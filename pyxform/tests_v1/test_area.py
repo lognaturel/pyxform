@@ -12,5 +12,4 @@ class AreaTest(PyxformTestCase):
             |        | calculate | result    |                          | enclosed-area(${geoshape1})  |   |
             """,
             xml__contains=['<bind calculate="enclosed-area( /area/geoshape1 )" nodeset="/area/result" type="string"/>'],
-            debug=True
         )
