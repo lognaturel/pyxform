@@ -36,6 +36,7 @@ class DoubleColonTranslations(PyxformTestCase):
             model__contains=[model_contains],
         )
 
+    # https://github.com/XLSForm/pyxform/issues/355
     def test_translations_and_choice_filters(self):
         self.assertPyxformXform(
             name="translations_choice_filters",
@@ -52,6 +53,5 @@ class DoubleColonTranslations(PyxformTestCase):
             |         | city               | grenoble | Grenoble            |                    |
             |         | city               | quebec   | Quebec              |                    |
             """,
-            errored=False,
-            debug= True
+            errored=False
         )

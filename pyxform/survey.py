@@ -576,12 +576,16 @@ class Survey(Section):
             for path, content_types in paths.items():
                 if path not in self._translations[lang]:
                     self._translations[lang][path] = {}
-                    # missing question/question thingy thats like a hint
+                    # Show a missing translation warning when a column from the survey sheet that can
+                    # be translated is not translated to the current language
                     question_and_column = path.split(":")
-                    missing_warning = self._generate_missing_translation_warning(
-                        lang, question_and_column[0], question_and_column[1]
-                    )
-                    warnings.append(missing_warning)
+                    # Strings in a secondary instance will not have a colon to split on. For now,
+                    # don't warn if choices in a dynamic choice list are missing translations
+                    if (len(question_and_column) is 2):
+                        missing_warning = self._generate_missing_translation_warning(
+                        lang, question_and_column[0], question_and_column[1])
+                        warnings.append(missing_warning)
+
                     # no need to warn about content types missing translations since the
                     # whole path has a warning now.
                     this_path_has_warning = True
