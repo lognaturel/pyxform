@@ -1428,7 +1428,7 @@ def parse_file_to_workbook_dict(path, file_object=None):
     if extension in constants.XLS_EXTENSIONS:
         return xls_to_dict(file_object if file_object is not None else path)
     elif extension in constants.XLSX_EXTENSIONS:
-        return xlsx_to_dict(file_object if file_object is not None else path)
+        return xls_to_dict(file_object if file_object is not None else path)
     elif extension == ".csv":
         return csv_to_dict(file_object if file_object is not None else path)
     else:
