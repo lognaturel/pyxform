@@ -29,7 +29,7 @@ class TestEntitiesCreateRepeat(PyxformTestCase):
                 xpe.model_bind_question_saveto("/r1/q1", "q1e"),
                 xpe.model_bind_meta_id("/r1"),
                 xpe.model_setvalue_meta_id("/r1"),
-                xpe.model_bind_meta_label(" ../../q1 ", "/r1"),
+                xpe.model_bind_meta_label(" ../../../q1 ", "/r1"),
                 xpe.model_bind_meta_instanceid(),
             ],
             xml__contains=['xmlns:entities="http://www.opendatakit.org/xforms/entities"'],
@@ -66,7 +66,7 @@ class TestEntitiesCreateRepeat(PyxformTestCase):
         self.assertPyxformXform(
             md=md,
             warnings_count=0,
-            xml__xpath_match=[xpe.model_bind_meta_create(" ../../q1  = ''", "/r1")],
+            xml__xpath_match=[xpe.model_bind_meta_create(" ../../../q1  = ''", "/r1")],
         )
 
     def test_other_controls_before__ok(self):
@@ -237,7 +237,7 @@ class TestEntitiesCreateRepeat(PyxformTestCase):
                 xpe.model_instance_repeat("e1", "/x:r1", template=True, create=True),
                 xpe.model_instance_repeat("e1", "/x:r1", create=True),
                 xpe.model_bind_question_saveto("/r1/g1/q1", "q1e"),
-                xpe.model_bind_meta_label(" ../../g1/q1 ", "/r1"),
+                xpe.model_bind_meta_label(" ../../../g1/q1 ", "/r1"),
             ],
         )
 
@@ -263,7 +263,7 @@ class TestEntitiesCreateRepeat(PyxformTestCase):
                 xpe.model_instance_repeat("e1", "/x:g1/x:r1", template=True, create=True),
                 xpe.model_instance_repeat("e1", "/x:g1/x:r1", create=True),
                 xpe.model_bind_question_saveto("/g1/r1/q1", "q1e"),
-                xpe.model_bind_meta_label(" ../../q1 ", "/g1/r1"),
+                xpe.model_bind_meta_label(" ../../../q1 ", "/g1/r1"),
             ],
         )
 
