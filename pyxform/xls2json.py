@@ -4,6 +4,7 @@ import os
 import re
 import sys
 from collections import Counter
+from pathlib import Path
 from typing import IO, Any
 
 from pyxform import aliases, constants
@@ -1477,9 +1478,13 @@ if __name__ == "__main__":
     # convert that file to json, then print it
     if len(sys.argv) < 2:
         # print "You must supply a file argument."
-        _filename = "xlsform_spec_test.xls"
-        _path = "/home/user/python-dev/xlsform/pyxform/tests/example_xls/"
-        _path += _filename
+        _path = str(
+            Path(__file__).parent.parent
+            / "tests"
+            / "fixtures"
+            / "example_forms"
+            / "xlsform_spec_test.xlsx"
+        )
     else:
         _path = sys.argv[1]
 

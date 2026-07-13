@@ -8,7 +8,8 @@ from pyxform.xls2json import SurveyReader
 from pyxform.xls2json_backends import csv_to_dict, xlsx_to_dict
 from pyxform.xls2xform import convert
 
-from tests import example_xls, test_expected_output, utils
+from tests import test_expected_output, utils
+from tests.fixtures import example_forms
 
 
 class BasicXls2JsonApiTests(TestCase):
@@ -16,7 +17,7 @@ class BasicXls2JsonApiTests(TestCase):
 
     def test_simple_yes_or_no_question(self):
         filename = "yes_or_no_question.xls"
-        path_to_excel_file = Path(example_xls.PATH) / filename
+        path_to_excel_file = Path(example_forms.PATH) / filename
         expected_output_path = Path(test_expected_output.PATH) / (
             path_to_excel_file.stem + ".json"
         )

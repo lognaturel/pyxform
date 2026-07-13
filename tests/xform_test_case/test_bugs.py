@@ -12,7 +12,8 @@ from pyxform.xls2json import SurveyReader
 from pyxform.xls2json_backends import DefinitionData, get_xlsform, xlsx_to_dict
 from pyxform.xls2xform import convert
 
-from tests import bug_example_xls, example_xls, test_output
+from tests import test_output
+from tests.fixtures import bug_example_forms, example_forms
 
 
 class TestXFormConversion(TestCase):
@@ -28,7 +29,7 @@ class TestXFormConversion(TestCase):
         for i, (case, err_msg) in enumerate(cases):
             with self.subTest(msg=f"{i}: {case}"):
                 with self.assertRaises(PyXFormError) as err:
-                    convert(xlsform=Path(bug_example_xls.PATH) / case, warnings=[])
+                    convert(xlsform=Path(bug_example_forms.PATH) / case, warnings=[])
                 self.assertIn(err_msg, err.exception.args[0])
 
 
@@ -38,7 +39,7 @@ class ValidateWrapper(TestCase):
     @staticmethod
     def test_conversion():
         filename = "ODKValidateWarnings.xlsx"
-        path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
+        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
         # Get the xform output path:
         root_filename, _ = os.path.splitext(filename)
         output_path = os.path.join(test_output.PATH, root_filename + ".xml")
@@ -54,7 +55,9 @@ class ValidateWrapper(TestCase):
 class EmptyStringOnRelevantColumnTest(TestCase):
     def test_conversion(self):
         filename = "ict_survey_fails.xls"
-        workbook_dict = get_xlsform(xlsform=os.path.join(bug_example_xls.PATH, filename))
+        workbook_dict = get_xlsform(
+            xlsform=os.path.join(bug_example_forms.PATH, filename)
+        )
         with self.assertRaises(KeyError):
             # bind:relevant should not be part of workbook_dict
             workbook_dict.survey[0]["bind: relevant"].strip()
@@ -63,7 +66,7 @@ class EmptyStringOnRelevantColumnTest(TestCase):
 class BadChoicesSheetHeaders(TestCase):
     def test_conversion(self):
         filename = "spaces_in_choices_header.xls"
-        path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
+        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
         warnings = []
         pyxform.xls2json.parse_file_to_json(
             path_to_excel_file,
@@ -87,7 +90,7 @@ class BadChoicesSheetHeaders(TestCase):
         of leading and trailing whitespaces.
         """
         filename = "spaces_in_choices_header.xls"
-        path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
+        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
         survey_reader = SurveyReader(
             path_to_excel_file, default_name="spaces_in_choices_header"
         )
@@ -101,7 +104,7 @@ class BadChoicesSheetHeaders(TestCase):
 class TestChoiceNameAsType(TestCase):
     def test_choice_name_as_type(self):
         filename = "choice_name_as_type.xls"
-        path_to_excel_file = os.path.join(example_xls.PATH, filename)
+        path_to_excel_file = os.path.join(example_forms.PATH, filename)
         xls_reader = SurveyReader(path_to_excel_file, default_name="choice_name_as_type")
         survey_dict = xls_reader.to_json_dict()
         self.assertTrue(has_external_choices(survey_dict))
@@ -110,7 +113,7 @@ class TestChoiceNameAsType(TestCase):
 class TestBlankSecondRow(TestCase):
     def test_blank_second_row(self):
         filename = "blank_second_row.xls"
-        path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
+        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
         xls_reader = SurveyReader(path_to_excel_file, default_name="blank_second_row")
         survey_dict = xls_reader.to_json_dict()
         self.assertTrue(len(survey_dict) > 0)
@@ -122,7 +125,7 @@ class TestXLDateAmbigous(TestCase):
     def test_xl_date_ambigous(self):
         """Test non standard sheet with exception is processed successfully."""
         filename = "xl_date_ambiguous.xlsx"
-        path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
+        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
         xls_reader = SurveyReader(path_to_excel_file, default_name="xl_date_ambiguous")
         survey_dict = xls_reader.to_json_dict()
         self.assertTrue(len(survey_dict) > 0)
@@ -136,7 +139,7 @@ class TestXLDateAmbigousNoException(TestCase):
     def test_xl_date_ambigous_no_exception(self):
         """Test standard sheet is processed successfully."""
         filename = "xl_date_ambiguous_v1.xlsx"
-        path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
+        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
         survey_dict = xlsx_to_dict(path_to_excel_file)
         self.assertEqual(survey_dict["survey"][4]["default"], "1900-01-01 00:00:00")
 
@@ -146,7 +149,7 @@ class TestSpreadSheetFilesWithMacrosAreAllowed(TestCase):
 
     def test_xlsm_files_are_allowed(self):
         filename = "excel_with_macros.xlsm"
-        result = get_xlsform(xlsform=os.path.join(bug_example_xls.PATH, filename))
+        result = get_xlsform(xlsform=os.path.join(bug_example_forms.PATH, filename))
         self.assertIsInstance(result, DefinitionData)
 
 

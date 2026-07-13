@@ -4,7 +4,8 @@ from unittest import TestCase
 from defusedxml.ElementTree import fromstring
 from formencode.doctest_xml_compare import xml_compare
 
-from tests import example_xls, test_output
+from tests import test_output
+from tests.fixtures import example_forms
 
 
 # Do not use this class for new tests. Use PyxformTestCase instead.
@@ -21,7 +22,7 @@ class XFormTestCase(TestCase):
     """
 
     def get_file_path(self, filename):
-        self.path_to_excel_file = os.path.join(example_xls.PATH, filename)
+        self.path_to_excel_file = os.path.join(example_forms.PATH, filename)
 
         # Get the xform output path:
         self.root_filename, self.ext = os.path.splitext(filename)

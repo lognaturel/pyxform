@@ -17,7 +17,8 @@ from pyxform.xls2json_backends import (
     xlsx_value_to_str,
 )
 
-from tests import bug_example_xls, utils
+from tests import utils
+from tests.fixtures import bug_example_forms
 from tests.pyxform_test_case import PyxformTestCase
 from tests.xpath_helpers.choices import xpc
 from tests.xpath_helpers.entities import xpe
@@ -175,7 +176,7 @@ class TestXLS2JSONBackends(PyxformTestCase):
     def test_xls_with_many_empty_cells(self):
         """Should quickly produce expected data, and find large input sheet dimensions."""
         # Test fixture produced by adding data at cells IV1 and A19999.
-        xls_path = os.path.join(bug_example_xls.PATH, "extra_columns.xls")
+        xls_path = os.path.join(bug_example_forms.PATH, "extra_columns.xls")
         before = datetime.datetime.now(datetime.UTC)
         xls_data = xls_to_dict(xls_path)
         after = datetime.datetime.now(datetime.UTC)
@@ -198,7 +199,7 @@ class TestXLS2JSONBackends(PyxformTestCase):
     def test_xlsx_with_many_empty_cells(self):
         """Should quickly produce expected data, and find large input sheet dimensions."""
         # Test fixture produced (presumably) by a LibreOffice serialisation bug.
-        xlsx_path = os.path.join(bug_example_xls.PATH, "UCL_Biomass_Plot_Form.xlsx")
+        xlsx_path = os.path.join(bug_example_forms.PATH, "UCL_Biomass_Plot_Form.xlsx")
         before = datetime.datetime.now(datetime.UTC)
         xlsx_data = xlsx_to_dict(xlsx_path)
         after = datetime.datetime.now(datetime.UTC)

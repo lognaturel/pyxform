@@ -21,7 +21,7 @@ from pyxform.xls2xform import (
     xls2xform_convert,
 )
 
-from tests import example_xls
+from tests.fixtures import example_forms
 from tests.utils import get_temp_dir, get_temp_file, path_to_text_fixture
 
 
@@ -241,11 +241,11 @@ class TestXLS2XFormConvert(TestCase):
     def test_xls2xform_convert__ok(self):
         """Should find the expected output files for the conversion."""
         xlsforms = (
-            Path(example_xls.PATH) / "group.xlsx",
-            Path(example_xls.PATH) / "group.xls",
-            Path(example_xls.PATH) / "group.csv",
-            Path(example_xls.PATH) / "group.md",
-            Path(example_xls.PATH) / "choice_name_as_type.xls",  # has external choices
+            Path(example_forms.PATH) / "group.xlsx",
+            Path(example_forms.PATH) / "group.xls",
+            Path(example_forms.PATH) / "group.csv",
+            Path(example_forms.PATH) / "group.md",
+            Path(example_forms.PATH) / "choice_name_as_type.xls",  # has external choices
         )
         kwargs = (
             ("validate", (True, False)),
@@ -309,12 +309,12 @@ class TestXLS2XFormConvertAPI(TestCase):
             ("str (data)", self.with_xlsform_data_str),  # Only for .csv, .md.
         ]
         xlsforms = (
-            (Path(example_xls.PATH) / "group.xlsx", funcs[:4]),
-            (Path(example_xls.PATH) / "group.xls", funcs[:4]),
-            (Path(example_xls.PATH) / "group.csv", funcs),
-            (Path(example_xls.PATH) / "group.md", funcs),
+            (Path(example_forms.PATH) / "group.xlsx", funcs[:4]),
+            (Path(example_forms.PATH) / "group.xls", funcs[:4]),
+            (Path(example_forms.PATH) / "group.csv", funcs),
+            (Path(example_forms.PATH) / "group.md", funcs),
             (
-                Path(example_xls.PATH) / "choice_name_as_type.xls",
+                Path(example_forms.PATH) / "choice_name_as_type.xls",
                 funcs[:4],
             ),  # has external choices
         )
