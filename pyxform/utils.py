@@ -155,7 +155,7 @@ def get_pyobj_from_json(str_or_path):
 
 def print_pyobj_to_json(pyobj, path=None):
     """
-    dump a python nested array/dict structure to the specified file
+    Dump a python nested array/dict structure to the specified file
     or stdout if no file is specified
     """
     if path:

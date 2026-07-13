@@ -71,7 +71,7 @@ class TestSurveyColumns(PyxformTestCase):
 
     def test_missing_name(self):
         """
-        every question needs a name (or alias of name)
+        Every question needs a name (or alias of name)
         """
         self.assertPyxformXform(
             name="invalidcols",
@@ -304,7 +304,7 @@ class TestColumnAliases(PyxformTestCase):
 
     def test_value_and_name(self):
         """
-        confirm that both 'name' and 'value' columns of choice list work
+        Confirm that both 'name' and 'value' columns of choice list work
         """
         md = """
         | survey  |               |                |            |

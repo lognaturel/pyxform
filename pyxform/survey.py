@@ -290,7 +290,7 @@ class Survey(Section):
 
     def xml(self):
         """
-        calls necessary preparation methods, then returns the xml.
+        Calls necessary preparation methods, then returns the xml.
         """
         self.validate()
         self._setup_xpath_dictionary()
@@ -739,7 +739,7 @@ class Survey(Section):
 
     def _setup_translations(self):
         """
-        set up the self._translations dict which will be referenced in the
+        Set up the self._translations dict which will be referenced in the
         setup media and itext functions
         """
 
@@ -1040,7 +1040,7 @@ class Survey(Section):
 
         def _in_secondary_instance_predicate() -> bool:
             """
-            check if ${} expression represented by matchobj
+            Check if ${} expression represented by matchobj
             is in a predicate for a path expression for a secondary instance
             """
 

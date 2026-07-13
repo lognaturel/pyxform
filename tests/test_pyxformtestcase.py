@@ -10,7 +10,7 @@ from tests.xpath_helpers.settings import xps
 class PyxformTestCaseNonMarkdownSurveyAlternatives(PyxformTestCase):
     def test_tainted_vanilla_survey_failure(self):
         """
-        the _invalid_ss_structure structure should fail to compile
+        The _invalid_ss_structure structure should fail to compile
         because the note has no label.
 
         if "errored" parameter is not set to False, it should
@@ -20,7 +20,7 @@ class PyxformTestCaseNonMarkdownSurveyAlternatives(PyxformTestCase):
 
         def _no_valid_flag():
             """
-            when the 'errored' flag is set to false (default) and the survey
+            When the 'errored' flag is set to false (default) and the survey
             fails to compile, the test should raise an exception.
             """
             self.assertPyxformXform(
@@ -39,7 +39,7 @@ class PyxformTestCaseNonMarkdownSurveyAlternatives(PyxformTestCase):
 
     def test_vanilla_survey(self):
         """
-        testing that a survey can be passed as a _spreadsheet structure_ named
+        Testing that a survey can be passed as a _spreadsheet structure_ named
         'ss_structure'.
 
         this will be helpful when testing whitespace constraints and

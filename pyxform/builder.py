@@ -68,7 +68,7 @@ class SurveyElementBuilder:
 
     def set_sections(self, sections):
         """
-        sections is a dict of python objects, a key in this dict is
+        Sections is a dict of python objects, a key in this dict is
         the name of the section and the value is a dict that can be
         used to create a whole survey.
         """

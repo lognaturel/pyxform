@@ -161,7 +161,7 @@ class BuilderTests(TestCase):
 
     def test_select_one_question_with_identical_choice_name(self):
         """
-        testing to make sure that select ones whose choice names are the same
+        Testing to make sure that select ones whose choice names are the same
         as the name of the select one get compiled.
         """
         survey = utils.create_survey_from_fixture(

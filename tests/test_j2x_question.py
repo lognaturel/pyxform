@@ -15,7 +15,7 @@ from tests.xpath_helpers.questions import xpq
 
 def ctw(control):
     """
-    ctw stands for control_test_wrap, but ctw is shorter and easier. using
+    Ctw stands for control_test_wrap, but ctw is shorter and easier. using
     begin_str and end_str to take out the wrap that xml gives us
     """
     if isinstance(control, list) and len(control) == 1:
@@ -146,7 +146,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
 
     def test_simple_integer_question_type_multilingual(self):
         """
-        not sure how integer questions should show up.
+        Not sure how integer questions should show up.
         """
         simple_integer_question = {
             "label": {"f": "fc", "e": "ec"},
@@ -172,7 +172,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
 
     def test_simple_date_question_type_multilingual(self):
         """
-        not sure how date questions should show up.
+        Not sure how date questions should show up.
         """
         simple_date_question = {
             "label": {"f": "fd", "e": "ed"},
@@ -196,7 +196,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
 
     def test_simple_phone_number_question_type_multilingual(self):
         """
-        not sure how phone number questions should show up.
+        Not sure how phone number questions should show up.
         """
         simple_phone_number_question = {
             "label": {"f": "fe", "e": "ee"},
@@ -233,7 +233,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
 
     def test_simple_select_all_question_multilingual(self):
         """
-        not sure how select all questions should show up...
+        Not sure how select all questions should show up...
         """
         survey = {
             "type": "survey",
@@ -273,7 +273,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
 
     def test_simple_decimal_question_multilingual(self):
         """
-        not sure how decimal should show up.
+        Not sure how decimal should show up.
         """
         simple_decimal_question = {
             "label": {"f": "f text", "e": "e text"},

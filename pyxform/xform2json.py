@@ -683,7 +683,7 @@ class XFormToDictBuilder:
 
     @staticmethod
     def _get_name_from_ref(ref):
-        """given /xlsform_spec_test/launch,
+        """Given /xlsform_spec_test/launch,
         return the string after the last occurance of the character '/'
         """
         pos = ref.rfind("/")
