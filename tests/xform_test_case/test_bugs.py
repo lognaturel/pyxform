@@ -132,7 +132,8 @@ class TestXLDateAmbigous(TestCase):
 
 class TestXLDateAmbigousNoException(TestCase):
     """Test date values that exceed the workbook datemode value.
-    (This would cause an exception with xlrd, but openpyxl handles it)."""
+    (This would cause an exception with xlrd, but openpyxl handles it).
+    """
 
     def test_xl_date_ambigous_no_exception(self):
         """Test standard sheet is processed successfully."""
