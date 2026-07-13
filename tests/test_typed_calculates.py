@@ -185,3 +185,13 @@ class TypedCalculatesTest(PyxformTestCase):
         """,
             instance__contains=["<a/>"],
         )
+
+    def test_round_function__ok(self):
+        """Should find that using the round() function does not raise an ODK Validate error."""
+        md = """
+        | survey |
+        | | type      | name | label | calculation     |
+        | | decimal   | q1   | Q1    |                 |
+        | | calculate | q2   | Q2    | round(${q1}, 0) |
+        """
+        self.assertPyxformXform(md=md)
