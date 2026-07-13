@@ -222,7 +222,6 @@ class RepeatingSection(Section):
     def xml_control(self, survey: "Survey"):
         """
         Example
-
         ```
         <group>
         <label>Fav Color</label>

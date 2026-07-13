@@ -118,7 +118,7 @@ def parse_expression(text: str) -> tuple[Token, ...]:
 
 
 def is_xml_tag(value: str) -> bool:
-    """Does the input string contain only a valid XML tag / element name?"""
+    """Check if the input string contains only a valid XML tag / element name."""
     return value and bool(RE_NCNAME_NAMESPACED.fullmatch(value))
 
 
