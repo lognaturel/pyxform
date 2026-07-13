@@ -5,7 +5,7 @@ authors = [
   {name = "github.com/xlsform", email = "support@getodk.org"},
 ]
 description = "A Python package to create XForms for ODK Collect."
-readme = "README.rst"
+readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
   "xlrd==2.0.1",        # Read XLS files
