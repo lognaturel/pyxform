@@ -245,9 +245,7 @@ class TestTranslations(PyxformTestCase):
 
 
 class TestSecondaryInstances(PyxformTestCase):
-    """
-    Test behaviour of the search() appearance with other sources of secondary instances.
-    """
+    """Test behaviour of the search() appearance with other sources of secondary instances."""
 
     @classmethod
     def setUpClass(cls) -> None:

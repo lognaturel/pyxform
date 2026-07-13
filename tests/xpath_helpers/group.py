@@ -1,7 +1,5 @@
 class XPathHelper:
-    """
-    XPath expressions for settings assertions.
-    """
+    """XPath expressions for settings assertions."""
 
     @staticmethod
     def group_no_label(ref: str) -> str:

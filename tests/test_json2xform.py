@@ -1,6 +1,4 @@
-"""
-Testing simple cases for pyxform.
-"""
+"""Testing simple cases for pyxform."""
 
 from unittest import TestCase
 

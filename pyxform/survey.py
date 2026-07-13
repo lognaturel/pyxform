@@ -1,6 +1,4 @@
-"""
-Survey module with XForm Survey objects and utility functions.
-"""
+"""Survey module with XForm Survey objects and utility functions."""
 
 import os
 import re
@@ -173,9 +171,7 @@ SURVEY_FIELDS = (*SURVEY_ELEMENT_FIELDS, *SECTION_EXTRA_FIELDS, *SURVEY_EXTRA_FI
 
 
 class Survey(Section):
-    """
-    Survey class - represents the full XForm XML.
-    """
+    """Survey class - represents the full XForm XML."""
 
     __slots__ = SURVEY_EXTRA_FIELDS
 
@@ -289,9 +285,7 @@ class Survey(Section):
         return NSMAP
 
     def xml(self):
-        """
-        Calls necessary preparation methods, then returns the xml.
-        """
+        """Calls necessary preparation methods, then returns the xml."""
         self.validate()
         self._setup_xpath_dictionary()
 
@@ -310,9 +304,7 @@ class Survey(Section):
     def _generate_static_instances(
         self, list_name: str, itemset: Itemset
     ) -> InstanceInfo:
-        """
-        Generate <instance> elements for static data (e.g. choices for selects).
-        """
+        """Generate <instance> elements for static data (e.g. choices for selects)."""
 
         def choice_nodes(idx, choice):
             # Add a unique id to the choice element in case there are itext references
@@ -466,9 +458,7 @@ class Survey(Section):
 
     @staticmethod
     def _generate_last_saved_instance(element: Question) -> bool:
-        """
-        True if a last-saved instance should be generated, false otherwise.
-        """
+        """True if a last-saved instance should be generated, false otherwise."""
         if element.default and has_pyxform_reference_with_last_saved(element.default):
             return True
         if element.choice_filter and has_pyxform_reference_with_last_saved(
@@ -594,9 +584,7 @@ class Survey(Section):
             seen[i.name] = i
 
     def xml_model_bindings(self) -> Generator[DetachableElement | None, None, None]:
-        """
-        Yield bindings (bind or action elements) for this node and all its descendants.
-        """
+        """Yield bindings (bind or action elements) for this node and all its descendants."""
         for e in self.iter_descendants(
             condition=lambda i: not isinstance(i, Option | Tag)
         ):
@@ -606,9 +594,7 @@ class Survey(Section):
                 yield from e.xml_actions(survey=self, in_repeat=False)
 
     def xml_model(self):
-        """
-        Generate the xform <model> element.
-        """
+        """Generate the xform <model> element."""
         self._setup_translations()
         self._setup_media()
         self._add_empty_translations()

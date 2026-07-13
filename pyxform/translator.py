@@ -1,6 +1,4 @@
-"""
-Translator class module.
-"""
+"""Translator class module."""
 
 from collections import defaultdict
 

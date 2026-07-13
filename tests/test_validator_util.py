@@ -1,6 +1,4 @@
-"""
-Test pyxform.validators.utils module.
-"""
+"""Test pyxform.validators.utils module."""
 
 import os
 from unittest import TestCase

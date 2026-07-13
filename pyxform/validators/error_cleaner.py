@@ -1,6 +1,4 @@
-"""
-Cleans up error messages from the validators.
-"""
+"""Cleans up error messages from the validators."""
 
 import re
 

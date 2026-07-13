@@ -1,6 +1,4 @@
-"""
-Test randomize itemsets.
-"""
+"""Test randomize itemsets."""
 
 from pyxform import constants as co
 from pyxform.errors import ErrorCode

@@ -1,6 +1,4 @@
-"""
-pyxform utils module.
-"""
+"""pyxform utils module."""
 
 import copy
 import csv
@@ -199,9 +197,7 @@ def external_choices_to_csv(
 
 
 def has_external_choices(json_struct):
-    """
-    Returns true if a select one external prompt is used in the survey.
-    """
+    """Returns true if a select one external prompt is used in the survey."""
     if isinstance(json_struct, dict):
         for k, v in json_struct.items():
             if (

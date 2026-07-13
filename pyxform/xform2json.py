@@ -1,6 +1,4 @@
-"""
-xform2json module - Transform an XForm to a JSON dictionary.
-"""
+"""xform2json module - Transform an XForm to a JSON dictionary."""
 
 import copy
 import json
@@ -32,9 +30,7 @@ QUESTION_TYPES = {
 
 # {{{ http://code.activestate.com/recipes/573463/ (r7)
 class XmlDictObject(dict):
-    """
-    Adds object like functionality to the standard dictionary.
-    """
+    """Adds object like functionality to the standard dictionary."""
 
     def __init__(self, initdict=None):
         if initdict is None:
@@ -55,9 +51,7 @@ class XmlDictObject(dict):
 
     @staticmethod
     def wrap(x):
-        """
-        Static method to wrap a dictionary recursively as an XmlDictObject.
-        """
+        """Static method to wrap a dictionary recursively as an XmlDictObject."""
         if isinstance(x, dict):
             return XmlDictObject((k, XmlDictObject.Wrap(v)) for (k, v) in iter(x.items()))
         elif isinstance(x, list):
@@ -105,9 +99,7 @@ def _convert_dict_to_xml_recurse(parent, dictitem):
 
 
 def convert_dict_to_xml(xmldict):
-    """
-    Converts a dictionary to an XML ElementTree Element.
-    """
+    """Converts a dictionary to an XML ElementTree Element."""
     roottag = xmldict.keys()[0]
     root = Element(roottag)
     _convert_dict_to_xml_recurse(root, xmldict[roottag])
@@ -157,9 +149,7 @@ def _convert_xml_to_dict_recurse(node, dictclass):
 
 
 def convert_xml_to_dict(root, dictclass=XmlDictObject):
-    """
-    Converts an XML file or ElementTree Element to a dictionary.
-    """
+    """Converts an XML file or ElementTree Element to a dictionary."""
     # If a string is passed in, try to open it as a file
     if isinstance(root, str):
         root = _try_parse(root)
@@ -173,9 +163,7 @@ def convert_xml_to_dict(root, dictclass=XmlDictObject):
 
 
 def _try_parse(root, parser=None):
-    """
-    Try to parse the root from a string or a file/file-like object.
-    """
+    """Try to parse the root from a string or a file/file-like object."""
     root = root.encode("UTF-8")
     try:
         parsed_root = fromstring(root, parser)
@@ -661,9 +649,7 @@ class XFormToDictBuilder:
         return constraint_msg
 
     def _get_choices(self) -> dict[str, Any]:
-        """
-        Get all form choices, using the model/instance and model/itext.
-        """
+        """Get all form choices, using the model/instance and model/itext."""
         choices = {}
         for instance in self.secondary_instances:
             items = []

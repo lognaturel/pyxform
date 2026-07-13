@@ -1,6 +1,4 @@
-"""
-PyxformTestCase base class using markdown to define the XLSForm.
-"""
+"""PyxformTestCase base class using markdown to define the XLSForm."""
 
 import logging
 import os

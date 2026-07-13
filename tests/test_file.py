@@ -1,19 +1,13 @@
-"""
-Test file question type.
-"""
+"""Test file question type."""
 
 from tests.pyxform_test_case import PyxformTestCase
 
 
 class FileWidgetTest(PyxformTestCase):
-    """
-    Test file widget class.
-    """
+    """Test file widget class."""
 
     def test_file_type(self):
-        """
-        Test file question type.
-        """
+        """Test file question type."""
         self.assertPyxformXform(
             name="data",
             md="""

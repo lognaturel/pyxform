@@ -1,6 +1,4 @@
-"""
-Test handling dynamic default in forms.
-"""
+"""Test handling dynamic default in forms."""
 
 from dataclasses import dataclass
 from os import getpid
@@ -39,9 +37,7 @@ class Case:
 
 
 class XPathHelper:
-    """
-    XPath expressions for dynamic defaults assertions.
-    """
+    """XPath expressions for dynamic defaults assertions."""
 
     @staticmethod
     def model_setvalue(q_num: int):
@@ -150,9 +146,7 @@ xp = XPathHelper()
 
 
 class TestDynamicDefault(PyxformTestCase):
-    """
-    Handling dynamic defaults.
-    """
+    """Handling dynamic defaults."""
 
     def test_static_default_in_repeat(self):
         """Should use instance repeat template and first row for static default inside a repeat."""

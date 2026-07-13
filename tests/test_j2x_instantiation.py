@@ -1,6 +1,4 @@
-"""
-Testing the instance object for pyxform.
-"""
+"""Testing the instance object for pyxform."""
 
 from unittest import TestCase
 

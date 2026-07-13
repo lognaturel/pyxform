@@ -1,6 +1,4 @@
-"""
-XForm survey question type mapping dictionary module.
-"""
+"""XForm survey question type mapping dictionary module."""
 
 from collections.abc import Sequence
 from types import MappingProxyType

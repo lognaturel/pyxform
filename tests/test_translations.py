@@ -1,6 +1,4 @@
-"""
-Test translations syntax.
-"""
+"""Test translations syntax."""
 
 from dataclasses import dataclass
 from os import getpid
@@ -26,9 +24,7 @@ from tests.xpath_helpers.settings import xps
 
 @dataclass(slots=True)
 class XPathHelper:
-    """
-    XPath expressions for translations-related assertions.
-    """
+    """XPath expressions for translations-related assertions."""
 
     question_type: str
     question_name: str

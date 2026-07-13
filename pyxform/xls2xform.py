@@ -150,9 +150,7 @@ def xls2xform_convert(
 
 
 def _create_parser():
-    """
-    Parse command line arguments.
-    """
+    """Parse command line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "path_to_XLSForm",

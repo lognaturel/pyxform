@@ -1,6 +1,4 @@
-"""
-Test setting form name to data.
-"""
+"""Test setting form name to data."""
 
 from tests.pyxform_test_case import PyxformTestCase
 
@@ -24,9 +22,7 @@ class TestFormName(PyxformTestCase):
         )
 
     def test_default_to_data(self):
-        """
-        Test using data as the name of the form which will generate <data />.
-        """
+        """Test using data as the name of the form which will generate <data />."""
         self.assertPyxformXform(
             md="""
                | survey |      |      |           |
@@ -44,9 +40,7 @@ class TestFormName(PyxformTestCase):
         )
 
     def test_default_form_name_to_superclass_definition(self):
-        """
-        Test no form_name and setting name field, should use name field.
-        """
+        """Test no form_name and setting name field, should use name field."""
         self.assertPyxformXform(
             md="""
                | survey |      |      |           |

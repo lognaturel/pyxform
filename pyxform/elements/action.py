@@ -6,9 +6,7 @@ from pyxform.utils import node
 
 
 class Event(StrEnum):
-    """
-    Supported W3C XForms 1.1 Events and ODK extensions.
-    """
+    """Supported W3C XForms 1.1 Events and ODK extensions."""
 
     # For actions in model under /html/head/model
     ODK_INSTANCE_FIRST_LOAD = "odk-instance-first-load"
@@ -128,9 +126,7 @@ class LibraryMember:
 
 
 class ActionLibrary(Enum):
-    """
-    A collection of action/event configs used by pyxform.
-    """
+    """A collection of action/event configs used by pyxform."""
 
     setvalue_first_load = LibraryMember(
         name=Setvalue.name,

@@ -1,14 +1,10 @@
-"""
-AuditTest - test audit question type.
-"""
+"""AuditTest - test audit question type."""
 
 from tests.pyxform_test_case import PyxformTestCase
 
 
 class AuditTest(PyxformTestCase):
-    """
-    AuditTest - test audit question type.
-    """
+    """AuditTest - test audit question type."""
 
     def test_audit(self):
         self.assertPyxformXform(

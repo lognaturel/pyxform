@@ -21,9 +21,7 @@ from tests.xpath_helpers.questions import xpq
 
 @dataclass(slots=True)
 class XPathHelperSelectFromFile:
-    """
-    XPath expressions for translations-related assertions.
-    """
+    """XPath expressions for translations-related assertions."""
 
     q_type: str
     q_name: str
@@ -289,9 +287,7 @@ class TestSelectFromFile(PyxformTestCase):
 
 
 class TestSelectOneExternal(PyxformTestCase):
-    """
-    select_one_external question type, where external_choices are converted to a CSV.
-    """
+    """select_one_external question type, where external_choices are converted to a CSV."""
 
     all_choices = """
       | choices |           |      |       |

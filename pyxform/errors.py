@@ -1,6 +1,4 @@
-"""
-Common base classes for pyxform exceptions.
-"""
+"""Common base classes for pyxform exceptions."""
 
 from enum import Enum
 from string import Formatter

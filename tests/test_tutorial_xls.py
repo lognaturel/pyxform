@@ -1,6 +1,4 @@
-"""
-Test tutorial XLSForm.
-"""
+"""Test tutorial XLSForm."""
 
 from unittest import TestCase
 

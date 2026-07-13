@@ -61,9 +61,7 @@ class GeoWidgetsTest(PyxformTestCase):
         )
 
     def test_geo_widgets_types(self):
-        """
-        This test could be broken into multiple smaller tests.
-        """
+        """This test could be broken into multiple smaller tests."""
         self.assertPyxformXform(
             name="geos",
             md="""

@@ -55,6 +55,7 @@ src = ["pyxform", "tests"]
 select = [
   "B",  # flake8-bugbear
   "C4",  # flake8-comprehensions
+  "D200",  # pydocstyle (unnecessary-multiline-docstring)
   "D202",  # pydocstyle (blank-line-after-function)
   "D209",  # pydocstyle (new-line-after-last-paragraph)
   "D301",  # pydocstyle (escape-sequence-in-docstring)

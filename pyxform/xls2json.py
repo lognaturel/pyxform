@@ -1,6 +1,4 @@
-"""
-A Python script to convert excel files into JSON.
-"""
+"""A Python script to convert excel files into JSON."""
 
 import os
 import re
@@ -1409,9 +1407,7 @@ def parse_file_to_json(
     warnings: list[str] | None = None,
     file_object: IO | None = None,
 ) -> dict[str, Any]:
-    """
-    A wrapper for workbook_to_json.
-    """
+    """A wrapper for workbook_to_json."""
     if warnings is None:
         warnings = []
     workbook_dict = get_xlsform(xlsform=coalesce(path, file_object))

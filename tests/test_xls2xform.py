@@ -1,6 +1,4 @@
-"""
-Test xls2xform module.
-"""
+"""Test xls2xform module."""
 
 # The Django application xls2xform uses the function
 # pyxform.create_survey. We have a test here to make sure no one
@@ -220,9 +218,7 @@ class XLS2XFormTests(TestCase):
         ),
     )
     def test_xls2xform_convert_throwing_odk_error(self, parser_mock_args):
-        """
-        Parse and validate bad_calc.xlsx.
-        """
+        """Parse and validate bad_calc.xlsx."""
         logger = logging.getLogger("pyxform.xls2xform")
         with mock.patch.object(logger, "error") as mock_debug:
             main_cli()
@@ -240,9 +236,7 @@ class XLS2XFormTests(TestCase):
 
 
 class TestXLS2XFormConvert(TestCase):
-    """
-    Tests for `xls2xform_convert`.
-    """
+    """Tests for `xls2xform_convert`."""
 
     def test_xls2xform_convert__ok(self):
         """Should find the expected output files for the conversion."""
@@ -276,9 +270,7 @@ class TestXLS2XFormConvert(TestCase):
 
 
 class TestXLS2XFormConvertAPI(TestCase):
-    """
-    Tests for the `convert` library API entrypoint (not xls2xform_convert).
-    """
+    """Tests for the `convert` library API entrypoint (not xls2xform_convert)."""
 
     @staticmethod
     def with_xlsform_path_str(**kwargs):

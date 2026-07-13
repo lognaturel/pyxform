@@ -1,6 +1,4 @@
-"""
-SurveyInstance class module.
-"""
+"""SurveyInstance class module."""
 
 import os.path
 

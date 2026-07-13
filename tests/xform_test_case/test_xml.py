@@ -1,6 +1,4 @@
-"""
-Test XForm XML syntax.
-"""
+"""Test XForm XML syntax."""
 
 from sys import version_info
 from unittest import TestCase

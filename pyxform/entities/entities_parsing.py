@@ -15,9 +15,7 @@ EC = const.EntityColumns
 
 @dataclass(frozen=True, slots=True)
 class ContainerNode:
-    """
-    Details of a XForm container: the survey root, a group, or a repeat.
-    """
+    """Details of a XForm container: the survey root, a group, or a repeat."""
 
     name: str
     type: str
@@ -38,16 +36,12 @@ class ContainerPath:
 
     @classmethod
     def default(cls) -> "ContainerPath":
-        """
-        Create the default ContainerPath, which is the '/survey' root path.
-        """
+        """Create the default ContainerPath, which is the '/survey' root path."""
         return cls((ContainerNode(name=const.SURVEY, type=const.SURVEY),))
 
     @classmethod
     def from_stack(cls, stack: list[dict[str, Any]]) -> "ContainerPath":
-        """
-        Create a ContainerPath from the workbook_to_json container stack.
-        """
+        """Create a ContainerPath from the workbook_to_json container stack."""
         if len(stack) > 1:
             return cls(
                 (
@@ -62,9 +56,7 @@ class ContainerPath:
             return cls.default()
 
     def get_scope_boundary(self) -> "ContainerPath":
-        """
-        Get the full path to the nearest ancestor boundary scope node.
-        """
+        """Get the full path to the nearest ancestor boundary scope node."""
         for i in range(len(self.nodes) - 1, -1, -1):
             if self.nodes[i].type in {const.REPEAT, const.SURVEY}:
                 return ContainerPath(self.nodes[: i + 1])
@@ -122,9 +114,7 @@ class EntityReferences:
     )
 
     def get_allocation_request(self) -> "AllocationRequest":
-        """
-        Find/validate the preferred path for each entity declaration.
-        """
+        """Find/validate the preferred path for each entity declaration."""
         deepest_scope_ref = None
         deepest_scope_boundary = None
         deepest_scope_boundary_node_count = None
@@ -530,9 +520,7 @@ def validate_saveto(
 def get_entity_declarations(
     entities_sheet: Iterable[dict],
 ) -> dict[str, dict[str, Any]]:
-    """
-    Collect all entity declarations from the entities sheet.
-    """
+    """Collect all entity declarations from the entities sheet."""
     entities = {}
     for row_number, row in enumerate(entities_sheet, start=2):
         entity = get_entity_declaration(row=row, row_number=row_number)
@@ -576,9 +564,7 @@ def get_entity_references_by_question(
     is_container_begin: bool,
     is_container_end: bool,
 ) -> None:
-    """
-    For each question store the saveto or variable references that link it to an entity.
-    """
+    """For each question store the saveto or variable references that link it to an entity."""
     # Collect references for later reconciliation, because otherwise the first
     # referent found will determine the scope but there may be deeper refs.
     saveto = row.get(const.BIND, {}).get(const.ENTITIES_SAVETO_NS)
@@ -639,9 +625,7 @@ def allocate_entities_to_containers(
     entity_declarations: dict[str, dict[str, Any]],
     entity_references_by_question: dict[str, EntityReferences],
 ) -> dict[ContainerPath, str]:
-    """
-    Get the paths into which the entities will be placed.
-    """
+    """Get the paths into which the entities will be placed."""
     allocations: dict[ContainerPath, str] = {}
     scope_paths: defaultdict[ContainerPath, list[AllocationRequest]] = defaultdict(list)
     survey_path = ContainerPath.default()
@@ -734,9 +718,7 @@ def inject_entities_into_json(
     entities_allocated: set[str] | None = None,
     has_repeat_ancestor: bool = False,
 ) -> dict[str, Any]:
-    """
-    Recursively traverse the json_dict to inject entity declarations.
-    """
+    """Recursively traverse the json_dict to inject entity declarations."""
     if entities_allocated is None:
         entities_allocated = set()
 

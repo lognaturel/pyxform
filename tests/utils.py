@@ -1,6 +1,4 @@
-"""
-The tests utils module functionality.
-"""
+"""The tests utils module functionality."""
 
 import configparser
 import os
@@ -79,9 +77,7 @@ def get_temp_dir():
 
 
 def truncate_temp_files(temp_dir):
-    """
-    Truncate files in a folder, recursing into directories.
-    """
+    """Truncate files in a folder, recursing into directories."""
     # If we can't delete, at least the files can be truncated,
     # so that they don't take up disk space until next cleanup.
     # Seems to be a Windows-specific error for newly-created files.
@@ -97,9 +93,7 @@ def truncate_temp_files(temp_dir):
 
 
 def cleanup_pyxform_temp_files(prefix: str):
-    """
-    Try to clean up temp pyxform files from previous test runs.
-    """
+    """Try to clean up temp pyxform files from previous test runs."""
     temp_root = tempfile.gettempdir()
     if os.path.exists(temp_root):
         for f in os.scandir(temp_root):

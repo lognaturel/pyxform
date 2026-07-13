@@ -1,6 +1,4 @@
-"""
-XForm Survey element classes for different question types.
-"""
+"""XForm Survey element classes for different question types."""
 
 import os.path
 from collections.abc import Callable, Generator, Iterable
@@ -198,9 +196,7 @@ class Question(SurveyElement):
         return xml_node
 
     def xml_actions(self, survey: "Survey", in_repeat: bool = False):
-        """
-        Return the action(s) for this survey element.
-        """
+        """Return the action(s) for this survey element."""
         action_fields = {"name", "event", "value"}
         if self.actions:
             for _action in self.actions:
@@ -227,9 +223,7 @@ class Question(SurveyElement):
                 ).node()
 
     def _build_xml(self, survey: "Survey") -> DetachableElement | None:
-        """
-        Initial control node result for further processing depending on Question type.
-        """
+        """Initial control node result for further processing depending on Question type."""
         control_dict = self.control
         result = node(
             control_dict["tag"],

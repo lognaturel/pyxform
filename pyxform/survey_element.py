@@ -1,6 +1,4 @@
-"""
-Survey Element base class for all survey elements.
-"""
+"""Survey Element base class for all survey elements."""
 
 import json
 import warnings
@@ -193,9 +191,7 @@ class SurveyElement(Mapping):
     def lowest_common_ancestor(
         self, other: "SurveyElement", group_type: str | None = None
     ) -> tuple[str, int | None, int | None, Optional["SurveyElement"]]:
-        """
-        Get the relation type, steps from self, steps from other, and the common ancestor.
-        """
+        """Get the relation type, steps from self, steps from other, and the common ancestor."""
         # Filtering
         if group_type:
             type_filter = {group_type}
@@ -238,9 +234,7 @@ class SurveyElement(Mapping):
             return "Common Ancestor", self_ancestors[lca], other_ancestors[lca], lca
 
     def get_xpath(self, relative_to: Optional["SurveyElement"] = None) -> str:
-        """
-        Return the xpath of this survey element.
-        """
+        """Return the xpath of this survey element."""
         # Imported here to avoid circular references.
         from pyxform.survey import Survey
 
@@ -525,9 +519,7 @@ class SurveyElement(Mapping):
     def xml_bindings(
         self, survey: "Survey"
     ) -> Generator[DetachableElement | None, None, None]:
-        """
-        Return the binding(s) for this survey element.
-        """
+        """Return the binding(s) for this survey element."""
         if not hasattr(self, "bind") or self.get("bind") is None:
             return None
         if hasattr(self, "flat") and self.get("flat"):

@@ -1,6 +1,4 @@
-"""
-Test builder module functionality.
-"""
+"""Test builder module functionality."""
 
 import os
 import re

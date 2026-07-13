@@ -1,6 +1,4 @@
-"""
-Validations for question types.
-"""
+"""Validations for question types."""
 
 from collections.abc import Collection, Iterable
 

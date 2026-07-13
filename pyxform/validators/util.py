@@ -1,6 +1,4 @@
-"""
-The validators utility functions.
-"""
+"""The validators utility functions."""
 
 import logging
 import os
@@ -103,9 +101,7 @@ def decode_stream(stream):
 
 
 def request_get(url):
-    """
-    Get the response content from URL.
-    """
+    """Get the response content from URL."""
     try:
         if not url.startswith(("http:", "https:")):
             raise ValueError("URL must start with 'http:' or 'https:'")

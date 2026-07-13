@@ -1,6 +1,4 @@
-"""
-The last-saved virtual instance can be queried to get values from the last saved instance of the form being authored.
-"""
+"""The last-saved virtual instance can be queried to get values from the last saved instance of the form being authored."""
 
 from pyxform.errors import ErrorCode
 

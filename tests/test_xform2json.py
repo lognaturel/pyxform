@@ -1,6 +1,4 @@
-"""
-Test xform2json module.
-"""
+"""Test xform2json module."""
 
 import json
 import os
@@ -105,9 +103,7 @@ class TestXMLParse(TestCase):
 
 
 class TestXForm2JSON(PyxformTestCase):
-    """
-    Test xform2json module.
-    """
+    """Test xform2json module."""
 
     def test_convert_toJSON_multi_language(self):
         """

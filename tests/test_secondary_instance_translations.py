@@ -1,6 +1,4 @@
-"""
-Testing inlining translation when no translation is specified.
-"""
+"""Testing inlining translation when no translation is specified."""
 
 from tests.pyxform_test_case import PyxformTestCase
 from tests.xpath_helpers.choices import xpc
@@ -42,9 +40,7 @@ class TestSecondaryInstanceTest(PyxformTestCase):
         )
 
     def test_multiple_translations(self):
-        """
-        Dynamic choice with potential translation should generate itext fields.
-        """
+        """Dynamic choice with potential translation should generate itext fields."""
         self.assertPyxformXform(
             md="""
                | survey  |                   |          |            |               |
@@ -76,9 +72,7 @@ class TestSecondaryInstanceTest(PyxformTestCase):
     def test_select_with_media_and_choice_filter_and_no_translations_generates_media(
         self,
     ):
-        """
-        Selects with media and choice filter should generate itext fields for the media.
-        """
+        """Selects with media and choice filter should generate itext fields for the media."""
         md = """
         | survey |                    |                 |                                 |                           |
         |        | type               | name            | label                           | choice_filter             |
@@ -118,9 +112,7 @@ class TestSecondaryInstanceTest(PyxformTestCase):
     def test_select_with_choice_filter_and_translations_generates_single_translation(
         self,
     ):
-        """
-        Selects with choice filter and translations should only have a single itext entry.
-        """
+        """Selects with choice filter and translations should only have a single itext entry."""
         xform_md = """
         | survey |                    |      |       |               |
         |        | type               | name | label | choice_filter |
@@ -148,9 +140,7 @@ class TestSecondaryInstanceTest(PyxformTestCase):
     def test_select_with_dynamic_option_label__and_choice_filter__and_no_translations__generates_itext(
         self,
     ):
-        """
-        A select with a choice filter and no translations in which the first option label is dynamic should generate itext for choice labels.
-        """
+        """A select with a choice filter and no translations in which the first option label is dynamic should generate itext for choice labels."""
         xform_md = """
             | survey |                    |      |            |               |         |
             |        | type               | name | label      | choice_filter | default |
@@ -177,9 +167,7 @@ class TestSecondaryInstanceTest(PyxformTestCase):
     def test_select_with_dynamic_option_label_for_second_choice__and_choice_filter__and_no_translations__generates_itext(
         self,
     ):
-        """
-        A select with a choice filter and no translations in which the second option label is dynamic should generate itext for choice labels.
-        """
+        """A select with a choice filter and no translations in which the second option label is dynamic should generate itext for choice labels."""
         xform_md = """
             | survey |                    |      |            |               |         |
             |        | type               | name | label      | choice_filter | default |
@@ -211,9 +199,7 @@ class TestSecondaryInstanceTest(PyxformTestCase):
     def test_select_with_dynamic_option_label__and_choice_filter__and_no_translations__maintains_additional_columns(
         self,
     ):
-        """
-        A select with a choice filter and no translations in which the first option label is dynamic should maintain data columns.
-        """
+        """A select with a choice filter and no translations in which the first option label is dynamic should maintain data columns."""
         xform_md = """
             | survey |                    |      |            |               |         |
             |        | type               | name | label      | choice_filter | default |
@@ -232,9 +218,7 @@ class TestSecondaryInstanceTest(PyxformTestCase):
     def test_select_with_dynamic_option_label__and_no_choice_filter__and_no_translations__inlines_output(
         self,
     ):
-        """
-        A select without a choice filter and no translations in which the first option label is dynamic should not use itext.
-        """
+        """A select without a choice filter and no translations in which the first option label is dynamic should not use itext."""
         md = """
             | survey |                    |      |            |
             |        | type               | name | label      |

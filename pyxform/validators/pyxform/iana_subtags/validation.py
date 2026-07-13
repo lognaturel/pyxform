@@ -16,9 +16,7 @@ def read_tags(file_name: str) -> set[str]:
 
 
 def get_languages_with_bad_tags(languages):
-    """
-    Returns languages with invalid or missing IANA subtags.
-    """
+    """Returns languages with invalid or missing IANA subtags."""
     languages_with_bad_tags = []
     for lang in languages:
         # Minimum matchable lang code attempt requires 3 characters e.g. "a()".

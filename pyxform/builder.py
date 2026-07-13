@@ -1,6 +1,4 @@
-"""
-Survey builder functionality.
-"""
+"""Survey builder functionality."""
 
 import os
 from collections import defaultdict
@@ -308,9 +306,7 @@ class SurveyElementBuilder:
 
 
 def create_survey_element_from_dict(d, sections=None):
-    """
-    Creates a Survey from a dictionary in the format provided by SurveyReader.
-    """
+    """Creates a Survey from a dictionary in the format provided by SurveyReader."""
     if sections is None:
         sections = {}
     builder = SurveyElementBuilder()

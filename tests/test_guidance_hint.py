@@ -1,6 +1,4 @@
-"""
-Guidance hint test module.
-"""
+"""Guidance hint test module."""
 
 from tests.pyxform_test_case import PyxformTestCase
 

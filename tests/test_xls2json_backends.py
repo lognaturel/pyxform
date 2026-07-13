@@ -1,6 +1,4 @@
-"""
-Test xls2json_backends module functionality.
-"""
+"""Test xls2json_backends module functionality."""
 
 import datetime
 import os
@@ -28,9 +26,7 @@ from tests.xpath_helpers.settings import xps
 
 
 class TestXLS2JSONBackends(PyxformTestCase):
-    """
-    Test xls2json_backends module.
-    """
+    """Test xls2json_backends module."""
 
     maxDiff = None
 

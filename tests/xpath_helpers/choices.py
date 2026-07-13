@@ -7,9 +7,7 @@ JR_PREFIXES = {
 
 
 class XPathHelper:
-    """
-    XPath expressions for choices assertions.
-    """
+    """XPath expressions for choices assertions."""
 
     @staticmethod
     def model_instance_choices_label(cname: str, choices: tuple[tuple[str, str], ...]):

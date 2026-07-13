@@ -1,6 +1,4 @@
-"""
-Some tests for the new (v0.9) spec is properly implemented.
-"""
+"""Some tests for the new (v0.9) spec is properly implemented."""
 
 from pathlib import Path
 

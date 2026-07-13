@@ -1,6 +1,4 @@
-"""
-Test unicode characters in validate error messages.
-"""
+"""Test unicode characters in validate error messages."""
 
 from tests.pyxform_test_case import PyxformTestCase
 

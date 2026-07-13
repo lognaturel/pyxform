@@ -1,6 +1,4 @@
-"""
-Test language warnings.
-"""
+"""Test language warnings."""
 
 from pyxform.errors import ErrorCode
 
@@ -8,9 +6,7 @@ from tests.pyxform_test_case import PyxformTestCase
 
 
 class TestMetadata(PyxformTestCase):
-    """
-    Test metadata and related warnings.
-    """
+    """Test metadata and related warnings."""
 
     def test_metadata_bindings(self):
         self.assertPyxformXform(

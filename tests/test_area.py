@@ -1,14 +1,10 @@
-"""
-AreaTest - test enclosed-area(geo_shape) calculation.
-"""
+"""AreaTest - test enclosed-area(geo_shape) calculation."""
 
 from tests.pyxform_test_case import PyxformTestCase
 
 
 class AreaTest(PyxformTestCase):
-    """
-    AreaTest - test enclosed-area(geo_shape) calculation.
-    """
+    """AreaTest - test enclosed-area(geo_shape) calculation."""
 
     def test_area(self):
         d = (

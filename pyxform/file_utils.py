@@ -1,6 +1,4 @@
-"""
-The pyxform file utility functions.
-"""
+"""The pyxform file utility functions."""
 
 import glob
 import os
@@ -32,9 +30,7 @@ def load_file_to_dict(path):
 
 
 def collect_compatible_files_in_directory(directory):
-    """
-    Create a giant dict out of all the spreadsheets and json forms in the given directory.
-    """
+    """Create a giant dict out of all the spreadsheets and json forms in the given directory."""
     available_files = glob.glob(os.path.join(directory, "*.xls")) + glob.glob(
         os.path.join(directory, "*.json")
     )

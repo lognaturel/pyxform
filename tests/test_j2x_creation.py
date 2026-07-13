@@ -1,6 +1,4 @@
-"""
-Testing creation of Surveys using verbose methods.
-"""
+"""Testing creation of Surveys using verbose methods."""
 
 from unittest import TestCase
 

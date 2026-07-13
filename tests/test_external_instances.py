@@ -13,9 +13,7 @@ from tests.xpath_helpers.choices import xpc
 
 
 class ExternalInstanceTests(PyxformTestCase):
-    """
-    External Instance Tests.
-    """
+    """External Instance Tests."""
 
     def test_can__output_single_external_xml_item(self):
         """Simplest possible example to include an external instance."""
@@ -259,9 +257,7 @@ class ExternalInstanceTests(PyxformTestCase):
         )
 
     def test_cannot__use_different_src_same_id__external_then_pulldata(self):
-        """
-        Duplicate instance from pulldata after xml-external raises an error.
-        """
+        """Duplicate instance from pulldata after xml-external raises an error."""
         md = """
             | survey |              |        |                  |                                             |
             |        | type         | name   | label            | calculation                                 |
@@ -285,9 +281,7 @@ class ExternalInstanceTests(PyxformTestCase):
         )
 
     def test_cannot__use_different_src_same_id__pulldata_then_external(self):
-        """
-        Duplicate instance from xml-external after pulldata raises an error.
-        """
+        """Duplicate instance from xml-external after pulldata raises an error."""
         md = """
             | survey |              |        |                  |                                             |
             |        | type         | name   | label            | calculation                                 |

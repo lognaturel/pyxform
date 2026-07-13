@@ -1,6 +1,4 @@
-"""
-Test OSM widgets.
-"""
+"""Test OSM widgets."""
 
 from tests.pyxform_test_case import PyxformTestCase
 from tests.xpath_helpers.choices import xpc
@@ -19,9 +17,7 @@ expected_xml_output = """
 
 
 class OSMWidgetsTest(PyxformTestCase):
-    """
-    Test OSM widgets.
-    """
+    """Test OSM widgets."""
 
     def test_osm_type(self):
         self.assertPyxformXform(

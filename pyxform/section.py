@@ -1,6 +1,4 @@
-"""
-Section survey element module.
-"""
+"""Section survey element module."""
 
 from collections.abc import Callable, Generator, Iterable
 from itertools import chain
@@ -126,9 +124,7 @@ class Section(SurveyElement):
             )
 
     def xml_instance(self, survey: "Survey", **kwargs):
-        """
-        Creates an xml representation of the section.
-        """
+        """Creates an xml representation of the section."""
         append_template = kwargs.pop("append_template", False)
 
         attributes = {}
@@ -174,9 +170,7 @@ class Section(SurveyElement):
         return result
 
     def xml_instance_array(self, survey: "Survey"):
-        """
-        This method is used for generating flat instances.
-        """
+        """This method is used for generating flat instances."""
         for child in self.children:
             if hasattr(child, "flat") and child.get("flat"):
                 yield from child.xml_instance_array(survey=survey)

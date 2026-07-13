@@ -1,6 +1,4 @@
-"""
-Test groups.
-"""
+"""Test groups."""
 
 from unittest import TestCase
 
@@ -13,9 +11,7 @@ from tests.xpath_helpers.group import xpg
 
 
 class TestGroupOutput(PyxformTestCase):
-    """
-    Test output for groups.
-    """
+    """Test output for groups."""
 
     def test_group_type(self):
         self.assertPyxformXform(

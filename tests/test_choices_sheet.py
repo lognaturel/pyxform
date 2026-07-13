@@ -7,9 +7,7 @@ from tests.xpath_helpers.questions import xpq
 
 class TestChoicesSheet(PyxformTestCase):
     def test_numeric_choice_names__for_static_selects__allowed(self):
-        """
-        Test numeric choice names for static selects.
-        """
+        """Test numeric choice names for static selects."""
         self.assertPyxformXform(
             md="""
             | survey   |                    |      |       |
@@ -27,9 +25,7 @@ class TestChoicesSheet(PyxformTestCase):
         )
 
     def test_numeric_choice_names__for_dynamic_selects__allowed(self):
-        """
-        Test numeric choice names for dynamic selects.
-        """
+        """Test numeric choice names for dynamic selects."""
         self.assertPyxformXform(
             md="""
             | survey   |                    |      |       |               |
