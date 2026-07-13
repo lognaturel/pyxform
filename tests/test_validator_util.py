@@ -72,8 +72,3 @@ class TestErrorMessageCleaning(TestCase):
         message = """java.lang.NullPointerException Null Pointer\norg.javarosa.xform.parse.XFormParseException Parser"""
         cleaned = ErrorCleaner.odk_validate(message)
         self.assertEqual(cleaned, " Null Pointer\n Parser")
-
-    def should_clean_enketo_validate_stacktrace(self):
-        message = """Error in gugu/gaga\nError in gugu/gaga"""
-        cleaned = ErrorCleaner.enketo_validate(message)
-        self.assertEqual(cleaned, "Error in gugu/gaga")

@@ -12,7 +12,7 @@ from stat import S_IXGRP, S_IXUSR
 from zipfile import ZipFile, is_zipfile
 
 from pyxform.errors import PyXFormError
-from pyxform.validators import enketo_validate, odk_validate
+from pyxform.validators import odk_validate
 from pyxform.validators.util import HERE, CapturingHandler, request_get
 
 UTC_FMT = "%Y-%m-%dT%H:%M:%SZ"
@@ -483,25 +483,6 @@ class _UpdateService:
         raise NotImplementedError()
 
 
-class EnketoValidateUpdater(_UpdateService):
-    def __init__(self):
-        self.update_info = _UpdateInfo(
-            api_url="https://api.github.com/repos/enketo/enketo-validate/releases/latest",
-            repo_url="https://github.com/enketo/enketo-validate",
-            validate_subfolder="enketo_validate",
-            install_check=self._install_check,
-            validator_basename=os.path.basename(enketo_validate.ENKETO_VALIDATE_PATH),
-        )
-
-    @staticmethod
-    def _install_check(bin_file_path=None):
-        if bin_file_path is None:
-            return enketo_validate.install_ok()
-        else:
-            extracted = os.path.join(os.path.dirname(bin_file_path), "validate")
-            return enketo_validate.install_ok(bin_file_path=extracted)
-
-
 class ODKValidateUpdater(_UpdateService):
     def __init__(self):
         self.update_info = _UpdateInfo(
@@ -561,8 +542,8 @@ def _create_parser():
         "------------------------------------------------------\n"
         "Use this tool to update external validators.\n\n"
         "Example usage:\n\n"
-        "updater.py enketo list\n"
-        "updater.py enketo update linux.zip\n\n"
+        "updater.py ODK list\n"
+        "updater.py ODK update linux.zip\n\n"
         "First, use the 'list' sub-command for the validator\n"
         "to check for a new release and to show what (if any) \n"
         "files are attached to it.\n\n"
@@ -576,11 +557,6 @@ def _create_parser():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     sub_parsers = main_parser.add_subparsers(metavar="<sub_menu>")
-    _build_validator_menu(
-        main_subparser=sub_parsers,
-        validator_name="Enketo",
-        updater_instance=EnketoValidateUpdater(),
-    )
     _build_validator_menu(
         main_subparser=sub_parsers,
         validator_name="ODK",

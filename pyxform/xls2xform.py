@@ -65,7 +65,6 @@ def convert(
     warnings: list[str] | None = None,
     validate: bool = False,
     pretty_print: bool = False,
-    enketo: bool = False,
     form_name: str | None = None,
     default_language: str | None = None,
     file_type: str | None = None,
@@ -75,10 +74,9 @@ def convert(
 
     This function avoids result file IO so it is more suited to library usage of pyxform.
 
-    If validate=True or Enketo=True, then the XForm will be written to a temporary file
-    to be checked by ODK Validate and/or Enketo Validate. These validators are run as
-    external processes. A recent version of ODK Validate is distributed with pyxform,
-    while Enketo Validate is not. A script to download or update these validators is
+    If validate=True, then the XForm will be written to a temporary file to be checked by
+    ODK Validate. This validator is run as an external process. A recent version of ODK
+    Validate is distributed with pyxform. A script to download or update ODK Validate is
     provided in `validators/updater.py`.
 
     :param xlsform: The input XLSForm file path or content. If the content is bytes or
@@ -87,7 +85,6 @@ def convert(
     :param warnings: The conversions warnings list.
     :param validate: If True, check the XForm with ODK Validate
     :param pretty_print: If True, format the XForm with spaces, line breaks, etc.
-    :param enketo: If True, check the XForm with Enketo Validate.
     :param form_name: Used for the main instance root node name.
     :param default_language: The name of the default language for the form.
     :param file_type: If provided, attempt parsing the data only as this type. Otherwise,
@@ -113,7 +110,6 @@ def convert(
         validate=validate,
         pretty_print=pretty_print,
         warnings=warnings,
-        enketo=enketo,
     )
     return ConvertResult(
         xform=xform,
@@ -129,14 +125,12 @@ def xls2xform_convert(
     xform_path: str | PathLike[str],
     validate: bool = True,
     pretty_print: bool = True,
-    enketo: bool = False,
 ) -> list[str]:
     warnings = []
     result = convert(
         xlsform=xlsform_path,
         validate=validate,
         pretty_print=pretty_print,
-        enketo=enketo,
         warnings=warnings,
     )
     with open(xform_path, mode="w", encoding="utf-8") as f:
@@ -177,12 +171,6 @@ def _create_parser():
         help="Run the ODK Validate XForm external validator.",
     )
     parser.add_argument(
-        "--enketo_validate",
-        action="store_true",
-        default=False,
-        help="Run the Enketo Validate XForm external validator.",
-    )
-    parser.add_argument(
         "--pretty_print",
         action="store_true",
         default=False,
@@ -202,17 +190,13 @@ def _validator_args_logic(args):
     `xls2xform.py myform`: ODK only
 
     **new**
-    `xls2xform.py myform --enketo_validate`: Enketo only
     `xls2xform.py myform --odk_validate`: ODK only
-    `xls2xform.py myform --enketo_validate --odk_validate`: both
-    `xls2xform.py myform --enketo_validate --odk_validate --skip_validate`: no validators
+    `xls2xform.py myform --odk_validate --skip_validate`: no validators
     """
     if not args.skip_validate:
         args.odk_validate = False
-        args.enketo_validate = False
-    elif args.skip_validate and not (args.odk_validate or args.enketo_validate):
+    elif args.skip_validate and not args.odk_validate:
         args.odk_validate = True
-        args.enketo_validate = False
     return args
 
 
@@ -236,7 +220,6 @@ def main_cli():
                 xform_path=args.output_path,
                 validate=args.odk_validate,
                 pretty_print=args.pretty_print,
-                enketo=args.enketo_validate,
             )
 
             response["code"] = 100
@@ -259,7 +242,6 @@ def main_cli():
                 xform_path=args.output_path,
                 validate=args.odk_validate,
                 pretty_print=args.pretty_print,
-                enketo=args.enketo_validate,
             )
         except OSError:
             # Do not crash if 'java' not installed

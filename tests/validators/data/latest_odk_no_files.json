@@ -1,42 +1,5 @@
 {
-  "assets": [
-    {
-      "browser_download_url": "https://github.com/getodk/validate/releases/download/v1.20.0/ODK-Validate-v1.20.0.jar",
-      "content_type": "application/java-archive",
-      "created_at": "2026-01-08T20:48:03Z",
-      "digest": "sha256:92756ea4aed195355a07e5572f025f0921a31282387a870ae63e1f5cdf37e0c3",
-      "download_count": 0,
-      "id": 338040656,
-      "label": null,
-      "name": "ODK-Validate-v1.20.0.jar",
-      "node_id": "RA_kwDOAmc2ms4UJhdQ",
-      "size": 5885216,
-      "state": "uploaded",
-      "updated_at": "2026-01-08T20:48:04Z",
-      "uploader": {
-        "avatar_url": "https://avatars.githubusercontent.com/u/967540?v=4",
-        "events_url": "https://api.github.com/users/lognaturel/events{/privacy}",
-        "followers_url": "https://api.github.com/users/lognaturel/followers",
-        "following_url": "https://api.github.com/users/lognaturel/following{/other_user}",
-        "gists_url": "https://api.github.com/users/lognaturel/gists{/gist_id}",
-        "gravatar_id": "",
-        "html_url": "https://github.com/lognaturel",
-        "id": 967540,
-        "login": "lognaturel",
-        "node_id": "MDQ6VXNlcjk2NzU0MA==",
-        "organizations_url": "https://api.github.com/users/lognaturel/orgs",
-        "received_events_url": "https://api.github.com/users/lognaturel/received_events",
-        "repos_url": "https://api.github.com/users/lognaturel/repos",
-        "site_admin": false,
-        "starred_url": "https://api.github.com/users/lognaturel/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/lognaturel/subscriptions",
-        "type": "User",
-        "url": "https://api.github.com/users/lognaturel",
-        "user_view_type": "public"
-      },
-      "url": "https://api.github.com/repos/getodk/validate/releases/assets/338040656"
-    }
-  ],
+  "assets": [],
   "assets_url": "https://api.github.com/repos/getodk/validate/releases/275305335/assets",
   "author": {
     "avatar_url": "https://avatars.githubusercontent.com/u/967540?v=4",

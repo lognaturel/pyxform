@@ -83,14 +83,6 @@ class XLS2XFormTests(TestCase):
         args = _create_parser().parse_args(arg_list)
         self.assertEqual(True, args.skip_validate)
 
-    def test_create_parser_no_enketo_default_false(self):
-        """Should have enketo_validate=False if not specified."""
-        arg_xlsform = "xlsform.xlsx"
-        arg_output = "."
-        arg_list = [arg_xlsform, arg_output]
-        args = _create_parser().parse_args(arg_list)
-        self.assertEqual(False, args.enketo_validate)
-
     def test_create_parser_pretty_print_default_False(self):
         """Should have pretty_print=False if not specified."""
         args = _create_parser().parse_args(["xlsform.xlsx", "."])
@@ -101,37 +93,18 @@ class XLS2XFormTests(TestCase):
         raw_args = _create_parser().parse_args(["xlsform.xlsx", ".", "--skip_validate"])
         args = _validator_args_logic(args=raw_args)
         self.assertEqual(False, args.odk_validate)
-        self.assertEqual(False, args.enketo_validate)
 
     def test_validator_args_logic_odk_default(self):
         """Should activate ODK only."""
         raw_args = _create_parser().parse_args(["xlsform.xlsx", "."])
         args = _validator_args_logic(args=raw_args)
         self.assertEqual(True, args.odk_validate)
-        self.assertEqual(False, args.enketo_validate)
-
-    def test_validator_args_logic_enketo_only(self):
-        """Should activate Enketo only."""
-        raw_args = _create_parser().parse_args(["xlsform.xlsx", ".", "--enketo_validate"])
-        args = _validator_args_logic(args=raw_args)
-        self.assertEqual(False, args.odk_validate)
-        self.assertEqual(True, args.enketo_validate)
 
     def test_validator_args_logic_odk_only(self):
         """Should activate ODK only."""
         raw_args = _create_parser().parse_args(["xlsform.xlsx", ".", "--odk_validate"])
         args = _validator_args_logic(args=raw_args)
         self.assertEqual(True, args.odk_validate)
-        self.assertEqual(False, args.enketo_validate)
-
-    def test_validator_args_logic_odk_and_enketo(self):
-        """Should activate ODK and Enketo."""
-        raw_args = _create_parser().parse_args(
-            ["xlsform.xlsx", ".", "--odk_validate", "--enketo_validate"]
-        )
-        args = _validator_args_logic(args=raw_args)
-        self.assertEqual(True, args.odk_validate)
-        self.assertEqual(True, args.enketo_validate)
 
     def test_validator_args_logic_skip_validate_override(self):
         """Should deactivate both validators."""
@@ -141,12 +114,10 @@ class XLS2XFormTests(TestCase):
                 ".",
                 "--skip_validate",
                 "--odk_validate",
-                "--enketo_validate",
             ]
         )
         args = _validator_args_logic(args=raw_args)
         self.assertEqual(False, args.odk_validate)
-        self.assertEqual(False, args.enketo_validate)
 
     @mock.patch(
         "argparse.ArgumentParser.parse_args",
@@ -156,7 +127,6 @@ class XLS2XFormTests(TestCase):
             json=False,
             skip_validate=False,
             odk_validate=False,
-            enketo_validate=False,
             pretty_print=False,
         ),
     )
@@ -173,7 +143,6 @@ class XLS2XFormTests(TestCase):
             xform_path="xlsform.xml",
             validate=False,
             pretty_print=False,
-            enketo=False,
         )
 
     @mock.patch(
@@ -184,7 +153,6 @@ class XLS2XFormTests(TestCase):
             json=True,
             skip_validate=False,
             odk_validate=False,
-            enketo_validate=False,
             pretty_print=False,
         ),
     )
@@ -202,7 +170,6 @@ class XLS2XFormTests(TestCase):
             xform_path="xlsform.xml",
             validate=False,
             pretty_print=False,
-            enketo=False,
         )
 
     @mock.patch(
@@ -213,7 +180,6 @@ class XLS2XFormTests(TestCase):
             json=False,
             skip_validate=True,
             odk_validate=True,
-            enketo_validate=True,
             pretty_print=True,
         ),
     )

@@ -27,7 +27,7 @@ from pyxform.utils import (
     escape_text_for_xml,
     node,
 )
-from pyxform.validators import enketo_validate, odk_validate
+from pyxform.validators import odk_validate
 from pyxform.validators.pyxform import unique_names
 from pyxform.validators.pyxform.iana_subtags.validation import get_languages_with_bad_tags
 from pyxform.validators.pyxform.pyxform_reference import (
@@ -1206,7 +1206,7 @@ class Survey(Section):
             return text, False
 
     def print_xform_to_file(
-        self, path=None, validate=True, pretty_print=True, warnings=None, enketo=False
+        self, path=None, validate=True, pretty_print=True, warnings=None
     ) -> str:
         """
         Print the xForm to a file and optionally validate it as well by
@@ -1229,8 +1229,6 @@ class Survey(Section):
             raise
         if validate:
             warnings.extend(odk_validate.check_xform(path))
-        if enketo:
-            warnings.extend(enketo_validate.check_xform(path))
 
         # Warn if one or more translation is missing a valid IANA subtag
         translations = self._translations
@@ -1246,15 +1244,15 @@ class Survey(Section):
                 )
         return xml
 
-    def to_xml(self, validate=True, pretty_print=True, warnings=None, enketo=False):
+    def to_xml(self, validate=True, pretty_print=True, warnings=None):
         """
-        Generates the XForm XML.
-        validate is True by default - pass the XForm XML through ODK Validator.
-        pretty_print is True by default - formats the XML for readability.
-        warnings - if a list is passed it stores all warnings generated
-        enketo - pass the XForm XML though Enketo Validator.
+        Generate the XForm XML.
 
-        Return XForm XML string.
+        :param validate: True by default - pass the XForm XML through ODK Validator.
+        :param pretty_print: True by default - formats the XML for readability.
+        :param warnings: if a list is passed it stores all warnings generated
+
+        :returns: XForm XML string.
         """
         # On Windows, NamedTemporaryFile must be opened exclusively.
         # So it must be explicitly created, opened, closed, and removed.
@@ -1268,7 +1266,6 @@ class Survey(Section):
                 validate=validate,
                 pretty_print=pretty_print,
                 warnings=warnings,
-                enketo=enketo,
             )
         finally:
             tmp_path.unlink(missing_ok=True)

@@ -1,6 +1,6 @@
 # pyxform
 
-`pyxform` is a Python library that simplifies writing forms for ODK Collect and Enketo by converting spreadsheets that follow the [XLSForm standard](http://xlsform.org/) into [ODK XForms](https://github.com/opendatakit/xforms-spec). The XLSForms format is used in a [number of tools](http://xlsform.org/en/#tools-that-support-xlsforms).
+`pyxform` is a Python library that simplifies writing forms for ODK Collect, ODK Web Forms, and Enketo by converting spreadsheets that follow the [XLSForm standard](http://xlsform.org/) into [ODK XForms](https://github.com/opendatakit/xforms-spec). The XLSForms format is used in a [number of tools](http://xlsform.org/en/#tools-that-support-xlsforms).
 
 ## Project status
 

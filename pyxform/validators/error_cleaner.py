@@ -66,9 +66,3 @@ class ErrorCleaner:
         java_clean = [ErrorCleaner._remove_java_content(i) for i in common]
         final_message = ErrorCleaner._join_final(java_clean)
         return final_message
-
-    @staticmethod
-    def enketo_validate(error_message):
-        common = ErrorCleaner._cleanup_errors(error_message)
-        final_message = ErrorCleaner._join_final(common)
-        return final_message
