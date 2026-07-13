@@ -62,7 +62,7 @@ class DefinitionData:
 def _list_to_dict_list(list_items):
     """
     Takes a list and creates a dict with the list values as keys.
-    Returns a list of the created dict or an empty list
+    Returns a list of the created dict or an empty list.
     """
     if list_items:
         return [{str(i): None for i in list_items}]
@@ -446,15 +446,18 @@ and some day:
 
 def convert_file_to_csv_string(path):
     """
-    This will open a csv or xls file and return a CSV in the format:
-        sheet_name1
-        ,col1,col2
-        ,r1c1,r1c2
-        ,r2c1,r2c2
-        sheet_name2
-        ,col1,col2
-        ,r1c1,r1c2
-        ,r2c1,r2c2
+    This will open a csv or xls file and return a CSV in the format.
+
+    ```
+    sheet_name1
+    ,col1,col2
+    ,r1c1,r1c2
+    ,r2c1,r2c2
+    sheet_name2
+    ,col1,col2
+    ,r1c1,r1c2
+    ,r2c1,r2c2
+    ```
 
     Currently, it processes csv files and xls files to ensure consistent
     csv delimiters, etc. for tests.

@@ -58,7 +58,7 @@ class SurveyInstance:
     def to_xml(self):
         """
         A horrible way to do this, but it works (until we need the attributes
-         pumped out in order, etc)
+         pumped out in order, etc).
         """
         open_str = f"""<?xml version='1.0' ?><{self._name} id="{self._id}">"""
         close_str = f"""</{self._name}>"""
@@ -73,7 +73,7 @@ class SurveyInstance:
         """
         This returns "_answers", which is a dict with the key-value
         responses for this given instance. This could be pumped to xml
-        or returned as a dict for maximum convenience (i.e. testing.)
+        or returned as a dict for maximum convenience (i.e. testing.).
         """
         return self._answers
 

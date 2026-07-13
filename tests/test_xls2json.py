@@ -563,7 +563,7 @@ class TestXLS2JSONSheetNameHeuristics(PyxformTestCase):
         )
 
     def test_xls2xform_convert__e2e_row_with_no_column_value(self):
-        """Programmatically-created XLSX files may have rows without column values"""
+        """Programmatically-created XLSX files may have rows without column values."""
         md = """
         | survey |        |        |        |         |
         |        | type   | name   | label  | hint    |
@@ -602,7 +602,7 @@ class TestXLS2JSONSheetNameHeuristics(PyxformTestCase):
     def test_xls2xform_convert__e2e_with_extra_columns__does_not_use_excessive_memory(
         self,
     ):
-        """Degenerate form with many blank columns"""
+        """Degenerate form with many blank columns."""
         process = psutil.Process(os.getpid())
         pre_mem = process.memory_info().rss
         xls2xform_convert(

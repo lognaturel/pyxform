@@ -7,7 +7,7 @@ from tests.pyxform_test_case import PyxformTestCase
 
 class BindConversionsTest(PyxformTestCase):
     """
-    BindConversionsTest - test bind conversions
+    BindConversionsTest - test bind conversions.
     """
 
     def test_bind_readonly_conversion(self):

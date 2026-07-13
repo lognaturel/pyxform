@@ -106,13 +106,13 @@ class TestXMLParse(TestCase):
 
 class TestXForm2JSON(PyxformTestCase):
     """
-    Test xform2json module
+    Test xform2json module.
     """
 
     def test_convert_toJSON_multi_language(self):
         """
         Test that it's possible to convert XLSForms with multiple languages
-        to JSON and back into XML without losing any of the required information
+        to JSON and back into XML without losing any of the required information.
         """
         md = """
         | survey  |

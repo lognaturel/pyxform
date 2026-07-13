@@ -39,7 +39,7 @@ class Translator:
     def __init__(self):
         """
         I'm being super lazy dictionary has to have the form:
-        {'yes' : {'English' : {'French' : 'oui'}}}
+        `{'yes' : {'English' : {'French' : 'oui'}}}`.
         """
         self._dict = infinite_dict()
         self._languages = []

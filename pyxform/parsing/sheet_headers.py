@@ -64,7 +64,7 @@ def merge_dicts(
 
 def list_to_nested_dict(lst: Sequence) -> dict:
     """
-    [1,2,3,4] -> {1:{2:{3:4}}}
+    Example: `[1,2,3,4] -> {1:{2:{3:4}}}`.
     """
     if len(lst) > 1:
         return {lst[0]: list_to_nested_dict(lst[1:])}

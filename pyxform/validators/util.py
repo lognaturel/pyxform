@@ -22,7 +22,7 @@ XFORM_SPEC_PATH = os.path.join(HERE, "xlsform_spec_test.xml")
 
 
 class PopenResult:
-    """Result data for run_popen_with_timeout"""
+    """Result data for run_popen_with_timeout."""
 
     def __init__(
         self, return_code: int, timeout: bool, stdout: bytes, stderr: bytes
@@ -39,7 +39,7 @@ def run_popen_with_timeout(command, timeout) -> "PopenResult":
     """
     Run a sub-program in subprocess.Popen, pass it the input_data,
     kill it if the specified timeout has passed.
-    returns a tuple of resultcode, timeout, stdout, stderr
+    returns a tuple of resultcode, timeout, stdout, stderr.
     """
     kill_check = threading.Event()
 
@@ -84,7 +84,7 @@ def run_popen_with_timeout(command, timeout) -> "PopenResult":
 
 
 def decode_stream(stream):
-    """
+    r"""
     Decode a stream, e.g. stdout or stderr.
 
     On Windows, stderr may be latin-1; in which case utf-8 decode will fail.

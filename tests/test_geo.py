@@ -1,5 +1,5 @@
 """
-## Geo control traceability
+## Geo control traceability.
 
 Each test should reference one (or more) requirements from these lists.
 

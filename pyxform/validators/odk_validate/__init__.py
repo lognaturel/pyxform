@@ -1,6 +1,5 @@
 """
-odk_validate.py
-A python wrapper around ODK Validate
+A python wrapper around ODK Validate.
 """
 
 import logging

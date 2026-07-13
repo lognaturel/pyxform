@@ -57,7 +57,9 @@ select = [
   "C4",  # flake8-comprehensions
   "D202",  # pydocstyle (blank-line-after-function)
   "D209",  # pydocstyle (new-line-after-last-paragraph)
+  "D301",  # pydocstyle (escape-sequence-in-docstring)
   "D403",  # pydocstyle (first-word-uncapitalized)
+  "D415",  # pydocstyle (missing-terminal-punctuation)
   "E",  # pycodestyle error
 #  "ERA",  # eradicate (commented out code)
   "F",  # pyflakes

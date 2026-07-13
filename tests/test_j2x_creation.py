@@ -1,5 +1,5 @@
 """
-Testing creation of Surveys using verbose methods
+Testing creation of Surveys using verbose methods.
 """
 
 from unittest import TestCase
@@ -38,7 +38,7 @@ class Json2XformVerboseSurveyCreationTests(TestCase):
 
     def test_allow_surveys_with_comment_rows(self):
         """Assume that a survey with rows that don't have name, type, or label
-        headings raise warning only
+        headings raise warning only.
         """
         path = utils.path_to_text_fixture("allow_comment_rows_test.xls")
         survey = create_survey_from_xls(path)

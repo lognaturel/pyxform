@@ -196,7 +196,7 @@ def build_survey_from_path_spec(
 
 class TestGetPathRelativeToLCAR(TestCase):
     """
-    Tests of pyxform.survey.get_path_relative_to_lcar
+    Tests of `pyxform.survey.get_path_relative_to_lcar`.
     """
 
     def assert_relative_path(

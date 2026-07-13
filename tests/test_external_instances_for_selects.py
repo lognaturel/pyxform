@@ -1,5 +1,5 @@
 """
-Test external instance syntax
+Test external instance syntax.
 
 See also test_external_instances
 """
@@ -145,7 +145,7 @@ class TestSelectFromFile(PyxformTestCase):
                 )
 
     def test_no_params_with_filters(self):
-        """Should find that choice_filter adds a predicate to the itemset's instance ref"""
+        """Should find that choice_filter adds a predicate to the itemset's instance ref."""
         md = """
         | survey |                                        |         |         |                |
         |        | type                                   | name    | label   | choice_filter  |
@@ -307,7 +307,7 @@ class TestSelectOneExternal(PyxformTestCase):
     """
 
     def test_no_params_no_filters(self):
-        """Should find that Pyxform errors out, not a supported use case as per #488"""
+        """Should find that Pyxform errors out, not a supported use case as per #488."""
         md = """
         | survey |                             |        |        |
         |        | type                        | name   | label  |
@@ -346,7 +346,7 @@ class TestSelectOneExternal(PyxformTestCase):
         )
 
     def test_no_params_with_filters(self):
-        """Should find that choice_filter generates input()s with refs to external itemsets"""
+        """Should find that choice_filter generates input()s with refs to external itemsets."""
         md = """
         | survey |                            |        |        |                                 |
         |        | type                       | name   | label  | choice_filter                   |

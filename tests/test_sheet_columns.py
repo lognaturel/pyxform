@@ -66,12 +66,12 @@ class TestSettingsColumns(PyxformTestCase):
 
 class TestSurveyColumns(PyxformTestCase):
     """
-    Invalid survey column tests
+    Invalid survey column tests.
     """
 
     def test_missing_name(self):
         """
-        Every question needs a name (or alias of name)
+        Every question needs a name (or alias of name).
         """
         self.assertPyxformXform(
             name="invalidcols",
@@ -145,7 +145,7 @@ class TestSurveyColumns(PyxformTestCase):
 
     def test_column_case(self):
         """
-        Ensure that column name is case insensitive
+        Ensure that column name is case insensitive.
         """
         self.assertPyxformXform(
             md="""
@@ -205,13 +205,13 @@ class TestSurveyColumns(PyxformTestCase):
 
 class TestChoicesColumns(PyxformTestCase):
     """
-    Invalid choice sheet column tests
+    Invalid choice sheet column tests.
     """
 
     @staticmethod
     def _simple_choice_ss(choice_sheet=None):
         """
-        Return simple choices sheet
+        Return simple choices sheet.
         """
         if choice_sheet is None:
             choice_sheet = []
@@ -228,7 +228,7 @@ class TestChoicesColumns(PyxformTestCase):
 
     def test_valid_choices_sheet_passes(self):
         """
-        Test invalid choices sheet passes
+        Test invalid choices sheet passes.
         """
         self.assertPyxformXform(
             name="valid_choices",
@@ -242,7 +242,7 @@ class TestChoicesColumns(PyxformTestCase):
 
     def test_invalid_choices_sheet_fails(self):
         """
-        Test invalid choices sheet fails
+        Test invalid choices sheet fails.
         """
         self.assertPyxformXform(
             name="missing_name",
@@ -260,7 +260,7 @@ class TestChoicesColumns(PyxformTestCase):
 
     def test_missing_list_name(self):
         """
-        Test missing sheet name
+        Test missing sheet name.
         """
         self.assertPyxformXform(
             name="missing_list_name",
@@ -294,12 +294,12 @@ class TestChoicesColumns(PyxformTestCase):
 
 class TestColumnAliases(PyxformTestCase):
     """
-    Aliases Tests
+    Aliases Tests.
     """
 
     def test_value_and_name(self):
         """
-        Confirm that both 'name' and 'value' columns of choice list work
+        Confirm that both 'name' and 'value' columns of choice list work.
         """
         md = """
         | survey  |               |                |            |

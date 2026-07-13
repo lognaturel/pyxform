@@ -144,7 +144,7 @@ class TestXLDateAmbigousNoException(TestCase):
 
 
 class TestSpreadSheetFilesWithMacrosAreAllowed(TestCase):
-    """Test that spreadsheets with .xlsm extension are allowed"""
+    """Test that spreadsheets with .xlsm extension are allowed."""
 
     def test_xlsm_files_are_allowed(self):
         filename = "excel_with_macros.xlsm"
@@ -153,7 +153,7 @@ class TestSpreadSheetFilesWithMacrosAreAllowed(TestCase):
 
 
 class TestBadCalculation(TestCase):
-    """Bad calculation should not kill the application"""
+    """Bad calculation should not kill the application."""
 
     def test_bad_calculate_javarosa_error(self):
         filename = "bad_calc.xml"

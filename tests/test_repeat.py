@@ -350,7 +350,7 @@ class TestRepeatOutput(PyxformTestCase):
         )
 
     def test_choice_from_previous_repeat_answers_with_choice_filter(self):
-        """Select one choices from previous repeat answers with choice filter"""
+        """Select one choices from previous repeat answers with choice filter."""
         xlsform_md = """
         | survey  |                    |                |                |                           |
         |         | type               | name           | label          | choice_filter             |
@@ -378,7 +378,7 @@ class TestRepeatOutput(PyxformTestCase):
 
     def test_choice_from_previous_repeat_answers_in_child_repeat(self):
         """
-        Select one choice from previous repeat answers when within a child of a repeat
+        Select one choice from previous repeat answers when within a child of a repeat.
         """
         xlsform_md = """
         | survey  |                    |                           |                                                |                             |
@@ -399,7 +399,7 @@ class TestRepeatOutput(PyxformTestCase):
         )
 
     def test_choice_from_previous_repeat_answers_in_nested_repeat(self):
-        """Select one choices from previous repeat answers within a nested repeat"""
+        """Select one choices from previous repeat answers within a nested repeat."""
         xlsform_md = """
         | survey  |                    |                           |                                                |                             |
         |         | type               | name                      | label                                          | choice_filter               |
@@ -420,7 +420,7 @@ class TestRepeatOutput(PyxformTestCase):
 
     def test_choice_from_previous_repeat_answers_in_nested_repeat_uses_current(self):
         """
-        Select one choices from previous repeat answers within a nested repeat should use current if a sibling node of a select is used
+        Select one choices from previous repeat answers within a nested repeat should use current if a sibling node of a select is used.
         """
         xlsform_md = """
         | survey  |                    |                           |                                                |                             |
@@ -446,7 +446,7 @@ class TestRepeatOutput(PyxformTestCase):
         )
 
     def test_choice_from_previous_repeat_in_current_repeat_parents_out_to_repeat(self):
-        """Test choice from previous repeat in current repeat produces the correct reference"""
+        """Test choice from previous repeat in current repeat produces the correct reference."""
         xlsform_md = """
         | survey       |                           |               |                        |                                                      |            |                       |              |
         |              | type                      | name          | label                  | choice_filter                                        | appearance | relevant              | calculation  |
@@ -679,7 +679,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path is inside a predicate in a survey with select choice list
+        Test relative path expansion using current if reference path is inside a predicate in a survey with select choice list.
         """
         xlsform_md = """
         | survey |                 |              |                                                |               |                                                             |
@@ -709,7 +709,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path is inside a predicate and instance is not first expression in a survey with select choice list
+        Test relative path expansion using current if reference path is inside a predicate and instance is not first expression in a survey with select choice list.
         """
         xlsform_md = """
         | survey |                 |              |                                                |               |                                                                               |
@@ -739,7 +739,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path is inside a predicate in a survey with group
+        Test relative path expansion using current if reference path is inside a predicate in a survey with group.
         """
         xlsform_md = """
         | survey |              |       |       |                                                 |
@@ -764,7 +764,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path is inside a predicate
+        Test relative path expansion using current if reference path is inside a predicate.
         """
         xlsform_md = """
         | survey |              |       |       |                                                                 |
@@ -787,7 +787,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path (with whitespaces before/after an operator of ${name}) is inside a predicate
+        Test relative path expansion using current if reference path (with whitespaces before/after an operator of ${name}) is inside a predicate.
         """
         xlsform_md = """
         | survey |              |       |       |                                                                   |
@@ -814,7 +814,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path in a method (with whitespaces before/after an operator of ${name}) is inside apredicate
+        Test relative path expansion using current if reference path in a method (with whitespaces before/after an operator of ${name}) is inside apredicate.
         """
         xlsform_md = """
         | survey |              |       |       |                                                                           |
@@ -837,7 +837,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path (with whitespaces before/after an operator of ${name}) is inside a predicate with parenthesis
+        Test relative path expansion using current if reference path (with whitespaces before/after an operator of ${name}) is inside a predicate with parenthesis.
         """
         xlsform_md = """
         | survey |              |       |       |                                                                   |
@@ -860,7 +860,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using xpath without current() if reference path is inside a predicate and not inside a repeat
+        Test relative path expansion using xpath without current() if reference path is inside a predicate and not inside a repeat.
         """
         xlsform_md = """
         | survey |              |       |       |                                                 |
@@ -880,7 +880,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using xpath without current() if reference path is inside a predicate but not part of the primary instance
+        Test relative path expansion using xpath without current() if reference path is inside a predicate but not part of the primary instance.
         """
         xlsform_md = """
         | survey |              |       |       |                                   |
@@ -902,7 +902,7 @@ class TestRepeatOutput(PyxformTestCase):
         self,
     ):
         """
-        Test relative path expansion using current if reference path is in multiple predicate
+        Test relative path expansion using current if reference path is in multiple predicate.
         """
         xlsform_md = """
         | survey |              |       |       |                                                                       |
@@ -926,7 +926,7 @@ class TestRepeatOutput(PyxformTestCase):
     ):
         """
         Test relative path expansion using current if reference path is in multiple predicate, one of it is a complex one
-        ${pos1} is not using current because it is not in repeat
+        ${pos1} is not using current because it is not in repeat.
         """
         xlsform_md = """
         | survey |              |       |       |                                                                                                       |
@@ -953,7 +953,7 @@ class TestRepeatOutput(PyxformTestCase):
         Test relative reference path expansion uses current if reference path is in predicate
             even if the reference path is found after the instance() expression
         ${pos5} that is in 'index =${pos5}'' uses current because it is in a predicate
-        ${pos5} that is in 'position()=${pos5}'' uses current because it is in a predicate (eventhough not in an instance)
+        ${pos5} that is in 'position()=${pos5}'' uses current because it is in a predicate (eventhough not in an instance).
         """
         xlsform_md = """
         | survey |              |       |       |                                                                                                |
@@ -978,7 +978,7 @@ class TestRepeatOutput(PyxformTestCase):
         Test relative reference path expansion not using current if reference path is not in predicate
             and the reference path is found after the instance() expression
         ${pos5} that is in 'index =${pos5} uses current because it is in a predicate
-        ${pos5} that is in '${pos5} + 1'' not using current because it is not in a predicate (regardless in an instance or not)
+        ${pos5} that is in '${pos5} + 1'' not using current because it is not in a predicate (regardless in an instance or not).
         """
         xlsform_md = """
         | survey |              |       |            |                                                                       |
@@ -1073,7 +1073,7 @@ class TestRepeatOutput(PyxformTestCase):
 
     def test_repeat_adding_template_and_instance(self):
         """
-        Repeat should add template and instances
+        Repeat should add template and instances.
         """
         self.assertPyxformXform(
             md="""
@@ -1117,7 +1117,7 @@ class TestRepeatOutput(PyxformTestCase):
 
     def test_repeat_adding_template_and_instance_with_group(self):
         """
-        Repeat should add template and instance even when they are inside grouping
+        Repeat should add template and instance even when they are inside grouping.
         """
         self.assertPyxformXform(
             md="""

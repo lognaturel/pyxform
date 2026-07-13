@@ -127,7 +127,7 @@ class Section(SurveyElement):
 
     def xml_instance(self, survey: "Survey", **kwargs):
         """
-        Creates an xml representation of the section
+        Creates an xml representation of the section.
         """
         append_template = kwargs.pop("append_template", False)
 
@@ -186,7 +186,7 @@ class Section(SurveyElement):
     def xml_control(self, survey: "Survey"):
         """
         Ideally, we'll have groups up and rolling soon, but for now
-        let's just yield controls from all the children of this section
+        let's just yield controls from all the children of this section.
         """
         for e in self.children:
             control = e.xml_control(survey=survey)
@@ -227,6 +227,9 @@ class RepeatingSection(Section):
 
     def xml_control(self, survey: "Survey"):
         """
+        Example
+
+        ```
         <group>
         <label>Fav Color</label>
         <repeat nodeset="fav-color">
@@ -238,6 +241,7 @@ class RepeatingSection(Section):
           </select1>
         </repeat>
         </group>
+        ```.
         """
         # Resolve field references in attributes
         if self.control:

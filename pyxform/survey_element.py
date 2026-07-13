@@ -279,7 +279,7 @@ class SurveyElement(Mapping):
     def _delete_keys_from_dict(self, dictionary: dict, keys: Iterable[str]):
         """
         Deletes a list of keys from a dictionary.
-        Credits: https://stackoverflow.com/a/49723101
+        Credits: `https://stackoverflow.com/a/49723101`.
         """
         for key in keys:
             dictionary.pop(key, None)
@@ -294,7 +294,7 @@ class SurveyElement(Mapping):
     def to_json_dict(self, delete_keys: Iterable[str] | None = None) -> dict:
         """
         Create a dict copy of this survey element by removing inappropriate
-        attributes and converting its children to dicts
+        attributes and converting its children to dicts.
         """
         self.validate()
         result = self.copy()
@@ -359,7 +359,7 @@ class SurveyElement(Mapping):
     def get_translations(self, default_language):
         """
         Returns translations used by this element so they can be included in
-        the <itext> block. @see survey._setup_translations
+        the <itext> block. @see survey._setup_translations.
         """
         bind_dict = self.bind
         if bind_dict and isinstance(bind_dict, dict):

@@ -111,7 +111,7 @@ def add_flat_annotations(prompt_list, parent_relevant="", name_prefix=""):
       (However, there could be namespace collisions now.)
     - "and"s group relevance formulas onto that of their children.
     - Adds a flat property to groups
-      The flat property is used in the json2xform code
+      The flat property is used in the json2xform code.
     """
     for prompt in prompt_list:
         prompt_relevant = prompt.get("bind", {}).get("relevant", "")
@@ -215,7 +215,7 @@ def workbook_to_json(
        default language.
        If the default language is used as a suffix for media/labels/hints,
        then the suffixless version will be overwritten.
-    warnings -- an optional list which warnings will be appended to
+    warnings -- an optional list which warnings will be appended to.
 
     returns a nested dictionary equivalent to the format specified in the
     json form spec.
@@ -1410,7 +1410,7 @@ def parse_file_to_json(
     file_object: IO | None = None,
 ) -> dict[str, Any]:
     """
-    A wrapper for workbook_to_json
+    A wrapper for workbook_to_json.
     """
     if warnings is None:
         warnings = []

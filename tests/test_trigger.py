@@ -1,5 +1,5 @@
 """
-Test handling setvalue of 'trigger' column in forms
+Test handling setvalue of 'trigger' column in forms.
 """
 
 from itertools import product

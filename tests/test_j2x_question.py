@@ -1,5 +1,5 @@
 """
-Testing creation of Surveys using verbose methods
+Testing creation of Surveys using verbose methods.
 """
 
 from collections.abc import Generator
@@ -16,7 +16,7 @@ from tests.xpath_helpers.questions import xpq
 def ctw(control):
     """
     Ctw stands for control_test_wrap, but ctw is shorter and easier. using
-    begin_str and end_str to take out the wrap that xml gives us
+    begin_str and end_str to take out the wrap that xml gives us.
     """
     if isinstance(control, list) and len(control) == 1:
         control = control[0]

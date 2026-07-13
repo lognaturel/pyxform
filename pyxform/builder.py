@@ -82,7 +82,7 @@ class SurveyElementBuilder:
         """
         Convert from a nested python dictionary/array structure (a json dict I
         call it because it corresponds directly with a json object)
-        to a survey object
+        to a survey object.
 
         :param d: data to use for constructing SurveyElements.
         """
@@ -202,7 +202,7 @@ class SurveyElementBuilder:
         """
         Read the type string from the json format,
         and find what class it maps to going through
-        type_dictionary -> QUESTION_CLASSES
+        type_dictionary -> QUESTION_CLASSES.
         """
         by_type = QUESTION_CLASSES["__by_type__"].get(question_type_str, None)
         if by_type is not None:
@@ -246,7 +246,7 @@ class SurveyElementBuilder:
     ):
         """
         Takes a json_dict of "loop" type
-        Returns a GroupedSection
+        Returns a GroupedSection.
         """
         children = d.get(const.CHILDREN)
         result = GroupedSection(**d)
@@ -309,7 +309,7 @@ class SurveyElementBuilder:
 
 def create_survey_element_from_dict(d, sections=None):
     """
-    Creates a Survey from a dictionary in the format provided by SurveyReader
+    Creates a Survey from a dictionary in the format provided by SurveyReader.
     """
     if sections is None:
         sections = {}
@@ -380,7 +380,7 @@ def create_survey_from_path(path: str, include_directory: bool = False) -> Surve
     include_directory -- Switch to indicate that all the survey forms in the
                          same directory as the specified file should be read
                          so they can be included through include types.
-    @see: create_survey
+    @see: create_survey.
     """
     directory, file_name = os.path.split(path)
     if include_directory:

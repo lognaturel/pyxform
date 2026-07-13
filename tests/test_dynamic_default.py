@@ -1,5 +1,5 @@
 """
-Test handling dynamic default in forms
+Test handling dynamic default in forms.
 """
 
 from dataclasses import dataclass

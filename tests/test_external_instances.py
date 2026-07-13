@@ -14,7 +14,7 @@ from tests.xpath_helpers.choices import xpc
 
 class ExternalInstanceTests(PyxformTestCase):
     """
-    External Instance Tests
+    External Instance Tests.
     """
 
     def test_can__output_single_external_xml_item(self):
@@ -407,7 +407,7 @@ class ExternalInstanceTests(PyxformTestCase):
     def test_external_instance_pulldata_constraint(self):
         """
         Checks if instance node for pulldata function is added
-        when pulldata occurs in column with constraint title
+        when pulldata occurs in column with constraint title.
         """
         md = """
         | survey |        |         |                |                                                         |
@@ -507,7 +507,7 @@ class ExternalInstanceTests(PyxformTestCase):
     def test_external_instance_pulldata_readonly(self):
         """
         Checks if instance node for pulldata function is added
-        when pulldata occurs in column with readonly title
+        when pulldata occurs in column with readonly title.
         """
         md = """
         | survey |        |         |                |                                                         |
@@ -525,7 +525,7 @@ class ExternalInstanceTests(PyxformTestCase):
     def test_external_instance_pulldata_required(self):
         """
         Checks if instance node for pulldata function is added
-        when pulldata occurs in column with required title
+        when pulldata occurs in column with required title.
         """
         md = """
         | survey |        |         |                |                                                         |
@@ -542,7 +542,7 @@ class ExternalInstanceTests(PyxformTestCase):
     def test_external_instance_pulldata_relevant(self):
         """
         Checks if instance node for pulldata function is added
-        when pulldata occurs in column with relevant title
+        when pulldata occurs in column with relevant title.
         """
         md = """
         | survey |        |         |                |                                                         |
@@ -585,7 +585,7 @@ class ExternalInstanceTests(PyxformTestCase):
         """
         Checks that only one instance node for pulldata is created
         if pulldata function is present in at least one columns with
-        the titles: constraint, relevant, required, readonly
+        the titles: constraint, relevant, required, readonly.
         """
         md = """
         | survey |        |         |                |                                                         |                                                         |                                                         |
@@ -610,7 +610,7 @@ class ExternalInstanceTests(PyxformTestCase):
         Checks that all instances for pulldata that needs creation
         are created
         The situation is if pulldata is present in 2 or more
-        columns but pulling data from different csv files
+        columns but pulling data from different csv files.
         """
         md = """
         | survey |        |         |                |                                                 |                                                             |

@@ -1,5 +1,5 @@
 """
-Testing simple cases for Xls2Json
+Testing simple cases for Xls2Json.
 """
 
 import json
@@ -105,7 +105,7 @@ class BasicXls2JsonApiTests(TestCase):
 
     def test_choice_filter_choice_fields(self):
         """
-        Test that the choice filter fields appear on children field of json
+        Test that the choice filter fields appear on children field of json.
         """
         choice_filter_survey = SurveyReader(
             utils.path_to_text_fixture("choice_filter_test.xlsx"),
@@ -179,7 +179,7 @@ class UnicodeCsvTest(TestCase):
     def test_a_unicode_csv_works(self):
         """
         Simply tests that xls2json_backends.csv_to_dict does not have a problem
-        with a csv with unicode characters
+        with a csv with unicode characters.
         """
         utf_csv_path = utils.path_to_text_fixture("utf_csv.csv")
         dict_value = csv_to_dict(utf_csv_path)

@@ -1,5 +1,5 @@
 """
-ExternalInstance class module
+ExternalInstance class module.
 """
 
 from typing import TYPE_CHECKING

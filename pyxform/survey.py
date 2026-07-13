@@ -70,7 +70,7 @@ class InstanceInfo:
 
 
 def register_nsmap():
-    """Function to register NSMAP namespaces with ETree"""
+    """Function to register NSMAP namespaces with ETree."""
     for prefix, uri in NSMAP.items():
         prefix_no_xmlns = prefix.replace("xmlns", "").replace(":", "")
         ETree.register_namespace(prefix_no_xmlns, uri)
@@ -262,7 +262,7 @@ class Survey(Section):
             )
 
     def get_nsmap(self):
-        """Add additional namespaces"""
+        """Add additional namespaces."""
         if self.entity_version:
             entities_ns = " entities=http://www.opendatakit.org/xforms/entities"
             if self.namespaces is None:
@@ -311,7 +311,7 @@ class Survey(Section):
         self, list_name: str, itemset: Itemset
     ) -> InstanceInfo:
         """
-        Generate <instance> elements for static data (e.g. choices for selects)
+        Generate <instance> elements for static data (e.g. choices for selects).
         """
 
         def choice_nodes(idx, choice):
@@ -397,7 +397,7 @@ class Survey(Section):
             """
             Returns a list of different pulldata(... function strings if
             pulldata function is defined at least once for any of:
-            calculate, constraint, readonly, required, relevant
+            calculate, constraint, readonly, required, relevant.
             """
             functions_present = []
             for formula_name in constants.EXTERNAL_INSTANCES:
@@ -607,7 +607,7 @@ class Survey(Section):
 
     def xml_model(self):
         """
-        Generate the xform <model> element
+        Generate the xform <model> element.
         """
         self._setup_translations()
         self._setup_media()
@@ -740,7 +740,7 @@ class Survey(Section):
     def _setup_translations(self):
         """
         Set up the self._translations dict which will be referenced in the
-        setup media and itext functions
+        setup media and itext functions.
         """
 
         def get_choice_content(name, idx, choice):
@@ -912,7 +912,7 @@ class Survey(Section):
         This function creates the survey's itext nodes from _translations
         @see _setup_media _setup_translations
         itext nodes are localized images/audio/video/text
-        @see http://code.google.com/p/opendatakit/wiki/XFormDesignGuidelines
+        @see `http://code.google.com/p/opendatakit/wiki/XFormDesignGuidelines`.
         """
         result = []
         for lang, translation in self._translations.items():
@@ -1040,7 +1040,7 @@ class Survey(Section):
         def _in_secondary_instance_predicate() -> bool:
             """
             Check if ${} expression represented by matchobj
-            is in a predicate for a path expression for a secondary instance
+            is in a predicate for a path expression for a secondary instance.
             """
             if RE_INSTANCE.search(matchobj.string) is not None:
                 bracket_regex_match_iter = RE_BRACKET.finditer(matchobj.string)

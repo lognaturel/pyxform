@@ -224,7 +224,7 @@ class TestTranslations(PyxformTestCase):
         )
 
     def test_missing_media_itext(self):
-        """Test missing media itext translation
+        """Test missing media itext translation.
 
         Fix for https://github.com/XLSForm/pyxform/issues/32
         """

@@ -56,7 +56,7 @@ class XmlDictObject(dict):
     @staticmethod
     def wrap(x):
         """
-        Static method to wrap a dictionary recursively as an XmlDictObject
+        Static method to wrap a dictionary recursively as an XmlDictObject.
         """
         if isinstance(x, dict):
             return XmlDictObject((k, XmlDictObject.Wrap(v)) for (k, v) in iter(x.items()))
@@ -106,7 +106,7 @@ def _convert_dict_to_xml_recurse(parent, dictitem):
 
 def convert_dict_to_xml(xmldict):
     """
-    Converts a dictionary to an XML ElementTree Element
+    Converts a dictionary to an XML ElementTree Element.
     """
     roottag = xmldict.keys()[0]
     root = Element(roottag)
@@ -158,7 +158,7 @@ def _convert_xml_to_dict_recurse(node, dictclass):
 
 def convert_xml_to_dict(root, dictclass=XmlDictObject):
     """
-    Converts an XML file or ElementTree Element to a dictionary
+    Converts an XML file or ElementTree Element to a dictionary.
     """
     # If a string is passed in, try to open it as a file
     if isinstance(root, str):
@@ -208,7 +208,7 @@ def create_survey_element_from_xml(xml_file):
 
 
 class XFormToDictBuilder:
-    """Experimental XFORM xml to XFORM JSON"""
+    """Experimental XFORM xml to XFORM JSON."""
 
     def __init__(self, xml_file):
         doc_as_dict = XFormToDict(xml_file).get_dict()
@@ -681,7 +681,7 @@ class XFormToDictBuilder:
     @staticmethod
     def _get_name_from_ref(ref):
         """Given /xlsform_spec_test/launch,
-        return the string after the last occurance of the character '/'
+        return the string after the last occurance of the character '/'.
         """
         pos = ref.rfind("/")
         if pos == -1:
