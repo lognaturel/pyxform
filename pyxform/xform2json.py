@@ -639,7 +639,7 @@ class XFormToDictBuilder:
 
     def _get_bracketed_name(self, ref):
         name = self._get_name_from_ref(ref)
-        return "".join(["${", name.strip(), "}"])
+        return f"${{{name.strip()}}}"
 
     def _get_constraint_msg(self, constraint_msg):
         if isinstance(constraint_msg, str):

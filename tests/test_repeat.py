@@ -996,7 +996,7 @@ class TestRepeatOutput(PyxformTestCase):
         process = Process(getpid())
         for count in (500, 1000, 2000, 5000, 10000):
             questions = "\n".join(question.format(i=i) for i in range(count))
-            md = "".join((survey_header, questions, survey_footer))
+            md = f"{survey_header}{questions}{survey_footer}"
 
             def run(name, case):
                 runs = 0

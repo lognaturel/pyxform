@@ -59,6 +59,7 @@ select = [
   "E",  # pycodestyle error
 #  "ERA",  # eradicate (commented out code)
   "F",  # pyflakes
+  "FLY",  # flynt
   "FURB",  # refurb
   "I",  # isort
   "PERF",  # perflint
