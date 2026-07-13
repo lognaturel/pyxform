@@ -138,6 +138,19 @@ class TypedCalculatesTest(PyxformTestCase):
             error__contains=["The survey element named 'a' has no label or hint."],
         )
 
+    def test_calculate_without_calculation__error(self):
+        """Should find an error is raised when a calculate question has no calculation."""
+        md = """
+        | survey |
+        | | type      | name | label | calculation |
+        | | calculate | q1   | Q1    |             |
+        """
+        self.assertPyxformXform(
+            md=md,
+            errored=True,
+            error__contains=["[row : 2] Missing calculation."],
+        )
+
     def test_calculate_without_calculation_without_default(self):
         self.assertPyxformXform(
             name="calculate-without-calculation-without-default",

@@ -24,7 +24,6 @@ class TestXFormConversion(TestCase):
         cases = (
             ("group_name_test.xls", "[row : 3] Question or group with no name."),
             ("duplicate_columns.xlsx", "Duplicate column header: label"),
-            ("calculate_without_calculation.xls", "[row : 34] Missing calculation."),
         )
         for i, (case, err_msg) in enumerate(cases):
             with self.subTest(msg=f"{i}: {case}"):
