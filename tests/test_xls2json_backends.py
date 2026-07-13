@@ -173,28 +173,29 @@ class TestXLS2JSONBackends(PyxformTestCase):
             self.assertEqual(xlsx_inp, csv_inp)
             self.assertEqual(xlsx_inp, md_inp)
 
-    def test_xls_with_many_empty_cells(self):
+    def test_form_with_many_empty_cells(self):
         """Should quickly produce expected data, and find large input sheet dimensions."""
         # Test fixture produced by adding data at cells IV1 and A19999.
-        xls_path = os.path.join(bug_example_forms.PATH, "extra_columns.xls")
+        xlsx_path = os.path.join(bug_example_forms.PATH, "extra_columns.xlsx")
         before = datetime.datetime.now(datetime.UTC)
-        xls_data = xls_to_dict(xls_path)
+        xlsx_data = xlsx_to_dict(xlsx_path)
         after = datetime.datetime.now(datetime.UTC)
         self.assertLess((after - before).total_seconds(), 5)
-        wb = xlrd.open_workbook(filename=xls_path)
+        wb = openpyxl.open(filename=xlsx_path, read_only=True, data_only=True)
 
         survey_headers = [
             "type",
             "name",
             "label",
         ]
-        self.assertEqual(survey_headers, list(xls_data["survey_header"][0].keys()))
-        self.assertEqual(3, len(xls_data["survey"]))
-        self.assertEqual("b", xls_data["survey"][2]["name"])
+        self.assertEqual(survey_headers, list(xlsx_data["survey_header"][0].keys()))
+        self.assertEqual(3, len(xlsx_data["survey"]))
+        self.assertEqual("b", xlsx_data["survey"][2]["name"])
         survey = wb["survey"]
-        self.assertTupleEqual((19999, 256), (survey.nrows, survey.ncols))
+        self.assertEqual(19999, survey.max_row)
+        self.assertEqual(256, survey.max_column)
 
-        wb.release_resources()
+        wb.close()
 
     def test_xlsx_with_many_empty_rows(self):
         """Should quickly produce expected data, and find large input sheet dimensions."""
