@@ -55,6 +55,7 @@ src = ["pyxform", "tests"]
 select = [
   "B",  # flake8-bugbear
   "C4",  # flake8-comprehensions
+  "D202",  # pydocstyle (blank-line-after-function)
   "D403",  # pydocstyle (first-word-uncapitalized)
   "E",  # pycodestyle error
 #  "ERA",  # eradicate (commented out code)

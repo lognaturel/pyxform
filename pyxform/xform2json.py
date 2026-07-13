@@ -58,7 +58,6 @@ class XmlDictObject(dict):
         """
         Static method to wrap a dictionary recursively as an XmlDictObject
         """
-
         if isinstance(x, dict):
             return XmlDictObject((k, XmlDictObject.Wrap(v)) for (k, v) in iter(x.items()))
         elif isinstance(x, list):
@@ -80,7 +79,6 @@ class XmlDictObject(dict):
         Recursively converts an XmlDictObject to a standard dictionary
         and returns the result.
         """
-
         return XmlDictObject._un_wrap(self)
 
 
@@ -110,7 +108,6 @@ def convert_dict_to_xml(xmldict):
     """
     Converts a dictionary to an XML ElementTree Element
     """
-
     roottag = xmldict.keys()[0]
     root = Element(roottag)
     _convert_dict_to_xml_recurse(root, xmldict[roottag])

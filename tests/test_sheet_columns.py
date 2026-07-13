@@ -162,7 +162,6 @@ class TestSurveyColumns(PyxformTestCase):
         re: https://github.com/SEL-Columbia/pyxform/issues/76
         Capitalization of 'label' column can lead to confusing errors.
         """
-
         self.assertPyxformXform(
             md="""
             | survey |      |      |       |
@@ -214,7 +213,6 @@ class TestChoicesColumns(PyxformTestCase):
         """
         Return simple choices sheet
         """
-
         if choice_sheet is None:
             choice_sheet = []
         return {
@@ -232,7 +230,6 @@ class TestChoicesColumns(PyxformTestCase):
         """
         Test invalid choices sheet passes
         """
-
         self.assertPyxformXform(
             name="valid_choices",
             ss_structure=self._simple_choice_ss(
@@ -247,7 +244,6 @@ class TestChoicesColumns(PyxformTestCase):
         """
         Test invalid choices sheet fails
         """
-
         self.assertPyxformXform(
             name="missing_name",
             ss_structure=self._simple_choice_ss(
@@ -266,7 +262,6 @@ class TestChoicesColumns(PyxformTestCase):
         """
         Test missing sheet name
         """
-
         self.assertPyxformXform(
             name="missing_list_name",
             ss_structure=self._simple_choice_ss(

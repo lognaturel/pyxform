@@ -224,7 +224,6 @@ def dealias_and_group_headers(
       in the data rows.
     :param add_row_number: If True, add a "__row" key with the row number from the input data.
     """
-
     header_key: dict[str, tuple[str, ...]] = {}
     tokens_key: dict[tuple[str, ...], str] = {}
 

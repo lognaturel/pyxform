@@ -1033,7 +1033,6 @@ class Survey(Section):
         Given a dictionary of xpaths, return a function we can use to
         replace ${varname} with the xpath to varname.
         """
-
         name = matchobj.group("ncname")
         last_saved = matchobj.group("last_saved") is not None
         is_indexed_repeat = matchobj.string.find("indexed-repeat(") > -1
@@ -1043,7 +1042,6 @@ class Survey(Section):
             Check if ${} expression represented by matchobj
             is in a predicate for a path expression for a secondary instance
             """
-
             if RE_INSTANCE.search(matchobj.string) is not None:
                 bracket_regex_match_iter = RE_BRACKET.finditer(matchobj.string)
                 # Check whether current ${varname} is in the correct bracket_regex_match

@@ -47,7 +47,6 @@ class TestFormName(PyxformTestCase):
         """
         Test no form_name and setting name field, should use name field.
         """
-
         self.assertPyxformXform(
             md="""
                | survey |      |      |           |
