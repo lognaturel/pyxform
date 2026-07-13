@@ -6,7 +6,7 @@ authors = [
 ]
 description = "A Python package to create XForms for ODK Collect."
 readme = "README.rst"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
   "xlrd==2.0.1",        # Read XLS files
   "openpyxl==3.1.5",    # Read XLSX files
@@ -44,7 +44,7 @@ exclude = ["docs", "tests"]
 
 [tool.ruff]
 line-length = 90
-target-version = "py310"
+target-version = "py311"
 fix = true
 show-fixes = true
 output-format = "full"

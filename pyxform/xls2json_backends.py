@@ -742,7 +742,7 @@ def definition_to_dict(
             return DefinitionData(
                 fallback_form_name=definition.file_path_stem, **func(definition)
             )
-        except PyXFormReadError:  # noqa: PERF203
+        except PyXFormReadError:
             continue
 
     raise PyXFormError(
