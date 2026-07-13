@@ -566,7 +566,7 @@ class PyXFormError(Exception):
         """
         super().__init__(*args)
         self.code: ErrorCode | None = code
-        self.context: dict = context if context else {}
+        self.context: dict = context or {}
 
     def __str__(self):
         return self.__repr__()

@@ -707,9 +707,9 @@ class XFormToDictBuilder:
 
         # moving re flags into compile for python 2.6 compat
         pattern = "( /[a-z0-9-_]+(?:/[a-z0-9-_]+)+ )"
-        text = re.compile(pattern, flags=re.I).sub(replace_function, text)
+        text = re.compile(pattern, flags=re.IGNORECASE).sub(replace_function, text)
         pattern = "(/[a-z0-9-_]+(?:/[a-z0-9-_]+)+)"
-        text = re.compile(pattern, flags=re.I).sub(replace_function, text)
+        text = re.compile(pattern, flags=re.IGNORECASE).sub(replace_function, text)
         return text
 
 
