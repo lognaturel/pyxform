@@ -55,13 +55,7 @@ src = ["pyxform", "tests"]
 select = [
   "B",  # flake8-bugbear
   "C4",  # flake8-comprehensions
-  "D200",  # pydocstyle (unnecessary-multiline-docstring)
-  "D202",  # pydocstyle (blank-line-after-function)
-  "D209",  # pydocstyle (new-line-after-last-paragraph)
-  "D301",  # pydocstyle (escape-sequence-in-docstring)
-  "D400",  # pydocstyle (missing-trailing-period)
-  "D403",  # pydocstyle (first-word-uncapitalized)
-  "D415",  # pydocstyle (missing-terminal-punctuation)
+  "D",  # pydocstyle
   "E",  # pycodestyle error
 #  "ERA",  # eradicate (commented out code)
   "F",  # pyflakes
@@ -81,6 +75,15 @@ select = [
   "W",  # pycodestyle warning
 ]
 ignore = [
+  "D100", # undocumented-public-module (many instances requiring manual resolution)
+  "D101", # undocumented-public-class (many instances requiring manual resolution)
+  "D102", # undocumented-public-method (many instances requiring manual resolution)
+  "D103", # undocumented-public-function (many instances requiring manual resolution)
+  "D104", # undocumented-public-package (many instances requiring manual resolution)
+  "D105", # undocumented-magic-method (many instances requiring manual resolution)
+  "D107", # undocumented-public-init (many instances requiring manual resolution)
+  "D205", # missing-blank-line-after-summary (many instances requiring manual resolution)
+  "D401", # non-imperative-mood (many instances requiring manual resolution)
   "E501",  # line-too-long (we have a lot of long strings)
   "F821",  # undefined-name (doesn't work well with type hints, ruff 0.15.21).
   "PERF401",  # manual-list-comprehension (false positives on selective transforms)
