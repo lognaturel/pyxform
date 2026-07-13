@@ -3,7 +3,7 @@ Ensuring that the pyxform_test_case.PyxformTestCase class does some
 internal conversions correctly.
 """
 
-from tests.pyxform_test_case import PyxformTestCase
+from tests.pyxform_test_case import PyxformTestCase, PyxformTestError
 from tests.xpath_helpers.settings import xps
 
 
@@ -28,7 +28,7 @@ class PyxformTestCaseNonMarkdownSurveyAlternatives(PyxformTestCase):
                 errored=False,  # errored=False by default
             )
 
-        self.assertRaises(Exception, _no_valid_flag)
+        self.assertRaises(PyxformTestError, _no_valid_flag)
 
         # however when errored=True is present,
         self.assertPyxformXform(

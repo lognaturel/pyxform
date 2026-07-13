@@ -27,10 +27,10 @@ def build_survey(filename):
 
 def create_survey_from_fixture(fixture_name, filetype="xls", include_directory=False):
     fixture_path = path_to_text_fixture(f"{fixture_name}.{filetype}")
-    noop, section_dict = file_utils.load_file_to_dict(fixture_path)
+    _, section_dict = file_utils.load_file_to_dict(fixture_path)
     pkg = {"main_section": section_dict}
     if include_directory:
-        directory, noop = os.path.split(fixture_path)
+        directory, _ = os.path.split(fixture_path)
         pkg["sections"] = file_utils.collect_compatible_files_in_directory(directory)
     return create_survey(**pkg)
 

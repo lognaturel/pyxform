@@ -660,7 +660,7 @@ class XFormToDictBuilder:
         if isinstance(constraint_msg, str):
             if constraint_msg.find(":jr:constraintMsg") != -1:
                 ref = constraint_msg.replace("jr:itext('", "").replace("')", "")
-                k, constraint_msg = self._get_text_from_translation(ref)
+                _, constraint_msg = self._get_text_from_translation(ref)
         return constraint_msg
 
     def _get_choices(self) -> dict[str, Any]:

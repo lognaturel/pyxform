@@ -42,7 +42,7 @@ class ValidateWrapper(TestCase):
         filename = "ODKValidateWarnings.xlsx"
         path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
         # Get the xform output path:
-        root_filename, ext = os.path.splitext(filename)
+        root_filename, _ = os.path.splitext(filename)
         output_path = os.path.join(test_output.PATH, root_filename + ".xml")
         # Do the conversion:
         warnings = []
