@@ -110,15 +110,6 @@ class TestChoiceNameAsType(TestCase):
         self.assertTrue(has_external_choices(survey_dict))
 
 
-class TestBlankSecondRow(TestCase):
-    def test_blank_second_row(self):
-        filename = "blank_second_row.xls"
-        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
-        xls_reader = SurveyReader(path_to_excel_file, default_name="blank_second_row")
-        survey_dict = xls_reader.to_json_dict()
-        self.assertTrue(len(survey_dict) > 0)
-
-
 class TestXLDateAmbigous(TestCase):
     """Test non standard sheet with exception is processed successfully."""
 

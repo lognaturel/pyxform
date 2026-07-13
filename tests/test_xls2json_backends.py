@@ -196,7 +196,7 @@ class TestXLS2JSONBackends(PyxformTestCase):
 
         wb.release_resources()
 
-    def test_xlsx_with_many_empty_cells(self):
+    def test_xlsx_with_many_empty_rows(self):
         """Should quickly produce expected data, and find large input sheet dimensions."""
         # Test fixture produced (presumably) by a LibreOffice serialisation bug.
         xlsx_path = os.path.join(bug_example_forms.PATH, "UCL_Biomass_Plot_Form.xlsx")
