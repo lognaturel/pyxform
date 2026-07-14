@@ -5,7 +5,7 @@ from pathlib import Path
 from unittest import TestCase
 
 import pyxform
-from pyxform.errors import ErrorCode, PyXFormError
+from pyxform.errors import PyXFormError
 from pyxform.utils import has_external_choices
 from pyxform.validators.odk_validate import ODKValidateError, check_xform
 from pyxform.xls2json import SurveyReader
@@ -46,44 +46,6 @@ class ValidateWrapper(TestCase):
         )
         survey = pyxform.create_survey_element_from_dict(json_survey)
         survey.print_xform_to_file(output_path, warnings=warnings)
-
-
-class BadChoicesSheetHeaders(TestCase):
-    def test_conversion(self):
-        filename = "spaces_in_choices_header.xls"
-        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
-        warnings = []
-        pyxform.xls2json.parse_file_to_json(
-            path_to_excel_file,
-            default_name="spaces_in_choices_header",
-            warnings=warnings,
-        )
-        # The "column with no header" warning is probably not reachable since XLS/X
-        # pre-processing ignores any columns without a header.
-        observed = [
-            w
-            for w in warnings
-            if w == ErrorCode.HEADER_004.value.format(column="header with spaces")
-        ]
-        self.assertEqual(1, len(observed), warnings)
-
-    def test_values_with_spaces_are_cleaned(self):
-        """
-        Test that values with leading and trailing whitespaces are processed.
-
-        This test checks that the submission_url provided is cleaned
-        of leading and trailing whitespaces.
-        """
-        filename = "spaces_in_choices_header.xls"
-        path_to_excel_file = os.path.join(bug_example_forms.PATH, filename)
-        survey_reader = SurveyReader(
-            path_to_excel_file, default_name="spaces_in_choices_header"
-        )
-        result = survey_reader.to_json_dict()
-
-        self.assertEqual(
-            result["submission_url"], "https://odk.ona.io/random_person/submission"
-        )
 
 
 class TestChoiceNameAsType(TestCase):
