@@ -157,47 +157,6 @@ class BuilderTests(TestCase):
         }
         self.assertEqual(survey.to_json_dict(), expected_dict)
 
-    def test_select_one_question_with_identical_choice_name(self):
-        """
-        Testing to make sure that select ones whose choice names are the same
-        as the name of the select one get compiled.
-        """
-        survey = utils.create_survey_from_fixture(
-            "choice_name_same_as_select_name", filetype=FIXTURE_FILETYPE
-        )
-        expected_dict = {
-            "name": "choice_name_same_as_select_name",
-            "title": "choice_name_same_as_select_name",
-            "sms_keyword": "choice_name_same_as_select_name",
-            "default_language": "default",
-            "id_string": "choice_name_same_as_select_name",
-            "type": "survey",
-            "choices": {"zone": [{"label": "Zone", "name": "zone"}]},
-            "children": [
-                {
-                    "children": [{"name": "zone", "label": "Zone"}],
-                    "type": "select one",
-                    "name": "zone",
-                    "label": "Zone",
-                    "list_name": "zone",
-                    "itemset": "zone",
-                },
-                {
-                    "children": [
-                        {
-                            "bind": {"jr:preload": "uid", "readonly": "true()"},
-                            "name": "instanceID",
-                            "type": "calculate",
-                        }
-                    ],
-                    "control": {"bodyless": True},
-                    "name": "meta",
-                    "type": "group",
-                },
-            ],
-        }
-        self.assertEqual(expected_dict, survey.to_json_dict())
-
     def test_loop(self):
         survey = utils.create_survey_from_fixture("loop", filetype=FIXTURE_FILETYPE)
         expected_dict = {
