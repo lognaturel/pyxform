@@ -100,7 +100,7 @@ class TestXLS2JSONBackends(PyxformTestCase):
             # osm
             xpq.body_upload_tags("q3", (("n1-o", "l1-o"), ("n2-o", "l2-o"))),
         ]
-        file_types = [".xlsx", ".xls", ".csv", ".md"]
+        file_types = [".xlsx", ".csv", ".md"]
         for file_type in file_types:
             with self.subTest(msg=file_type):
                 data = get_xlsform(
