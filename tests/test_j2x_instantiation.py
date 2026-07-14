@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from pyxform import Survey, SurveyInstance
+from pyxform import MultipleChoiceQuestion, Survey, SurveyInstance
 from pyxform.builder import create_survey_element_from_dict
 
 from tests.utils import prep_class_config
@@ -95,3 +95,29 @@ class Json2XformExportingPrepTests(TestCase):
             self.cls_name, "test_simple_registration_xml"
         ).format(reg_xform.id_string)
         self.assertEqual(rx, expected_xml)
+
+    def test_survey_can_be_created_in_a_slightly_less_verbose_manner(self):
+        choices = {
+            "test": [
+                {"name": "red", "label": "Red"},
+                {"name": "blue", "label": "Blue"},
+            ]
+        }
+        s = Survey(name="Roses_are_Red", choices=choices)
+        q = MultipleChoiceQuestion(
+            name="Favorite_Color",
+            type="select one",
+            list_name="test",
+        )
+        s.add_child(q)
+
+        expected_dict = {
+            "name": "Roses_are_Red",
+            "type": "survey",
+            "children": [
+                {"name": "Favorite_Color", "type": "select one", "list_name": "test"}
+            ],
+            "choices": choices,
+        }
+
+        self.assertEqual(expected_dict, s.to_json_dict())
