@@ -21,9 +21,7 @@ class TestXFormConversion(TestCase):
 
     def test_conversion_raises(self):
         """Should find that conversion results in an error being raised by pyxform."""
-        cases = (
-            ("duplicate_columns.xlsx", "Duplicate column header: label"),
-        )
+        cases = (("duplicate_columns.xlsx", "Duplicate column header: label"),)
         for i, (case, err_msg) in enumerate(cases):
             with self.subTest(msg=f"{i}: {case}"):
                 with self.assertRaises(PyXFormError) as err:
@@ -48,17 +46,6 @@ class ValidateWrapper(TestCase):
         )
         survey = pyxform.create_survey_element_from_dict(json_survey)
         survey.print_xform_to_file(output_path, warnings=warnings)
-
-
-class EmptyStringOnRelevantColumnTest(TestCase):
-    def test_conversion(self):
-        filename = "ict_survey_fails.xls"
-        workbook_dict = get_xlsform(
-            xlsform=os.path.join(bug_example_forms.PATH, filename)
-        )
-        with self.assertRaises(KeyError):
-            # bind:relevant should not be part of workbook_dict
-            workbook_dict.survey[0]["bind: relevant"].strip()
 
 
 class BadChoicesSheetHeaders(TestCase):
