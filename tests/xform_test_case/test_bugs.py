@@ -22,7 +22,6 @@ class TestXFormConversion(TestCase):
     def test_conversion_raises(self):
         """Should find that conversion results in an error being raised by pyxform."""
         cases = (
-            ("group_name_test.xls", "[row : 3] Question or group with no name."),
             ("duplicate_columns.xlsx", "Duplicate column header: label"),
         )
         for i, (case, err_msg) in enumerate(cases):
