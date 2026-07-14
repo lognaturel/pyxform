@@ -225,6 +225,21 @@ class TestSurveyColumns(PyxformTestCase):
             ),
         )
 
+    def test_ignore_additional_columns_or_rows(self):
+        """Should find that additional columns or rows (such as for comments) are ignored."""
+        md = """
+        | survey |
+        | | _comment   | type | name | label |
+        | | looks good |      |      |       |
+        | |            | text | q1   | Q1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[
+                """/h:html/h:head/x:model/x:bind[@nodeset='/test_name/q1' and not(@_comment)]"""
+            ],
+        )
+
 
 class TestChoicesColumns(PyxformTestCase):
     """Invalid choice sheet column tests."""
