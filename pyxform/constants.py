@@ -72,7 +72,6 @@ CHOICES = "choices"
 # XLS Specific constants
 LIST_NAME_S = "list name"
 LIST_NAME_U = "list_name"
-CASCADING_SELECT = "cascading_select"
 TABLE_LIST = "table-list"  # hyphenated because it goes in appearance, and convention for appearance column is dashes
 FIELD_LIST = "field-list"
 LIST_NOLABEL = "list-nolabel"

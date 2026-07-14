@@ -338,38 +338,6 @@ def is_empty(value):
     return False
 
 
-def get_cascading_json(sheet_list, prefix, level):
-    return_list = []
-    for row in sheet_list:
-        if "stopper" in row:
-            if row["stopper"] == level:
-                # last element's name IS the prefix; doesn't need level
-                return_list[-1]["name"] = prefix
-                return return_list
-            else:
-                continue
-        elif "lambda" in row:
-
-            def replace_prefix(d, prefix):
-                for k, v in d.items():
-                    if isinstance(v, str):
-                        d[k] = v.replace("$PREFIX$", prefix)
-                    elif isinstance(v, dict):
-                        d[k] = replace_prefix(v, prefix)
-                    elif isinstance(v, list):
-                        d[k] = (replace_prefix(x, prefix) for x in v)
-                return d
-
-            return_list.append(replace_prefix(row["lambda"], prefix))
-    raise PyXFormError(
-        "Found a cascading_select "
-        + level
-        + ", but could not find "
-        + level
-        + "in cascades sheet."
-    )
-
-
 def csv_to_dict(path_or_file):
     def first_column_as_sheet_name(row):
         if len(row) == 0:

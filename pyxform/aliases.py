@@ -38,10 +38,6 @@ select = {
     **select_from_file,
     "rank": constants.RANK,
 }
-cascading = {
-    "cascading select": constants.CASCADING_SELECT,
-    "cascading_select": constants.CASCADING_SELECT,
-}
 settings_header = {
     "form_title": constants.TITLE,
     "set_form_title": constants.TITLE,
