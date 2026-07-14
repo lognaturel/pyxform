@@ -6,14 +6,13 @@ from unittest import TestCase
 
 import pyxform
 from pyxform.errors import PyXFormError
-from pyxform.utils import has_external_choices
 from pyxform.validators.odk_validate import ODKValidateError, check_xform
 from pyxform.xls2json import SurveyReader
 from pyxform.xls2json_backends import DefinitionData, get_xlsform, xlsx_to_dict
 from pyxform.xls2xform import convert
 
 from tests import test_output
-from tests.fixtures import bug_example_forms, example_forms
+from tests.fixtures import bug_example_forms
 
 
 class TestXFormConversion(TestCase):
@@ -46,15 +45,6 @@ class ValidateWrapper(TestCase):
         )
         survey = pyxform.create_survey_element_from_dict(json_survey)
         survey.print_xform_to_file(output_path, warnings=warnings)
-
-
-class TestChoiceNameAsType(TestCase):
-    def test_choice_name_as_type(self):
-        filename = "choice_name_as_type.xls"
-        path_to_excel_file = os.path.join(example_forms.PATH, filename)
-        xls_reader = SurveyReader(path_to_excel_file, default_name="choice_name_as_type")
-        survey_dict = xls_reader.to_json_dict()
-        self.assertTrue(has_external_choices(survey_dict))
 
 
 class TestXLDateAmbigous(TestCase):

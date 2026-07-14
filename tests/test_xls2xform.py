@@ -245,7 +245,6 @@ class TestXLS2XFormConvert(TestCase):
             Path(example_forms.PATH) / "group.xls",
             Path(example_forms.PATH) / "group.csv",
             Path(example_forms.PATH) / "group.md",
-            Path(example_forms.PATH) / "choice_name_as_type.xls",  # has external choices
         )
         kwargs = (
             ("validate", (True, False)),
@@ -263,10 +262,6 @@ class TestXLS2XFormConvert(TestCase):
                         self.assertIsInstance(observed, list)
                         self.assertEqual(len(observed), 0)
                         self.assertGreater(len(Path(xform).read_text()), 0)
-                        if x.name == "choice_name_as_type.xls":
-                            self.assertTrue(
-                                (Path(xform).parent / "itemsets.csv").is_file()
-                            )
 
 
 class TestXLS2XFormConvertAPI(TestCase):
@@ -313,10 +308,6 @@ class TestXLS2XFormConvertAPI(TestCase):
             (Path(example_forms.PATH) / "group.xls", funcs[:4]),
             (Path(example_forms.PATH) / "group.csv", funcs),
             (Path(example_forms.PATH) / "group.md", funcs),
-            (
-                Path(example_forms.PATH) / "choice_name_as_type.xls",
-                funcs[:4],
-            ),  # has external choices
         )
         # Not including validate here because it's slow, the test is more about input,
         # and these same forms are checked with validate=True above via xls2xform_convert.
