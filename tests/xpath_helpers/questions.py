@@ -12,10 +12,13 @@ class XPathHelper:
         """
 
     @staticmethod
-    def model_instance_item(q_name: str) -> str:
+    def model_instance_item(q_name: str, value: str | None = None) -> str:
         """Model instance contains the question item."""
+        pred = ""
+        if value is not None:
+            pred = f"[. = '{value}']"
         return rf"""
-          /h:html/h:head/x:model/x:instance/x:test_name/x:{q_name}
+          /h:html/h:head/x:model/x:instance/x:test_name/x:{q_name}{pred}
         """
 
     @staticmethod
