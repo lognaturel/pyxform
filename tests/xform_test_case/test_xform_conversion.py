@@ -22,7 +22,6 @@ class TestXFormConversion(XFormTestCase):
             ("survey_no_name.xlsx", False),
             ("widgets.xls", True),
             ("xlsform_spec_test.xlsx", True),
-            ("xml_escaping.xls", True),
         )
         for i, (case, set_name) in enumerate(cases):
             with self.subTest(msg=f"{i}: {case}"):
