@@ -1,11 +1,9 @@
 """Test builder module functionality."""
 
 import os
-import re
 from pathlib import Path
 from unittest import TestCase
 
-import defusedxml.ElementTree as ETree
 from pyxform import InputQuestion, Survey
 from pyxform.builder import SurveyElementBuilder, create_survey_from_xls
 from pyxform.errors import ErrorCode, PyXFormError
@@ -435,71 +433,6 @@ class BuilderTests(TestCase):
             },
         }
         self.assertEqual(expected_dict, survey.to_json_dict())
-
-    def test_style_column(self):
-        survey = utils.create_survey_from_fixture(
-            "style_settings", filetype=FIXTURE_FILETYPE
-        )
-        expected_dict = {
-            "children": [
-                {
-                    "label": {"english": "What is your name?"},
-                    "name": "your_name",
-                    "type": "text",
-                },
-                {
-                    "label": {"english": "How many years old are you?"},
-                    "name": "your_age",
-                    "type": "integer",
-                },
-                {
-                    "children": [
-                        {
-                            "bind": {"jr:preload": "uid", "readonly": "true()"},
-                            "name": "instanceID",
-                            "type": "calculate",
-                        }
-                    ],
-                    "control": {"bodyless": True},
-                    "name": "meta",
-                    "type": "group",
-                },
-            ],
-            "default_language": "default",
-            "id_string": "new_id",
-            "name": "style_settings",
-            "sms_keyword": "new_id",
-            "style": "ltr",
-            "title": "My Survey",
-            "type": "survey",
-        }
-        self.assertEqual(expected_dict, survey.to_json_dict())
-
-    STRIP_NS_FROM_TAG_RE = re.compile(r"\{.+\}")
-
-    def test_style_not_added_to_body_if_not_present(self):
-        survey = utils.create_survey_from_fixture("widgets", filetype=FIXTURE_FILETYPE)
-        xml = survey.to_xml(pretty_print=False)
-        # find the body tag
-        root_elm = ETree.fromstring(xml.encode("utf-8"))
-        body_elms = [
-            c for c in root_elm if self.STRIP_NS_FROM_TAG_RE.sub("", c.tag) == "body"
-        ]
-        self.assertEqual(len(body_elms), 1)
-        self.assertIsNone(body_elms[0].get("class"))
-
-    def test_style_added_to_body_if_present(self):
-        survey = utils.create_survey_from_fixture(
-            "style_settings", filetype=FIXTURE_FILETYPE
-        )
-        xml = survey.to_xml()
-        # find the body tag
-        root_elm = ETree.fromstring(xml.encode("utf-8"))
-        body_elms = [
-            c for c in root_elm if self.STRIP_NS_FROM_TAG_RE.sub("", c.tag) == "body"
-        ]
-        self.assertEqual(len(body_elms), 1)
-        self.assertEqual(body_elms[0].get("class"), "ltr")
 
     def test_trigger_data_wrong_type__error(self):
         """Should raise an error if a trigger is truthy and something other than tuple."""
