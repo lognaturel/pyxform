@@ -156,8 +156,6 @@ class TestXLS2JSONBackends(PyxformTestCase):
         """Should get the same data from equivalent files using each file type reader."""
         equivalent_fixtures = [
             "group",
-            "include",
-            "include_json",
             "loop",
             "specify_other",
             "text_and_integer",

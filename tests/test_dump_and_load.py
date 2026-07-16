@@ -13,15 +13,10 @@ class DumpAndLoadTests(TestCase):
     def setUp(self):
         self.excel_files = [
             "gps.xls",
-            # "include.xls",
             "specify_other.xls",
             "group.xls",
             "loop.xls",
             "text_and_integer.xls",
-            # todo: this is looking for json that is created (and
-            # deleted) by another test, is should just add that json
-            # to the directory.
-            # "include_json.xls",
             "simple_loop.xls",
             "yes_or_no_question.xls",
         ]
