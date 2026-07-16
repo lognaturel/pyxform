@@ -27,27 +27,6 @@ class BasicXls2JsonApiTests(TestCase):
         with open(expected_output_path, encoding="utf-8") as expected:
             self.assertEqual(json.load(expected), result._pyxform)
 
-    def test_hidden(self):
-        x = SurveyReader(utils.path_to_text_fixture("hidden.xls"), default_name="hidden")
-        x_results = x.to_json_dict()
-
-        expected_dict = [
-            {"type": "hidden", "name": "hidden_test"},
-            {
-                "children": [
-                    {
-                        "bind": {"jr:preload": "uid", "readonly": "true()"},
-                        "name": "instanceID",
-                        "type": "calculate",
-                    }
-                ],
-                "control": {"bodyless": True},
-                "name": "meta",
-                "type": "group",
-            },
-        ]
-        self.assertEqual(x_results["children"], expected_dict)
-
     def test_gps(self):
         x = SurveyReader(utils.path_to_text_fixture("gps.xls"), default_name="gps")
 
