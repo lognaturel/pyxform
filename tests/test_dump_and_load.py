@@ -12,10 +12,10 @@ from tests import utils
 class DumpAndLoadTests(TestCase):
     def setUp(self):
         self.excel_files = [
-            "group.xls",
-            "loop.xls",
-            "text_and_integer.xls",
-            "yes_or_no_question.xls",
+            "group.xlsx",
+            "loop.xlsx",
+            "text_and_integer.xlsx",
+            "yes_or_no_question.xlsx",
         ]
         self.surveys = {}
         self.this_directory = os.path.dirname(__file__)

@@ -15,7 +15,6 @@ from pyxform.xls2json_backends import (
     get_xlsform,
     md_table_to_workbook,
     md_to_dict,
-    xls_to_dict,
     xls_value_to_unicode,
     xlsx_to_dict,
     xlsx_value_to_str,
@@ -166,11 +165,9 @@ class TestXLS2JSONBackends(PyxformTestCase):
         ]
         for fixture in equivalent_fixtures:
             xlsx_inp = xlsx_to_dict(utils.path_to_text_fixture(f"{fixture}.xlsx"))
-            xls_inp = xls_to_dict(utils.path_to_text_fixture(f"{fixture}.xls"))
             csv_inp = csv_to_dict(utils.path_to_text_fixture(f"{fixture}.csv"))
             md_inp = md_to_dict(utils.path_to_text_fixture(f"{fixture}.md"))
 
-            self.assertEqual(xlsx_inp, xls_inp)
             self.assertEqual(xlsx_inp, csv_inp)
             self.assertEqual(xlsx_inp, md_inp)
 

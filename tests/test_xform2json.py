@@ -21,12 +21,12 @@ class DumpAndLoadXForm2JsonTests(XFormTestCase):
     def setUp(self):
         self.excel_files = [
             "choice_filter_test.xlsx",
-            "loop.xls",
-            "text_and_integer.xls",
-            "yes_or_no_question.xls",
+            "loop.xlsx",
+            "text_and_integer.xlsx",
+            "yes_or_no_question.xlsx",
             "xlsform_spec_test.xlsx",
             "field-list.xlsx",
-            "group.xls",
+            "group.xlsx",
         ]
         self.surveys = {}
         self.this_directory = os.path.dirname(__file__)

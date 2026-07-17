@@ -242,7 +242,6 @@ class TestXLS2XFormConvert(TestCase):
         """Should find the expected output files for the conversion."""
         xlsforms = (
             Path(example_forms.PATH) / "group.xlsx",
-            Path(example_forms.PATH) / "group.xls",
             Path(example_forms.PATH) / "group.csv",
             Path(example_forms.PATH) / "group.md",
         )
@@ -305,7 +304,6 @@ class TestXLS2XFormConvertAPI(TestCase):
         ]
         xlsforms = (
             (Path(example_forms.PATH) / "group.xlsx", funcs[:4]),
-            (Path(example_forms.PATH) / "group.xls", funcs[:4]),
             (Path(example_forms.PATH) / "group.csv", funcs),
             (Path(example_forms.PATH) / "group.md", funcs),
         )
@@ -332,8 +330,6 @@ class TestXLS2XFormConvertAPI(TestCase):
         msg = "Argument 'definition' was not recognized as a supported type"
 
         with get_temp_file() as empty, get_temp_dir() as td:
-            bad_xls = Path(td) / "bad.xls"
-            bad_xls.write_text("bad")
             bad_xlsx = Path(td) / "bad.xlsx"
             bad_xlsx.write_text("bad")
             bad_type = Path(td) / "bad.txt"
@@ -345,7 +341,6 @@ class TestXLS2XFormConvertAPI(TestCase):
                 "ok",
                 b"ok",
                 empty,
-                bad_xls,
                 bad_xlsx,
                 bad_type,
             )

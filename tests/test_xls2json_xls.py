@@ -16,7 +16,7 @@ class BasicXls2JsonApiTests(TestCase):
     maxDiff = None
 
     def test_simple_yes_or_no_question(self):
-        filename = "yes_or_no_question.xls"
+        filename = "yes_or_no_question.xlsx"
         path_to_excel_file = Path(example_forms.PATH) / filename
         expected_output_path = Path(test_expected_output.PATH) / (
             path_to_excel_file.stem + ".json"
@@ -29,7 +29,7 @@ class BasicXls2JsonApiTests(TestCase):
 
     def test_text_and_integer(self):
         x = SurveyReader(
-            utils.path_to_text_fixture("text_and_integer.xls"),
+            utils.path_to_text_fixture("text_and_integer.xlsx"),
             default_name="text_and_integer",
         )
 

@@ -16,7 +16,7 @@ class XMLTests(XFormTestCase):
 
     def setUp(self):
         self.survey = create_survey_from_xls(
-            path_to_text_fixture("yes_or_no_question.xls"), "yes_or_no_question"
+            path_to_text_fixture("yes_or_no_question.xlsx"), "yes_or_no_question"
         )
 
     def test_to_xml(self):

@@ -11,8 +11,6 @@ from pyxform.utils import print_pyobj_to_json
 
 from tests import utils
 
-FIXTURE_FILETYPE = "xls"
-
 
 class BuilderTests(TestCase):
     maxDiff = None
@@ -29,7 +27,7 @@ class BuilderTests(TestCase):
 
     @staticmethod
     def test_create_from_file_object():
-        path = utils.path_to_text_fixture("yes_or_no_question.xls")
+        path = utils.path_to_text_fixture("yes_or_no_question.xlsx")
         with open(path, "rb") as f:
             create_survey_from_xls(f)
 
@@ -91,7 +89,7 @@ class BuilderTests(TestCase):
         self.assertEqual(expected_dict, g.to_json_dict())
 
     def test_loop(self):
-        survey = utils.create_survey_from_fixture("loop", filetype=FIXTURE_FILETYPE)
+        survey = utils.create_survey_from_fixture("loop", filetype="xlsx")
         expected_dict = {
             "name": "loop",
             "id_string": "loop",
