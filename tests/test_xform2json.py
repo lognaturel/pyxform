@@ -27,7 +27,6 @@ class DumpAndLoadXForm2JsonTests(XFormTestCase):
             "yes_or_no_question.xls",
             "xlsform_spec_test.xlsx",
             "field-list.xlsx",
-            "table-list.xls",
             "group.xls",
         ]
         self.surveys = {}

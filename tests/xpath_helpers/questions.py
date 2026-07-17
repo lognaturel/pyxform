@@ -138,13 +138,19 @@ class XPathHelper:
         """
 
     @staticmethod
-    def body_group_select1_itemset(g_name: str, q_name: str) -> str:
+    def body_group_select1_itemset(
+        g_name: str, q_name: str, appearance: str | None = None
+    ) -> str:
         """Body has a select1 with an itemset, and no inline items."""
+        appearance_expr = ""
+        if appearance is not None:
+            appearance_expr = f"and @appearance='{appearance}'"
         return rf"""
         /h:html/h:body/x:group[@ref='/test_name/{g_name}']/x:select1[
           @ref = '/test_name/{g_name}/{q_name}'
           and ./x:itemset
           and not(./x:item)
+          {appearance_expr}
         ]
         """
 

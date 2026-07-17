@@ -8,6 +8,7 @@ from pyxform.xls2xform import convert
 
 from tests.pyxform_test_case import PyxformTestCase
 from tests.xpath_helpers.group import xpg
+from tests.xpath_helpers.questions import xpq
 
 
 class TestGroupOutput(PyxformTestCase):
@@ -76,37 +77,79 @@ class TestGroupOutput(PyxformTestCase):
         )
 
     def test_table_list_appearance(self):
+        """Should find that the table-list shortcut applies field-list and list-nolabel."""
         md = """
         | survey  |
-        | | type              | name       | label     | hint       | appearance         |
-        | | begin_group       | tablelist1 | Table_Y_N |            | table-list minimal |
-        | | select_one yes_no | options1a  | Q1        | first row! |                    |
-        | | select_one yes_no | options1b  | Q2        |            |                    |
-        | | end_group         |            |           |            |                    |
+        | | type          | name | label | hint       | appearance |
+        | | begin_group   | g1   | G1    |            | table-list |
+        | | select_one c1 | q1   | Q1    | first row! |            |
+        | | select_one c1 | q2   | Q2    |            |            |
+        | | end_group     |      |       |            |            |
+
         | choices |
         | | list_name | name | label |
-        | | yes_no    | yes  | Yes   |
+        | | c1        | n1   | N1    |
         """
-        xml_contains = """
-    <group appearance="field-list minimal" ref="/table-list-appearance-mod/tablelist1">
-      <input ref="/table-list-appearance-mod/tablelist1/generated_table_list_label_2">
-        <label>Table_Y_N</label>
-      </input>
-      <select1 appearance="label" ref="/table-list-appearance-mod/tablelist1/reserved_name_for_field_list_labels_3">
-        <label> </label>
-        <itemset nodeset="instance('yes_no')/root/item">
-          <value ref="name"/>
-          <label ref="label"/>
-        </itemset>
-      </select1>
-      <select1 appearance="list-nolabel" ref="/table-list-appearance-mod/tablelist1/options1a">
-        <label>Q1</label>
-        <hint>first row!</hint>
-""".strip()
         self.assertPyxformXform(
-            name="table-list-appearance-mod",
             md=md,
-            xml__contains=[xml_contains],
+            xml__xpath_match=[
+                # Model instance for specified + generated items.
+                xpq.model_instance_item("g1"),
+                xpq.model_instance_item("g1/x:generated_table_list_label_2"),
+                xpq.model_instance_item("g1/x:reserved_name_for_field_list_labels_3"),
+                xpq.model_instance_item("g1/x:q1"),
+                xpq.model_instance_item("g1/x:q2"),
+                # Model bind for specified + generated items.
+                xpq.model_instance_bind("g1/generated_table_list_label_2", "string"),
+                xpq.model_instance_bind(
+                    "g1/reserved_name_for_field_list_labels_3", "string"
+                ),
+                xpq.model_instance_bind("g1/q1", "string"),
+                xpq.model_instance_bind("g1/q2", "string"),
+                # Body control group and selects are assigned appearances.
+                xpg.group_no_label_appearance("/test_name/g1", "field-list"),
+                xpq.body_label_inline(
+                    "group/x:input", "g1/generated_table_list_label_2", "G1"
+                ),
+                xpq.body_group_select1_itemset(
+                    "g1", "reserved_name_for_field_list_labels_3", "label"
+                ),
+                xpq.body_label_inline(
+                    "group/x:select1", "g1/reserved_name_for_field_list_labels_3", " "
+                ),
+                xpq.body_group_select1_itemset("g1", "q1", "list-nolabel"),
+                xpq.body_label_inline("group/x:select1", "g1/q1", "Q1"),
+                """
+                /h:html/h:body/x:group/x:select1[@ref='/test_name/g1/q1']
+                  /x:hint[text()='first row!']
+                """,
+                xpq.body_group_select1_itemset("g1", "q2", "list-nolabel"),
+                xpq.body_label_inline("group/x:select1", "g1/q2", "Q2"),
+            ],
+        )
+
+    def test_table_list_appearance__preserve_additional_appearances(self):
+        """Should find that the table-list shortcut keeps any extra appearances."""
+        # Currently the documented / supported appearances for groups are 'table-list' and
+        # 'field-list', so an extra 'fake' appearance is added to check that anything else
+        # will be preserved (without adding confusion as to what is supported).
+        md = """
+        | survey  |
+        | | type          | name | label | hint       | appearance      |
+        | | begin_group   | g1   | G1    |            | table-list fake |
+        | | select_one c1 | q1   | Q1    | first row! |                 |
+        | | select_one c1 | q2   | Q2    |            |                 |
+        | | end_group     |      |       |            |                 |
+
+        | choices |
+        | | list_name | name | label |
+        | | c1        | n1   | N1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[
+                xpg.group_no_label_appearance("/test_name/g1", "field-list fake"),
+            ],
         )
 
     def test_group__label__ok(self):
