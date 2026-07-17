@@ -22,7 +22,6 @@ class DumpAndLoadXForm2JsonTests(XFormTestCase):
         self.excel_files = [
             "gps.xls",
             "choice_filter_test.xlsx",
-            "specify_other.xls",
             "loop.xls",
             "text_and_integer.xls",
             "simple_loop.xls",

@@ -406,7 +406,7 @@ and some day:
 
 def convert_file_to_csv_string(path):
     """
-    This will open a csv or xls file and return a CSV in the format.
+    This will open a csv or xlsx file and return a CSV in the format.
 
     ```
     sheet_name1
@@ -425,7 +425,7 @@ def convert_file_to_csv_string(path):
     if path.endswith(".csv"):
         imported_sheets = csv_to_dict(path)
     else:
-        imported_sheets = xls_to_dict(path)
+        imported_sheets = xlsx_to_dict(path)
     foo = StringIO(newline="")
     writer = csv.writer(foo, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
     for sheet_name, rows in imported_sheets.items():

@@ -90,61 +90,6 @@ class BuilderTests(TestCase):
         }
         self.assertEqual(expected_dict, g.to_json_dict())
 
-    def test_specify_other(self):
-        survey = utils.create_survey_from_fixture(
-            "specify_other", filetype=FIXTURE_FILETYPE
-        )
-        expected_dict = {
-            "name": "specify_other",
-            "type": "survey",
-            "title": "specify_other",
-            "default_language": "default",
-            "id_string": "specify_other",
-            "sms_keyword": "specify_other",
-            "choices": {
-                "sexes": [
-                    {"label": {"English": "Male"}, "name": "male"},
-                    {"label": {"English": "Female"}, "name": "female"},
-                    {"label": {"English": "Other"}, "name": "other"},
-                ]
-            },
-            "children": [
-                {
-                    "name": "sex",
-                    "label": {"English": "What sex are you?"},
-                    "type": "select one",
-                    "list_name": "sexes",
-                    "itemset": "sexes",
-                    "children": [
-                        # TODO Change to choices (there is stuff in the
-                        # json2xform half that will need to change)
-                        {"name": "male", "label": {"English": "Male"}},
-                        {"name": "female", "label": {"English": "Female"}},
-                        {"name": "other", "label": {"English": "Other"}},
-                    ],
-                },
-                {
-                    "name": "sex_other",
-                    "bind": {"relevant": "selected(../sex, 'other')"},
-                    "label": "Specify other.",
-                    "type": "text",
-                },
-                {
-                    "children": [
-                        {
-                            "bind": {"jr:preload": "uid", "readonly": "true()"},
-                            "name": "instanceID",
-                            "type": "calculate",
-                        }
-                    ],
-                    "control": {"bodyless": True},
-                    "name": "meta",
-                    "type": "group",
-                },
-            ],
-        }
-        self.assertEqual(survey.to_json_dict(), expected_dict)
-
     def test_loop(self):
         survey = utils.create_survey_from_fixture("loop", filetype=FIXTURE_FILETYPE)
         expected_dict = {

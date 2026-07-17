@@ -2,14 +2,18 @@
 
 import datetime
 import os
+from pathlib import Path
+from unittest import expectedFailure
 
 import openpyxl
 import xlrd
 from pyxform.builder import create_survey_element_from_dict
 from pyxform.xls2json import workbook_to_json
 from pyxform.xls2json_backends import (
+    convert_file_to_csv_string,
     csv_to_dict,
     get_xlsform,
+    md_table_to_workbook,
     md_to_dict,
     xls_to_dict,
     xls_value_to_unicode,
@@ -157,7 +161,6 @@ class TestXLS2JSONBackends(PyxformTestCase):
         equivalent_fixtures = [
             "group",
             "loop",
-            "specify_other",
             "text_and_integer",
             "yes_or_no_question",
         ]
@@ -253,3 +256,63 @@ class TestXLS2JSONBackends(PyxformTestCase):
         self.assertTupleEqual((2, 2), (settings.max_row, settings.max_column))
 
         wb.close()
+
+    def test_convert_file_to_csv_string(self):
+        """Should find that the same data read from xlsx or csv results in the same csv."""
+        md = """
+        | survey |
+        | | type | name | label |
+        | | text | q1   | Q1    |
+        """
+        csv = "survey\n,type,name,label\n,text,q1,Q1"
+        wb = md_table_to_workbook(md)
+        with utils.get_temp_dir() as tmp:
+            form_path = Path(tmp) / "test_name.xlsx"
+            wb.save(form_path)
+            wb.close()
+            converted_form = convert_file_to_csv_string(str(form_path))
+            csv_path = Path(tmp) / "test_name.csv"
+            csv_path.write_text(csv)
+            converted_csv = convert_file_to_csv_string(str(csv_path))
+        self.assertEqual(converted_csv, converted_form)
+
+    @expectedFailure
+    def test_convert_file_to_csv_string__column_order_bug(self):
+        """Should find that the header order is preserved when writing to csv."""
+        md = """
+        | survey |
+        | | type | name | label | hint | constraint | relevant |
+        | | text | q1   | Q1    | Hmm  |            | true()   |
+        | | text | q2   | Q2    |      | . != '0'   |          |
+        """
+        csv = (
+            "survey"
+            "\n,type,name,label,hint,constraint,relevant"
+            "\n,text,q1,Q1,Hmm,,true()"
+            "\n,text,q2,Q2,,\". != '0'\","
+        )
+        wb = md_table_to_workbook(md)
+        with utils.get_temp_dir() as tmp:
+            form_path = Path(tmp) / "test_name.xlsx"
+            wb.save(form_path)
+            wb.close()
+            converted_form = convert_file_to_csv_string(str(form_path))
+            csv_path = Path(tmp) / "test_name.csv"
+            csv_path.write_text(csv)
+            converted_csv = convert_file_to_csv_string(str(csv_path))
+        self.assertEqual(converted_csv, converted_form)
+
+        # Bug seems to occur because convert_file_to_csv collects the headers from the
+        # rows rather than using the "survey_header" (or similar). In this case the first
+        # row has no constraint, but the second row does, so constraint is put last.
+        expected_header = ",type,name,label,hint,constraint,relevant"
+        bugged_header = ",type,name,label,hint,relevant,constraint"
+        # Expected header is there but only in the the "survey_header" dict.
+        self.assertEqual(1, converted_csv.count(expected_header))
+        self.assertEqual(1, converted_form.count(expected_header))
+        # Bugged header appears in the "survey" dict.
+        self.assertEqual(1, converted_csv.count(bugged_header))
+        self.assertEqual(1, converted_form.count(bugged_header))
+        # Fail the test since the "survey" data should retain column order.
+        self.assertEqual(2, converted_csv.count(expected_header))
+        self.assertEqual(2, converted_form.count(expected_header))

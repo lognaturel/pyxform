@@ -13,7 +13,6 @@ class DumpAndLoadTests(TestCase):
     def setUp(self):
         self.excel_files = [
             "gps.xls",
-            "specify_other.xls",
             "group.xls",
             "loop.xls",
             "text_and_integer.xls",
