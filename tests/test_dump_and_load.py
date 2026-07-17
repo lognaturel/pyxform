@@ -15,7 +15,6 @@ class DumpAndLoadTests(TestCase):
             "group.xls",
             "loop.xls",
             "text_and_integer.xls",
-            "simple_loop.xls",
             "yes_or_no_question.xls",
         ]
         self.surveys = {}

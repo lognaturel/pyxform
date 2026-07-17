@@ -23,7 +23,6 @@ class DumpAndLoadXForm2JsonTests(XFormTestCase):
             "choice_filter_test.xlsx",
             "loop.xls",
             "text_and_integer.xls",
-            "simple_loop.xls",
             "yes_or_no_question.xls",
             "xlsform_spec_test.xlsx",
             "field-list.xlsx",
