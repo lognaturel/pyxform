@@ -17,17 +17,10 @@ from openpyxl.cell import Cell as pyxlCell
 from openpyxl.reader.excel import ExcelReader
 from openpyxl.workbook import Workbook as pyxlWorkbook
 from openpyxl.worksheet.worksheet import Worksheet as pyxlWorksheet
-from xlrd import XL_CELL_BOOLEAN, XL_CELL_DATE, XL_CELL_NUMBER, XLRDError
-from xlrd import open_workbook as xlrd_open
-from xlrd.book import Book as xlrdBook
-from xlrd.sheet import Cell as xlrdCell
-from xlrd.sheet import Sheet as xlrdSheet
-from xlrd.xldate import XLDateAmbiguous, xldate_as_tuple
 
 from pyxform import constants
 from pyxform.errors import PyXFormError, PyXFormReadError
 
-aCell = xlrdCell | pyxlCell
 XL_DATE_AMBIGOUS_MSG = (
     "The xls file provided has an invalid date on the %s sheet, under"
     " the %s column on row number %s"
@@ -102,8 +95,8 @@ def get_excel_column_headers(first_row: Iterable[str | None]) -> list[str | None
 
 def get_excel_rows(
     headers: Iterable[str | None],
-    rows: Iterable[tuple[aCell, ...]],
-    cell_func: Callable[[aCell, int, str], Any],
+    rows: Iterable[tuple[pyxlCell, ...]],
+    cell_func: Callable[[pyxlCell, int, str], Any],
 ) -> list[dict[str, Any]]:
     """Get rows of cleaned data; stop if there's a run of empty rows."""
     max_adjacent_empty_rows = 60
@@ -135,112 +128,6 @@ def get_excel_rows(
         result_rows.append(row_dict)
 
     return trim_trailing_empty(result_rows, adjacent_empty_rows)
-
-
-def xls_to_dict(path_or_file):
-    """
-    Return a Python dictionary with a key for each worksheet
-    name. For each sheet there is a list of dictionaries, each
-    dictionary corresponds to a single row in the worksheet. A
-    dictionary has keys taken from the column headers and values
-    equal to the cell value for that row and column.
-    All the keys and leaf elements are unicode text.
-    """
-
-    def xls_clean_cell(
-        wb: xlrdBook, wb_sheet: xlrdSheet, cell: xlrdCell, row_n: int, col_key: str
-    ) -> str | None:
-        value = cell.value
-        if isinstance(value, str):
-            value = value.strip()
-        if not is_empty(value):
-            try:
-                return xls_value_to_unicode(value, cell.ctype, wb.datemode)
-            except XLDateAmbiguous as date_err:
-                raise PyXFormError(
-                    XL_DATE_AMBIGOUS_MSG % (wb_sheet.name, col_key, row_n)
-                ) from date_err
-
-        return None
-
-    def xls_to_dict_normal_sheet(wb: xlrdBook, wb_sheet: xlrdSheet):
-        # XLS format: max cols 256, max rows 65536
-        first_row = (c.value for c in next(wb_sheet.get_rows(), []))
-        headers = get_excel_column_headers(first_row=first_row)
-        row_iter = (
-            tuple(wb_sheet.cell(r, c) for c in range(len(headers)))
-            for r in range(1, wb_sheet.nrows)
-        )
-
-        # Inject wb/sheet as closure since functools.partial isn't typing friendly.
-        def clean_func(cell: xlrdCell, row_n: int, col_key: str) -> str | None:
-            return xls_clean_cell(
-                wb=wb, wb_sheet=wb_sheet, cell=cell, row_n=row_n, col_key=col_key
-            )
-
-        rows = get_excel_rows(headers=headers, rows=row_iter, cell_func=clean_func)
-        column_header_list = [key for key in headers if key is not None]
-        return rows, _list_to_dict_list(column_header_list)
-
-    def process_workbook(wb: xlrdBook):
-        result_book = {"sheet_names": []}
-        for wb_sheet in wb.sheets():
-            # Note original in sheet_names for spelling check.
-            result_book["sheet_names"].append(wb_sheet.name)
-            sheet_name = wb_sheet.name.lower()
-            # Do not process sheets that have nothing to do with XLSForm.
-            if sheet_name not in constants.SUPPORTED_SHEET_NAMES:
-                if len(wb.sheets()) == 1:
-                    (
-                        result_book[constants.SURVEY],
-                        result_book[f"{constants.SURVEY}_header"],
-                    ) = xls_to_dict_normal_sheet(wb=wb, wb_sheet=wb_sheet)
-                else:
-                    continue
-            else:
-                (
-                    result_book[sheet_name],
-                    result_book[f"{sheet_name}_header"],
-                ) = xls_to_dict_normal_sheet(wb=wb, wb_sheet=wb_sheet)
-        return result_book
-
-    try:
-        wb_file = get_definition_data(definition=path_or_file)
-        workbook = xlrd_open(file_contents=wb_file.data.getvalue())
-        try:
-            return process_workbook(wb=workbook)
-        finally:
-            workbook.release_resources()
-    except (AttributeError, TypeError, XLRDError) as read_err:
-        raise PyXFormReadError(f"Error reading .xls file: {read_err}") from read_err
-
-
-def xls_value_to_unicode(value, value_type, datemode) -> str:
-    """Take a xls formatted value and try to make a unicode string representation."""
-    if value_type == XL_CELL_BOOLEAN:
-        return "TRUE" if value else "FALSE"
-    elif value_type == XL_CELL_NUMBER:
-        # Try to display as an int if possible.
-        int_value = int(value)
-        if int_value == value:
-            return str(int_value)
-        else:
-            return str(value)
-    elif value_type is XL_CELL_DATE:
-        # Warn that it is better to single quote as a string.
-        # error_location = cellFormatString % (ss_row_idx, ss_col_idx)
-        # raise Exception(
-        #   "Cannot handle excel formatted date at " + error_location)
-        datetime_or_time_only = xldate_as_tuple(value, datemode)
-        if datetime_or_time_only[:3] == (0, 0, 0):
-            # must be time only
-            return str(datetime.time(*datetime_or_time_only[3:]))
-        return str(datetime.datetime(*datetime_or_time_only))
-    else:
-        # ensure unicode and replace nbsp spaces with normal ones
-        # to avoid this issue:
-        # https://github.com/modilabs/pyxform/issues/83
-        return str(value).replace(chr(160), " ")
 
 
 def xlsx_to_dict(path_or_file):
@@ -449,39 +336,7 @@ def convert_file_to_csv_string(path):
 
 
 def sheet_to_csv(workbook_path, csv_path, sheet_name):
-    if workbook_path.endswith(".xls"):
-        return xls_sheet_to_csv(workbook_path, csv_path, sheet_name)
-    else:
-        return xlsx_sheet_to_csv(workbook_path, csv_path, sheet_name)
-
-
-def xls_sheet_to_csv(workbook_path, csv_path, sheet_name):
-    wb = xlrd_open(workbook_path)
-    try:
-        sheet = wb.sheet_by_name(sheet_name)
-    except XLRDError:
-        return False
-    if not sheet or sheet.nrows < 2:
-        return False
-    with open(csv_path, mode="w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
-        mask = [v and len(v.strip()) > 0 for v in sheet.row_values(0)]
-        for row_idx in range(sheet.nrows):
-            csv_data = []
-            try:
-                for v, m in zip(sheet.row(row_idx), mask, strict=False):
-                    if m:
-                        value = v.value
-                        value_type = v.ctype
-                        data = xls_value_to_unicode(value, value_type, wb.datemode)
-                        # clean the values of leading and trailing whitespaces
-                        data = data.strip()
-                        csv_data.append(data)
-            except TypeError:
-                continue
-            writer.writerow(csv_data)
-
-    return True
+    return xlsx_sheet_to_csv(workbook_path, csv_path, sheet_name)
 
 
 def xlsx_sheet_to_csv(workbook_path, csv_path, sheet_name):
@@ -652,7 +507,6 @@ def is_csv(data: str) -> bool:
 class SupportedFileTypes(Enum):
     xlsx = ".xlsx"
     xlsm = ".xlsm"
-    xls = ".xls"
     md = ".md"
     csv = ".csv"
 
@@ -661,7 +515,6 @@ class SupportedFileTypes(Enum):
         return {
             SupportedFileTypes.xlsx: xlsx_to_dict,
             SupportedFileTypes.xlsm: xlsx_to_dict,
-            SupportedFileTypes.xls: xls_to_dict,
             SupportedFileTypes.md: md_to_dict,
             SupportedFileTypes.csv: csv_to_dict,
         }

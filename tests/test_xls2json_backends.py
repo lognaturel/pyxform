@@ -6,7 +6,6 @@ from pathlib import Path
 from unittest import expectedFailure
 
 import openpyxl
-import xlrd
 from pyxform.builder import create_survey_element_from_dict
 from pyxform.xls2json import workbook_to_json
 from pyxform.xls2json_backends import (
@@ -15,7 +14,6 @@ from pyxform.xls2json_backends import (
     get_xlsform,
     md_table_to_workbook,
     md_to_dict,
-    xls_value_to_unicode,
     xlsx_to_dict,
     xlsx_value_to_str,
 )
@@ -33,26 +31,6 @@ class TestXLS2JSONBackends(PyxformTestCase):
     """Test xls2json_backends module."""
 
     maxDiff = None
-
-    def test_xls_value_to_unicode(self):
-        """
-        Test external choices sheet with numeric values is processed successfully.
-
-        The test ensures that the integer values within the external choices sheet
-        are returned as they were initially received.
-        """
-        value = 32.0
-        value_type = xlrd.XL_CELL_NUMBER
-        datemode = 1
-        csv_data = xls_value_to_unicode(value, value_type, datemode)
-        expected_output = "32"
-        self.assertEqual(csv_data, expected_output)
-
-        # Test that the decimal value is not changed during conversion.
-        value = 46.9
-        csv_data = xls_value_to_unicode(value, value_type, datemode)
-        expected_output = "46.9"
-        self.assertEqual(csv_data, expected_output)
 
     def test_xlsx_value_to_str(self):
         value = 32.0
