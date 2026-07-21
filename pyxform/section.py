@@ -165,7 +165,7 @@ class Section(SurveyElement):
         for child in self.children:
             if isinstance(child, RepeatingSection):
                 result.appendChild(child.template_instance(survey=survey))
-            else:
+            elif hasattr(child, "xml_instance"):
                 result.appendChild(child.xml_instance(survey=survey))
         return result
 
