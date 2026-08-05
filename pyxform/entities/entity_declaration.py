@@ -18,7 +18,7 @@ class EntityDeclaration(Section):
     """
     An entity declaration produces an entity instance node with optional label child,
     some variable attributes, and corresponding bindings. The ODK XForms Entities
-    specification can be found at https://getodk.github.io/xforms-spec/entities
+    specification can be found at `https://getodk.github.io/xforms-spec/entities`.
     """
 
     __slots__ = ENTITY_EXTRA_FIELDS

@@ -1,6 +1,4 @@
-"""
-Test translations syntax.
-"""
+"""Test translations syntax."""
 
 from dataclasses import dataclass
 from os import getpid
@@ -26,9 +24,7 @@ from tests.xpath_helpers.settings import xps
 
 @dataclass(slots=True)
 class XPathHelper:
-    """
-    XPath expressions for translations-related assertions.
-    """
+    """XPath expressions for translations-related assertions."""
 
     question_type: str
     question_name: str
@@ -224,7 +220,7 @@ class TestTranslations(PyxformTestCase):
         )
 
     def test_missing_media_itext(self):
-        """Test missing media itext translation
+        """Test missing media itext translation.
 
         Fix for https://github.com/XLSForm/pyxform/issues/32
         """
@@ -409,7 +405,7 @@ class TestTranslations(PyxformTestCase):
         for count in (500, 1000, 2000, 5000, 10000):
             questions = "\n".join(question.format(i=i) for i in range(count))
             choice_lists = "\n".join(choice_list.format(i=i) for i in range(count))
-            md = "".join((survey_header, questions, choices_header, choice_lists))
+            md = f"{survey_header}{questions}{choices_header}{choice_lists}"
 
             def run(name, case):
                 runs = 0

@@ -1,5 +1,5 @@
 """
-## Geo control traceability
+## Geo control traceability.
 
 Each test should reference one (or more) requirements from these lists.
 
@@ -61,9 +61,7 @@ class GeoWidgetsTest(PyxformTestCase):
         )
 
     def test_geo_widgets_types(self):
-        """
-        this test could be broken into multiple smaller tests.
-        """
+        """This test could be broken into multiple smaller tests."""
         self.assertPyxformXform(
             name="geos",
             md="""

@@ -1,6 +1,4 @@
-"""
-Test xls2xform module.
-"""
+"""Test xls2xform module."""
 
 # The Django application xls2xform uses the function
 # pyxform.create_survey. We have a test here to make sure no one
@@ -36,7 +34,7 @@ class XLS2XFormTests(TestCase):
     def test_create_parser_optional_output_path(self):
         """
         Should run fine for a single argument i.e. that is the
-        path to the xlsx file path, while the output path is left out
+        path to the xlsx file path, while the output path is left out.
         """
         try:
             _create_parser().parse_args(["/some/path/tofile.xlsx"])
@@ -136,7 +134,7 @@ class XLS2XFormTests(TestCase):
         self.assertEqual(True, args.enketo_validate)
 
     def test_validator_args_logic_skip_validate_override(self):
-        """Should deactivate both validators"""
+        """Should deactivate both validators."""
         raw_args = _create_parser().parse_args(
             [
                 "xlsform.xlsx",
@@ -166,7 +164,7 @@ class XLS2XFormTests(TestCase):
     def test_xls2form_convert_parameters(self, converter_mock, parser_mock_args):
         """
         Checks that xls2xform_convert is given the right arguments, when the
-        output-path is not given
+        output-path is not given.
         """
         converter_mock.return_value = "{}"
         main_cli()
@@ -195,7 +193,7 @@ class XLS2XFormTests(TestCase):
         """
         Should call xlsform_convert with the correct input for output
         path where only the xlsform input path and json flag were provided, since
-        the xlsform-convert can be called if json flag was set or when not
+        the xlsform-convert can be called if json flag was set or when not.
         """
         converter_mock.return_value = "{}"
         main_cli()
@@ -220,16 +218,14 @@ class XLS2XFormTests(TestCase):
         ),
     )
     def test_xls2xform_convert_throwing_odk_error(self, parser_mock_args):
-        """
-        Parse and validate bad_calc.xlsx
-        """
+        """Parse and validate bad_calc.xlsx."""
         logger = logging.getLogger("pyxform.xls2xform")
         with mock.patch.object(logger, "error") as mock_debug:
             main_cli()
             self.assertEqual(mock_debug.call_count, 1)
 
     def test_get_xml_path_function(self):
-        """Should return an xml path in the same directory as the xlsx file"""
+        """Should return an xml path in the same directory as the xlsx file."""
         xlsx_path = "/home/user/Desktop/xlsform.xlsx"
         expected = "/home/user/Desktop/xlsform.xml"
         self.assertEqual(expected, get_xml_path(xlsx_path))
@@ -240,9 +236,7 @@ class XLS2XFormTests(TestCase):
 
 
 class TestXLS2XFormConvert(TestCase):
-    """
-    Tests for `xls2xform_convert`.
-    """
+    """Tests for `xls2xform_convert`."""
 
     def test_xls2xform_convert__ok(self):
         """Should find the expected output files for the conversion."""
@@ -276,9 +270,7 @@ class TestXLS2XFormConvert(TestCase):
 
 
 class TestXLS2XFormConvertAPI(TestCase):
-    """
-    Tests for the `convert` library API entrypoint (not xls2xform_convert).
-    """
+    """Tests for the `convert` library API entrypoint (not xls2xform_convert)."""
 
     @staticmethod
     def with_xlsform_path_str(**kwargs):

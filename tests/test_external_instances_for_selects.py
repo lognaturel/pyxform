@@ -1,5 +1,5 @@
 """
-Test external instance syntax
+Test external instance syntax.
 
 See also test_external_instances
 """
@@ -21,9 +21,7 @@ from tests.xpath_helpers.questions import xpq
 
 @dataclass(slots=True)
 class XPathHelperSelectFromFile:
-    """
-    XPath expressions for translations-related assertions.
-    """
+    """XPath expressions for translations-related assertions."""
 
     q_type: str
     q_name: str
@@ -145,7 +143,7 @@ class TestSelectFromFile(PyxformTestCase):
                 )
 
     def test_no_params_with_filters(self):
-        """Should find that choice_filter adds a predicate to the itemset's instance ref"""
+        """Should find that choice_filter adds a predicate to the itemset's instance ref."""
         md = """
         | survey |                                        |         |         |                |
         |        | type                                   | name    | label   | choice_filter  |
@@ -289,9 +287,7 @@ class TestSelectFromFile(PyxformTestCase):
 
 
 class TestSelectOneExternal(PyxformTestCase):
-    """
-    select_one_external question type, where external_choices are converted to a CSV.
-    """
+    """select_one_external question type, where external_choices are converted to a CSV."""
 
     all_choices = """
       | choices |           |      |       |
@@ -307,7 +303,7 @@ class TestSelectOneExternal(PyxformTestCase):
     """
 
     def test_no_params_no_filters(self):
-        """Should find that Pyxform errors out, not a supported use case as per #488"""
+        """Should find that Pyxform errors out, not a supported use case as per #488."""
         md = """
         | survey |                             |        |        |
         |        | type                        | name   | label  |
@@ -346,7 +342,7 @@ class TestSelectOneExternal(PyxformTestCase):
         )
 
     def test_no_params_with_filters(self):
-        """Should find that choice_filter generates input()s with refs to external itemsets"""
+        """Should find that choice_filter generates input()s with refs to external itemsets."""
         md = """
         | survey |                            |        |        |                                 |
         |        | type                       | name   | label  | choice_filter                   |

@@ -1,6 +1,4 @@
-"""
-Test handling dynamic default in forms
-"""
+"""Test handling dynamic default in forms."""
 
 from dataclasses import dataclass
 from os import getpid
@@ -39,9 +37,7 @@ class Case:
 
 
 class XPathHelper:
-    """
-    XPath expressions for dynamic defaults assertions.
-    """
+    """XPath expressions for dynamic defaults assertions."""
 
     @staticmethod
     def model_setvalue(q_num: int):
@@ -150,9 +146,7 @@ xp = XPathHelper()
 
 
 class TestDynamicDefault(PyxformTestCase):
-    """
-    Handling dynamic defaults.
-    """
+    """Handling dynamic defaults."""
 
     def test_static_default_in_repeat(self):
         """Should use instance repeat template and first row for static default inside a repeat."""
@@ -924,7 +918,7 @@ class TestDynamicDefaultSimpleInput(PyxformTestCase):
         process = Process(getpid())
         for count in (500, 1000, 2000, 5000, 10000):
             questions = "\n".join(question.format(i=i) for i in range(count))
-            md = "".join((survey_header, questions))
+            md = f"{survey_header}{questions}"
 
             def run(name, case):
                 runs = 0
@@ -964,7 +958,7 @@ class TestDynamicDefaultSimpleInput(PyxformTestCase):
         |        | text       | q{i}     | Q{i}     | if(../t2 = 'test', 1, 2) + 15 - int(1.2) |
         """
         questions = "\n".join(question.format(i=i) for i in range(1, 2000))
-        md = "".join((survey_header, questions))
+        md = f"{survey_header}{questions}"
         process = Process(getpid())
         pre_mem = process.memory_info().rss
         self.assertPyxformXform(md=md)

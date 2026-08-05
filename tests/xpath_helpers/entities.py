@@ -1,7 +1,5 @@
 class XPathHelper:
-    """
-    XPath expressions for entities assertions.
-    """
+    """XPath expressions for entities assertions."""
 
     @staticmethod
     def model_entities_version(version: str):

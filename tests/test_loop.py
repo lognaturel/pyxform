@@ -1,6 +1,4 @@
-"""
-Test loop syntax.
-"""
+"""Test loop syntax."""
 
 from unittest import TestCase
 

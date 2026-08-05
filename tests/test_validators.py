@@ -1,6 +1,4 @@
-"""
-Test validators.
-"""
+"""Test validators."""
 
 from unittest import TestCase
 from unittest.mock import patch
@@ -12,7 +10,7 @@ msg = "Form validation failed because Java (8+ required) could not be found."
 
 
 class TestValidatorsUtil(TestCase):
-    """Test validators.util"""
+    """Test validators.util."""
 
     def test_check_java_available__found(self):
         """Should not raise an error when Java is found."""

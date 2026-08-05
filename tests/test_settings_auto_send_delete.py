@@ -1,6 +1,4 @@
-"""
-Test settins auto settings.
-"""
+"""Test settins auto settings."""
 
 from tests.pyxform_test_case import PyxformTestCase
 

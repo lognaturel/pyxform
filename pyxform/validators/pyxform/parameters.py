@@ -11,9 +11,7 @@ def validate(
     accepted: type[StrEnum],
     row_number: int,
 ) -> None:
-    """
-    Raise an error if 'parameters' includes any keys not named in 'accepted'.
-    """
+    """Raise an error if 'parameters' includes any keys not named in 'accepted'."""
     extras = set(parameters) - accepted.value_set()
     if 0 < len(extras):
         raise PyXFormError(

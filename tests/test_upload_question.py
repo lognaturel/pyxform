@@ -1,6 +1,4 @@
-"""
-Test upload (image, audio, file) question types in XLSForm
-"""
+"""Test upload (image, audio, file) question types in XLSForm."""
 
 from tests.pyxform_test_case import PyxformTestCase
 

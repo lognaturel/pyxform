@@ -1,6 +1,4 @@
-"""
-Test setgeopoint widget.
-"""
+"""Test setgeopoint widget."""
 
 from tests.pyxform_test_case import PyxformTestCase
 

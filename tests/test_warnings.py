@@ -1,6 +1,4 @@
-"""
-Test warnings.
-"""
+"""Test warnings."""
 
 from tests.pyxform_test_case import PyxformTestCase
 

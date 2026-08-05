@@ -1,6 +1,4 @@
-"""
-pyxform utils module.
-"""
+"""pyxform utils module."""
 
 import copy
 import csv
@@ -155,8 +153,8 @@ def get_pyobj_from_json(str_or_path):
 
 def print_pyobj_to_json(pyobj, path=None):
     """
-    dump a python nested array/dict structure to the specified file
-    or stdout if no file is specified
+    Dump a python nested array/dict structure to the specified file
+    or stdout if no file is specified.
     """
     if path:
         with open(path, mode="w", encoding="utf-8") as fp:
@@ -199,9 +197,7 @@ def external_choices_to_csv(
 
 
 def has_external_choices(json_struct):
-    """
-    Returns true if a select one external prompt is used in the survey.
-    """
+    """Returns true if a select one external prompt is used in the survey."""
     if isinstance(json_struct, dict):
         for k, v in json_struct.items():
             if (

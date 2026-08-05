@@ -1,7 +1,4 @@
-"""
-odk_validate.py
-A python wrapper around ODK Validate
-"""
+"""A python wrapper around ODK Validate."""
 
 import logging
 import os
@@ -40,9 +37,7 @@ def _call_validator(path_to_xform, bin_file_path=ODK_VALIDATE_PATH) -> "PopenRes
 
 
 def install_ok(bin_file_path=ODK_VALIDATE_PATH):
-    """
-    Check if ODK Validate functions as expected.
-    """
+    """Check if ODK Validate functions as expected."""
     check_readable(file_path=XFORM_SPEC_PATH)
     result = _call_validator(
         path_to_xform=XFORM_SPEC_PATH,
@@ -55,9 +50,7 @@ def install_ok(bin_file_path=ODK_VALIDATE_PATH):
 
 
 def check_java_available():
-    """
-    Check if 'which java' returncode is 0. If not, raise an error since java is required.
-    """
+    """Check if 'which java' returncode is 0. If not, raise an error since java is required."""
     java_path = shutil.which(cmd="java")
     if java_path is not None:
         return

@@ -1,6 +1,4 @@
-"""
-Guidance hint test module.
-"""
+"""Guidance hint test module."""
 
 from tests.pyxform_test_case import PyxformTestCase
 
@@ -21,7 +19,7 @@ class GuidanceHintTest(PyxformTestCase):
         )
 
     def test_guidance_hint_and_label(self):
-        """Test guidance_hint with label"""
+        """Test guidance_hint with label."""
         self.assertPyxformXform(
             name="data",
             md="""

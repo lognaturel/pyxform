@@ -1,6 +1,4 @@
-"""
-Test validator update cli command.
-"""
+"""Test validator update cli command."""
 
 import os
 import platform

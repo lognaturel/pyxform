@@ -1,10 +1,10 @@
-"""
-Cleans up error messages from the validators.
-"""
+"""Cleans up error messages from the validators."""
 
 import re
 
-ERROR_MESSAGE_REGEX = re.compile(r"(/[a-z0-9\-_]+(?:/[a-z0-9\-_]+)+)", flags=re.I)
+ERROR_MESSAGE_REGEX = re.compile(
+    r"(/[a-z0-9\-_]+(?:/[a-z0-9\-_]+)+)", flags=re.IGNORECASE
+)
 
 
 class ErrorCleaner:

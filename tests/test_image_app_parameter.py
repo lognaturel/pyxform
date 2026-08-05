@@ -1,6 +1,4 @@
-"""
-Test image max-pixels and app parameters.
-"""
+"""Test image max-pixels and app parameters."""
 
 from pyxform import constants as co
 from pyxform.errors import ErrorCode

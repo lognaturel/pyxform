@@ -1,5 +1,5 @@
 """
-## Entity feature traceability test suite
+## Entity feature traceability test suite.
 
 Each entities test should reference one (or more) requirements from these lists.
 

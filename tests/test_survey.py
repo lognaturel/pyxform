@@ -11,9 +11,7 @@ from tests.pyxform_test_case import PYXFORM_TESTS_RUN_ODK_VALIDATE, PyxformTestC
 
 
 class TestSurvey(PyxformTestCase):
-    """
-    Tests for the Survey class.
-    """
+    """Tests for the Survey class."""
 
     def test_many_xpath_references_do_not_hit_64_recursion_limit__one_to_one(self):
         """Should be able to pipe a question into one note more than 64 times."""
@@ -195,9 +193,7 @@ def build_survey_from_path_spec(
 
 
 class TestGetPathRelativeToLCAR(TestCase):
-    """
-    Tests of pyxform.survey.get_path_relative_to_lcar
-    """
+    """Tests of `pyxform.survey.get_path_relative_to_lcar`."""
 
     def assert_relative_path(
         self,

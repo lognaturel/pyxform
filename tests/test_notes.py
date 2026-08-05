@@ -1,6 +1,4 @@
-"""
-Test the "note" question type.
-"""
+"""Test the "note" question type."""
 
 from dataclasses import dataclass, field
 
@@ -10,9 +8,7 @@ from tests.xpath_helpers.questions import xpq
 
 @dataclass(slots=True)
 class Case:
-    """
-    A test case spec for note output scenarios.
-    """
+    """A test case spec for note output scenarios."""
 
     label: str
     match: set[str]

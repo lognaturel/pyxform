@@ -2,9 +2,7 @@ from pyxform.question_type_dictionary import QUESTION_TYPE_DICT
 
 
 class XPathHelper:
-    """
-    XPath expressions for questions assertions.
-    """
+    """XPath expressions for questions assertions."""
 
     @staticmethod
     def model_instance_exists(i_id: str) -> str:

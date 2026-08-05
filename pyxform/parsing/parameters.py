@@ -22,7 +22,7 @@ _PARAMETER_PARSER = Lark(PARAMETER_GRAMMAR, parser="lalr", start="start")
 class ParameterTransformer(Transformer):
     @staticmethod
     def start(pairs: list[tuple[str, str]]) -> dict[str, str]:
-        """Combine (key, value) tuples into a dict"""
+        """Combine (key, value) tuples into a dict."""
         return dict(pairs)
 
     @staticmethod

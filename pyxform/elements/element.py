@@ -15,7 +15,5 @@ class Element:
     name: str
 
     def node(self) -> "DetachableElement":
-        """
-        Create the element.
-        """
+        """Create the element."""
         raise NotImplementedError()

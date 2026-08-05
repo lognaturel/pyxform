@@ -1,6 +1,4 @@
-"""
-Some tests for the new (v0.9) spec is properly implemented.
-"""
+"""Some tests for the new (v0.9) spec is properly implemented."""
 
 import os
 from pathlib import Path
@@ -42,7 +40,7 @@ class ValidateWrapper(TestCase):
         filename = "ODKValidateWarnings.xlsx"
         path_to_excel_file = os.path.join(bug_example_xls.PATH, filename)
         # Get the xform output path:
-        root_filename, ext = os.path.splitext(filename)
+        root_filename, _ = os.path.splitext(filename)
         output_path = os.path.join(test_output.PATH, root_filename + ".xml")
         # Do the conversion:
         warnings = []
@@ -132,7 +130,8 @@ class TestXLDateAmbigous(TestCase):
 
 class TestXLDateAmbigousNoException(TestCase):
     """Test date values that exceed the workbook datemode value.
-    (This would cause an exception with xlrd, but openpyxl handles it)."""
+    (This would cause an exception with xlrd, but openpyxl handles it).
+    """
 
     def test_xl_date_ambigous_no_exception(self):
         """Test standard sheet is processed successfully."""
@@ -143,7 +142,7 @@ class TestXLDateAmbigousNoException(TestCase):
 
 
 class TestSpreadSheetFilesWithMacrosAreAllowed(TestCase):
-    """Test that spreadsheets with .xlsm extension are allowed"""
+    """Test that spreadsheets with .xlsm extension are allowed."""
 
     def test_xlsm_files_are_allowed(self):
         filename = "excel_with_macros.xlsm"
@@ -152,7 +151,7 @@ class TestSpreadSheetFilesWithMacrosAreAllowed(TestCase):
 
 
 class TestBadCalculation(TestCase):
-    """Bad calculation should not kill the application"""
+    """Bad calculation should not kill the application."""
 
     def test_bad_calculate_javarosa_error(self):
         filename = "bad_calc.xml"

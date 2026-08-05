@@ -1,6 +1,4 @@
-"""
-Survey module with XForm Survey objects and utility functions.
-"""
+"""Survey module with XForm Survey objects and utility functions."""
 
 import os
 import re
@@ -70,7 +68,7 @@ class InstanceInfo:
 
 
 def register_nsmap():
-    """Function to register NSMAP namespaces with ETree"""
+    """Function to register NSMAP namespaces with ETree."""
     for prefix, uri in NSMAP.items():
         prefix_no_xmlns = prefix.replace("xmlns", "").replace(":", "")
         ETree.register_namespace(prefix_no_xmlns, uri)
@@ -173,9 +171,7 @@ SURVEY_FIELDS = (*SURVEY_ELEMENT_FIELDS, *SECTION_EXTRA_FIELDS, *SURVEY_EXTRA_FI
 
 
 class Survey(Section):
-    """
-    Survey class - represents the full XForm XML.
-    """
+    """Survey class - represents the full XForm XML."""
 
     __slots__ = SURVEY_EXTRA_FIELDS
 
@@ -262,7 +258,7 @@ class Survey(Section):
             )
 
     def get_nsmap(self):
-        """Add additional namespaces"""
+        """Add additional namespaces."""
         if self.entity_version:
             entities_ns = " entities=http://www.opendatakit.org/xforms/entities"
             if self.namespaces is None:
@@ -289,9 +285,7 @@ class Survey(Section):
         return NSMAP
 
     def xml(self):
-        """
-        calls necessary preparation methods, then returns the xml.
-        """
+        """Calls necessary preparation methods, then returns the xml."""
         self.validate()
         self._setup_xpath_dictionary()
 
@@ -310,9 +304,7 @@ class Survey(Section):
     def _generate_static_instances(
         self, list_name: str, itemset: Itemset
     ) -> InstanceInfo:
-        """
-        Generate <instance> elements for static data (e.g. choices for selects)
-        """
+        """Generate <instance> elements for static data (e.g. choices for selects)."""
 
         def choice_nodes(idx, choice):
             # Add a unique id to the choice element in case there are itext references
@@ -397,7 +389,7 @@ class Survey(Section):
             """
             Returns a list of different pulldata(... function strings if
             pulldata function is defined at least once for any of:
-            calculate, constraint, readonly, required, relevant
+            calculate, constraint, readonly, required, relevant.
             """
             functions_present = []
             for formula_name in constants.EXTERNAL_INSTANCES:
@@ -466,9 +458,7 @@ class Survey(Section):
 
     @staticmethod
     def _generate_last_saved_instance(element: Question) -> bool:
-        """
-        True if a last-saved instance should be generated, false otherwise.
-        """
+        """True if a last-saved instance should be generated, false otherwise."""
         if element.default and has_pyxform_reference_with_last_saved(element.default):
             return True
         if element.choice_filter and has_pyxform_reference_with_last_saved(
@@ -594,9 +584,7 @@ class Survey(Section):
             seen[i.name] = i
 
     def xml_model_bindings(self) -> Generator[DetachableElement | None, None, None]:
-        """
-        Yield bindings (bind or action elements) for this node and all its descendants.
-        """
+        """Yield bindings (bind or action elements) for this node and all its descendants."""
         for e in self.iter_descendants(
             condition=lambda i: not isinstance(i, Option | Tag)
         ):
@@ -606,9 +594,7 @@ class Survey(Section):
                 yield from e.xml_actions(survey=self, in_repeat=False)
 
     def xml_model(self):
-        """
-        Generate the xform <model> element
-        """
+        """Generate the xform <model> element."""
         self._setup_translations()
         self._setup_media()
         self._add_empty_translations()
@@ -739,8 +725,8 @@ class Survey(Section):
 
     def _setup_translations(self):
         """
-        set up the self._translations dict which will be referenced in the
-        setup media and itext functions
+        Set up the self._translations dict which will be referenced in the
+        setup media and itext functions.
         """
 
         def get_choice_content(name, idx, choice):
@@ -912,7 +898,7 @@ class Survey(Section):
         This function creates the survey's itext nodes from _translations
         @see _setup_media _setup_translations
         itext nodes are localized images/audio/video/text
-        @see http://code.google.com/p/opendatakit/wiki/XFormDesignGuidelines
+        @see `http://code.google.com/p/opendatakit/wiki/XFormDesignGuidelines`.
         """
         result = []
         for lang, translation in self._translations.items():
@@ -1033,17 +1019,15 @@ class Survey(Section):
         Given a dictionary of xpaths, return a function we can use to
         replace ${varname} with the xpath to varname.
         """
-
         name = matchobj.group("ncname")
         last_saved = matchobj.group("last_saved") is not None
         is_indexed_repeat = matchobj.string.find("indexed-repeat(") > -1
 
         def _in_secondary_instance_predicate() -> bool:
             """
-            check if ${} expression represented by matchobj
-            is in a predicate for a path expression for a secondary instance
+            Check if ${} expression represented by matchobj
+            is in a predicate for a path expression for a secondary instance.
             """
-
             if RE_INSTANCE.search(matchobj.string) is not None:
                 bracket_regex_match_iter = RE_BRACKET.finditer(matchobj.string)
                 # Check whether current ${varname} is in the correct bracket_regex_match

@@ -358,9 +358,7 @@ class TestSettings(PyxformTestCase):
 
 
 class TestNamespaces(PyxformTestCase):
-    """
-    Test namespaces, for the XForm and in relation to settings that can be namespaced.
-    """
+    """Test namespaces, for the XForm and in relation to settings that can be namespaced."""
 
     def test_standard_namespaces(self):
         """Should find the standard namespaces in the XForm output."""

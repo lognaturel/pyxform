@@ -37,7 +37,7 @@ class ParsedReference:
 
 def is_pyxform_reference_candidate(value: str) -> bool:
     """
-    Does the string look like a pyxform reference?
+    Check if the string looks like a pyxform reference.
 
     Needs 2 characters for "${", plus at least 1 more for a name inside. Does not look
     for closing brace because full parsing will try to detect malformed references. This
@@ -107,7 +107,7 @@ def _parse(
 @lru_cache(maxsize=128)
 def is_pyxform_reference(value: str) -> bool:
     """
-    Does the input string contain only a valid Pyxform reference? e.g. `${my_question}`
+    Does the input string contain only a valid Pyxform reference? e.g. `${my_question}`.
 
     :param value: The string to inspect.
     """
@@ -120,7 +120,7 @@ def is_pyxform_reference(value: str) -> bool:
 @lru_cache(maxsize=128)
 def has_pyxform_reference(value: str) -> bool:
     """
-    Does the input string contain a valid Pyxform reference? e.g. `hi ${name}`
+    Does the input string contain a valid Pyxform reference? e.g. `hi ${name}`.
 
     :param value: The string to inspect.
     """
@@ -133,7 +133,7 @@ def has_pyxform_reference(value: str) -> bool:
 @lru_cache(maxsize=128)
 def has_pyxform_reference_with_last_saved(value: str) -> bool:
     """
-    Does the input string contain a valid '#last-saved' reference? e.g. `${last-saved#my_question}`
+    Does the input string contain a valid '#last-saved'? e.g. `${last-saved#my_question}`.
 
     Needs 14 characters for "${last-saved#}", plus a name inside. This pre-check can help
     avoid more expensive full parsing.

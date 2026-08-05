@@ -1,6 +1,4 @@
-"""
-XLS-to-dict and csv-to-dict are essentially backends for xls2json.
-"""
+"""XLS-to-dict and csv-to-dict are essentially backends for xls2json."""
 
 import csv
 import datetime
@@ -62,7 +60,7 @@ class DefinitionData:
 def _list_to_dict_list(list_items):
     """
     Takes a list and creates a dict with the list values as keys.
-    Returns a list of the created dict or an empty list
+    Returns a list of the created dict or an empty list.
     """
     if list_items:
         return [{str(i): None for i in list_items}]
@@ -70,9 +68,7 @@ def _list_to_dict_list(list_items):
 
 
 def trim_trailing_empty(a_list: list, n_empty: int) -> list:
-    """
-    Trim trailing empty columns or rows. Avoids `[:-0] == []`, and unnecessary list copy.
-    """
+    """Trim trailing empty columns or rows. Avoids `[:-0] == []`, and unnecessary list copy."""
     if 0 < n_empty:
         offset = len(a_list) - n_empty
         a_list = a_list[:offset]
@@ -220,9 +216,7 @@ def xls_to_dict(path_or_file):
 
 
 def xls_value_to_unicode(value, value_type, datemode) -> str:
-    """
-    Take a xls formatted value and try to make a unicode string representation.
-    """
+    """Take a xls formatted value and try to make a unicode string representation."""
     if value_type == XL_CELL_BOOLEAN:
         return "TRUE" if value else "FALSE"
     elif value_type == XL_CELL_NUMBER:
@@ -313,9 +307,7 @@ def xlsx_to_dict(path_or_file):
 
 
 def xlsx_value_to_str(value) -> str:
-    """
-    Take a xls formatted value and try to make a string representation.
-    """
+    """Take a xls formatted value and try to make a string representation."""
     if value is True:
         return "TRUE"
     elif value is False:
@@ -446,15 +438,18 @@ and some day:
 
 def convert_file_to_csv_string(path):
     """
-    This will open a csv or xls file and return a CSV in the format:
-        sheet_name1
-        ,col1,col2
-        ,r1c1,r1c2
-        ,r2c1,r2c2
-        sheet_name2
-        ,col1,col2
-        ,r1c1,r1c2
-        ,r2c1,r2c2
+    This will open a csv or xls file and return a CSV in the format.
+
+    ```
+    sheet_name1
+    ,col1,col2
+    ,r1c1,r1c2
+    ,r2c1,r2c2
+    sheet_name2
+    ,col1,col2
+    ,r1c1,r1c2
+    ,r2c1,r2c2
+    ```
 
     Currently, it processes csv files and xls files to ensure consistent
     csv delimiters, etc. for tests.
@@ -631,9 +626,7 @@ def md_to_dict(md: str | BytesIO):
 
 
 def md_table_to_workbook(mdstr: str) -> pyxlWorkbook:
-    """
-    Convert Markdown table string to an openpyxl.Workbook. Call wb.save() to persist.
-    """
+    """Convert Markdown table string to an openpyxl.Workbook. Call wb.save() to persist."""
     md_data = _md_table_to_ss_structure(mdstr=mdstr)
     wb = pyxlWorkbook(write_only=True)
     for key, rows in md_data.items():
@@ -742,7 +735,7 @@ def definition_to_dict(
             return DefinitionData(
                 fallback_form_name=definition.file_path_stem, **func(definition)
             )
-        except PyXFormReadError:  # noqa: PERF203
+        except PyXFormReadError:
             continue
 
     raise PyXFormError(

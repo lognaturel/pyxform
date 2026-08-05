@@ -1,6 +1,4 @@
-"""
-Testing simple cases for pyxform
-"""
+"""Testing simple cases for pyxform."""
 
 from unittest import TestCase
 
@@ -15,7 +13,7 @@ from pyxform.survey import Survey
 class BasicJson2XFormTests(TestCase):
     def test_survey_can_have_to_xml_called_twice(self):
         """
-        Test: Survey can have "to_xml" called multiple times
+        Test: Survey can have "to_xml" called multiple times.
 
         (This was not being allowed before.)
 

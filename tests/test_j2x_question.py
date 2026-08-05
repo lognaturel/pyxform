@@ -1,6 +1,4 @@
-"""
-Testing creation of Surveys using verbose methods
-"""
+"""Testing creation of Surveys using verbose methods."""
 
 from collections.abc import Generator
 
@@ -15,8 +13,8 @@ from tests.xpath_helpers.questions import xpq
 
 def ctw(control):
     """
-    ctw stands for control_test_wrap, but ctw is shorter and easier. using
-    begin_str and end_str to take out the wrap that xml gives us
+    Ctw stands for control_test_wrap, but ctw is shorter and easier. using
+    begin_str and end_str to take out the wrap that xml gives us.
     """
     if isinstance(control, list) and len(control) == 1:
         control = control[0]
@@ -145,9 +143,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
         )
 
     def test_simple_integer_question_type_multilingual(self):
-        """
-        not sure how integer questions should show up.
-        """
+        """Not sure how integer questions should show up."""
         simple_integer_question = {
             "label": {"f": "fc", "e": "ec"},
             "type": "integer",
@@ -171,9 +167,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
         self.assertEqual(ctw(q.xml_bindings(survey=self.s)), expected_integer_binding_xml)
 
     def test_simple_date_question_type_multilingual(self):
-        """
-        not sure how date questions should show up.
-        """
+        """Not sure how date questions should show up."""
         simple_date_question = {
             "label": {"f": "fd", "e": "ed"},
             "type": "date",
@@ -195,9 +189,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
         self.assertEqual(ctw(q.xml_bindings(survey=self.s)), expected_date_binding_xml)
 
     def test_simple_phone_number_question_type_multilingual(self):
-        """
-        not sure how phone number questions should show up.
-        """
+        """Not sure how phone number questions should show up."""
         simple_phone_number_question = {
             "label": {"f": "fe", "e": "ee"},
             "type": "phone number",
@@ -232,9 +224,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
         self.assertDictEqual(expected, observed)
 
     def test_simple_select_all_question_multilingual(self):
-        """
-        not sure how select all questions should show up...
-        """
+        """Not sure how select all questions should show up..."""
         survey = {
             "type": "survey",
             "name": "test_name",
@@ -272,9 +262,7 @@ class Json2XformQuestionValidationTests(PyxformTestCase):
         )
 
     def test_simple_decimal_question_multilingual(self):
-        """
-        not sure how decimal should show up.
-        """
+        """Not sure how decimal should show up."""
         simple_decimal_question = {
             "label": {"f": "f text", "e": "e text"},
             "type": "decimal",

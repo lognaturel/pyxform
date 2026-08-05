@@ -1,6 +1,4 @@
-"""
-Validate XForms using Enketo validator.
-"""
+"""Validate XForms using Enketo validator."""
 
 import os
 from typing import TYPE_CHECKING
@@ -26,9 +24,7 @@ class EnketoValidateError(Exception):
 
 
 def install_exists():
-    """
-    Check if Enketo-validate is installed.
-    """
+    """Check if Enketo-validate is installed."""
     return os.path.exists(ENKETO_VALIDATE_PATH)
 
 
@@ -37,9 +33,7 @@ def _call_validator(path_to_xform, bin_file_path=ENKETO_VALIDATE_PATH) -> "Popen
 
 
 def install_ok(bin_file_path=ENKETO_VALIDATE_PATH):
-    """
-    Check if Enketo-validate functions as expected.
-    """
+    """Check if Enketo-validate functions as expected."""
     check_readable(file_path=XFORM_SPEC_PATH)
     return_code, _, _, _ = _call_validator(
         path_to_xform=XFORM_SPEC_PATH, bin_file_path=bin_file_path

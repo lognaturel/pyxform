@@ -1,6 +1,4 @@
-"""
-Test multiple XLSForm can be generated successfully.
-"""
+"""Test multiple XLSForm can be generated successfully."""
 
 import os
 from pathlib import Path

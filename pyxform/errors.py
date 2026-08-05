@@ -1,6 +1,4 @@
-"""
-Common base classes for pyxform exceptions.
-"""
+"""Common base classes for pyxform exceptions."""
 
 from enum import Enum
 from string import Formatter
@@ -566,7 +564,7 @@ class PyXFormError(Exception):
         """
         super().__init__(*args)
         self.code: ErrorCode | None = code
-        self.context: dict = context if context else {}
+        self.context: dict = context or {}
 
     def __str__(self):
         return self.__repr__()

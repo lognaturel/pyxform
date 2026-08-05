@@ -1,6 +1,4 @@
-"""
-Testing our ability to import from a JSON text file.
-"""
+"""Testing our ability to import from a JSON text file."""
 
 from unittest import TestCase
 

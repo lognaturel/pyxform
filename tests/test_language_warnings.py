@@ -1,14 +1,10 @@
-"""
-Test language warnings.
-"""
+"""Test language warnings."""
 
 from tests.pyxform_test_case import PyxformTestCase
 
 
 class LanguageWarningTest(PyxformTestCase):
-    """
-    Test language warnings.
-    """
+    """Test language warnings."""
 
     def test_label_with_valid_subtag_should_not_warn(self):
         self.assertPyxformXform(

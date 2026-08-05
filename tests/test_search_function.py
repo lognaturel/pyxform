@@ -64,7 +64,7 @@ class TestTranslations(PyxformTestCase):
         cls.run_odk_validate = True
 
     def test_shared_choice_list(self):
-        """Should include translation for search() items, when sharing the choice list"""
+        """Should include translation for search() items, when sharing the choice list."""
         md = """
         | survey  |               |       |            |           |                   |
         |         | type          | name  | label::en  | label::fr | appearance        |
@@ -91,7 +91,7 @@ class TestTranslations(PyxformTestCase):
         )
 
     def test_usage_with_other_selects(self):
-        """Should include translation for search() items, when used with other selects"""
+        """Should include translation for search() items, when used with other selects."""
         md = """
         | survey  |               |       |            |           |                   |
         |         | type          | name  | label::en  | label::fr | appearance        |
@@ -138,7 +138,7 @@ class TestTranslations(PyxformTestCase):
         )
 
     def test_single_question_usage(self):
-        """Should include translation for search() items, edge case of single question"""
+        """Should include translation for search() items, edge case of single question."""
         md = """
         | survey  |               |       |            |           |                   |
         |         | type          | name  | label::en  | label::fr | appearance        |
@@ -162,7 +162,7 @@ class TestTranslations(PyxformTestCase):
         )
 
     def test_additional_static_choices(self):
-        """Should include translation for search() items, when adding static choices"""
+        """Should include translation for search() items, when adding static choices."""
         md = """
         | survey  |               |       |            |           |                   |
         |         | type          | name  | label::en  | label::fr | appearance        |
@@ -212,7 +212,7 @@ class TestTranslations(PyxformTestCase):
         )
 
     def test_search_and_select_xlsx(self):
-        """Test to replace the old XLSX-based test fixture, 'search_and_select.xlsx'"""
+        """Test to replace the old XLSX-based test fixture, 'search_and_select.xlsx'."""
         md = """
         | survey  |                   |            |                |                  |
         |         | type              | name       | label          | appearance       |
@@ -245,9 +245,7 @@ class TestTranslations(PyxformTestCase):
 
 
 class TestSecondaryInstances(PyxformTestCase):
-    """
-    Test behaviour of the search() appearance with other sources of secondary instances.
-    """
+    """Test behaviour of the search() appearance with other sources of secondary instances."""
 
     @classmethod
     def setUpClass(cls) -> None:

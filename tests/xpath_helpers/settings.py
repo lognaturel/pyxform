@@ -1,7 +1,5 @@
 class XPathHelper:
-    """
-    XPath expressions for settings assertions.
-    """
+    """XPath expressions for settings assertions."""
 
     @staticmethod
     def form_title(value: str) -> str:

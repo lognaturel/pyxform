@@ -1,6 +1,4 @@
-"""
-Test duplicate survey question field name.
-"""
+"""Test duplicate survey question field name."""
 
 from pyxform import constants as co
 from pyxform.errors import ErrorCode
@@ -9,9 +7,7 @@ from tests.pyxform_test_case import PyxformTestCase
 
 
 class TestQuestionParsing(PyxformTestCase):
-    """
-    Test XLSForm Fields
-    """
+    """Test XLSForm Fields."""
 
     def test_names__question_basic_case__ok(self):
         """Should find that a single unique question name is ok."""

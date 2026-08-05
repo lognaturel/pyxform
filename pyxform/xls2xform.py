@@ -33,7 +33,7 @@ logger.setLevel(logging.INFO)
 
 def get_xml_path(path):
     """
-    Returns the xform file path
+    Returns the xform file path.
 
     Generates an output path for the xform file from the given
     xlsx input file path.
@@ -150,9 +150,7 @@ def xls2xform_convert(
 
 
 def _create_parser():
-    """
-    Parse command line arguments.
-    """
+    """Parse command line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "path_to_XLSForm",

@@ -1,6 +1,4 @@
-"""
-Test rank widget.
-"""
+"""Test rank widget."""
 
 from tests.pyxform_test_case import PyxformTestCase
 from tests.xpath_helpers.choices import xpc

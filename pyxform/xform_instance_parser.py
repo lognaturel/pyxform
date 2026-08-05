@@ -1,6 +1,4 @@
-"""
-XFormInstanceParser class module - parses an instance XML.
-"""
+"""XFormInstanceParser class module - parses an instance XML."""
 # todo: this has been copied from xform_manager, we need to figure out
 # where this code is actually going to live.
 
@@ -44,9 +42,7 @@ def _xml_node_to_dict(node):
 
 
 def _flatten_dict(d, prefix):
-    """
-    Return a list of XPath, value pairs.
-    """
+    """Return a list of XPath, value pairs."""
     if not isinstance(d, dict):
         raise PyXFormError("""Invalid value for `d`.""")
     if not isinstance(prefix, list):
@@ -75,9 +71,7 @@ def _flatten_dict(d, prefix):
 
 
 def _get_all_attributes(node):
-    """
-    Go through an XML document returning all the attributes we see.
-    """
+    """Go through an XML document returning all the attributes we see."""
     if hasattr(node, "hasAttributes") and node.hasAttributes():
         for key in node.attributes.keys():
             yield key, node.getAttribute(key)

@@ -1,6 +1,4 @@
-"""
-PyxformTestCase base class using markdown to define the XLSForm.
-"""
+"""PyxformTestCase base class using markdown to define the XLSForm."""
 
 import logging
 import os
@@ -112,7 +110,7 @@ class PyxformTestCase(TestCase):
           cases where testing whitespace and cells' type is important.
         :param survey: easy for reuse within a test
         # Note: XLS is not implemented at this time. You can use builder to create a
-        pyxform Survey object
+        pyxform Survey object.
 
         One or more XForm assertions:
         :param xml__xpath_exact: A list of tuples where the first tuple element is an
@@ -367,7 +365,7 @@ class PyxformTestCase(TestCase):
 
     def assertContains(self, content, text, count=None, msg_prefix=""):
         """
-        FROM: django source- testcases.py
+        FROM: django source- testcases.py.
 
         Asserts that ``text`` occurs ``count`` times in the content string.
         If ``count`` is None, the count doesn't matter - the assertion is

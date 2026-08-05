@@ -1,6 +1,4 @@
-"""
-The pyxform file utility functions.
-"""
+"""The pyxform file utility functions."""
 
 import glob
 import os
@@ -10,8 +8,8 @@ from pyxform.xls2json import SurveyReader
 
 
 def _section_name(path_or_file_name):
-    directory, filename = os.path.split(path_or_file_name)
-    section_name, extension = os.path.splitext(filename)
+    _, filename = os.path.split(path_or_file_name)
+    section_name, _ = os.path.splitext(filename)
     return section_name
 
 
@@ -32,10 +30,7 @@ def load_file_to_dict(path):
 
 
 def collect_compatible_files_in_directory(directory):
-    """
-    create a giant dict out of all the spreadsheets and json forms
-    in the given directory
-    """
+    """Create a giant dict out of all the spreadsheets and json forms in the given directory."""
     available_files = glob.glob(os.path.join(directory, "*.xls")) + glob.glob(
         os.path.join(directory, "*.json")
     )

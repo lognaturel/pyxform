@@ -1,6 +1,4 @@
-"""
-Test xls2json_backends util functions.
-"""
+"""Test xls2json_backends util functions."""
 
 from unittest import TestCase
 

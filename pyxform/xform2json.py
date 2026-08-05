@@ -1,6 +1,4 @@
-"""
-xform2json module - Transform an XForm to a JSON dictionary.
-"""
+"""xform2json module - Transform an XForm to a JSON dictionary."""
 
 import copy
 import json
@@ -32,9 +30,7 @@ QUESTION_TYPES = {
 
 # {{{ http://code.activestate.com/recipes/573463/ (r7)
 class XmlDictObject(dict):
-    """
-    Adds object like functionality to the standard dictionary.
-    """
+    """Adds object like functionality to the standard dictionary."""
 
     def __init__(self, initdict=None):
         if initdict is None:
@@ -55,10 +51,7 @@ class XmlDictObject(dict):
 
     @staticmethod
     def wrap(x):
-        """
-        Static method to wrap a dictionary recursively as an XmlDictObject
-        """
-
+        """Static method to wrap a dictionary recursively as an XmlDictObject."""
         if isinstance(x, dict):
             return XmlDictObject((k, XmlDictObject.Wrap(v)) for (k, v) in iter(x.items()))
         elif isinstance(x, list):
@@ -80,7 +73,6 @@ class XmlDictObject(dict):
         Recursively converts an XmlDictObject to a standard dictionary
         and returns the result.
         """
-
         return XmlDictObject._un_wrap(self)
 
 
@@ -107,10 +99,7 @@ def _convert_dict_to_xml_recurse(parent, dictitem):
 
 
 def convert_dict_to_xml(xmldict):
-    """
-    Converts a dictionary to an XML ElementTree Element
-    """
-
+    """Converts a dictionary to an XML ElementTree Element."""
     roottag = xmldict.keys()[0]
     root = Element(roottag)
     _convert_dict_to_xml_recurse(root, xmldict[roottag])
@@ -160,9 +149,7 @@ def _convert_xml_to_dict_recurse(node, dictclass):
 
 
 def convert_xml_to_dict(root, dictclass=XmlDictObject):
-    """
-    Converts an XML file or ElementTree Element to a dictionary
-    """
+    """Converts an XML file or ElementTree Element to a dictionary."""
     # If a string is passed in, try to open it as a file
     if isinstance(root, str):
         root = _try_parse(root)
@@ -176,9 +163,7 @@ def convert_xml_to_dict(root, dictclass=XmlDictObject):
 
 
 def _try_parse(root, parser=None):
-    """
-    Try to parse the root from a string or a file/file-like object.
-    """
+    """Try to parse the root from a string or a file/file-like object."""
     root = root.encode("UTF-8")
     try:
         parsed_root = fromstring(root, parser)
@@ -211,7 +196,7 @@ def create_survey_element_from_xml(xml_file):
 
 
 class XFormToDictBuilder:
-    """Experimental XFORM xml to XFORM JSON"""
+    """Experimental XFORM xml to XFORM JSON."""
 
     def __init__(self, xml_file):
         doc_as_dict = XFormToDict(xml_file).get_dict()
@@ -654,19 +639,17 @@ class XFormToDictBuilder:
 
     def _get_bracketed_name(self, ref):
         name = self._get_name_from_ref(ref)
-        return "".join(["${", name.strip(), "}"])
+        return f"${{{name.strip()}}}"
 
     def _get_constraint_msg(self, constraint_msg):
         if isinstance(constraint_msg, str):
             if constraint_msg.find(":jr:constraintMsg") != -1:
                 ref = constraint_msg.replace("jr:itext('", "").replace("')", "")
-                k, constraint_msg = self._get_text_from_translation(ref)
+                _, constraint_msg = self._get_text_from_translation(ref)
         return constraint_msg
 
     def _get_choices(self) -> dict[str, Any]:
-        """
-        Get all form choices, using the model/instance and model/itext.
-        """
+        """Get all form choices, using the model/instance and model/itext."""
         choices = {}
         for instance in self.secondary_instances:
             items = []
@@ -683,8 +666,8 @@ class XFormToDictBuilder:
 
     @staticmethod
     def _get_name_from_ref(ref):
-        """given /xlsform_spec_test/launch,
-        return the string after the last occurance of the character '/'
+        """Given /xlsform_spec_test/launch,
+        return the string after the last occurance of the character '/'.
         """
         pos = ref.rfind("/")
         if pos == -1:
@@ -707,9 +690,9 @@ class XFormToDictBuilder:
 
         # moving re flags into compile for python 2.6 compat
         pattern = "( /[a-z0-9-_]+(?:/[a-z0-9-_]+)+ )"
-        text = re.compile(pattern, flags=re.I).sub(replace_function, text)
+        text = re.compile(pattern, flags=re.IGNORECASE).sub(replace_function, text)
         pattern = "(/[a-z0-9-_]+(?:/[a-z0-9-_]+)+)"
-        text = re.compile(pattern, flags=re.I).sub(replace_function, text)
+        text = re.compile(pattern, flags=re.IGNORECASE).sub(replace_function, text)
         return text
 
 

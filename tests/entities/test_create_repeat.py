@@ -5,7 +5,7 @@ from tests.xpath_helpers.entities import xpe
 
 
 class TestEntitiesCreateRepeat(PyxformTestCase):
-    """Test entity create specs for entities declared in a repeat"""
+    """Test entity create specs for entities declared in a repeat."""
 
     def test_other_controls_before__ok(self):
         """Should find that having other control types before the entity repeat is OK."""
