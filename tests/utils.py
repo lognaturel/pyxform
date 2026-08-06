@@ -11,11 +11,11 @@ from pathlib import Path
 from pyxform import file_utils
 from pyxform.builder import create_survey, create_survey_from_path
 
-from tests import example_xls
+from tests.fixtures import example_forms
 
 
 def path_to_text_fixture(filename):
-    return os.path.join(example_xls.PATH, filename)
+    return os.path.join(example_forms.PATH, filename)
 
 
 def build_survey(filename):
@@ -23,7 +23,7 @@ def build_survey(filename):
     return create_survey_from_path(path)
 
 
-def create_survey_from_fixture(fixture_name, filetype="xls", include_directory=False):
+def create_survey_from_fixture(fixture_name, filetype="xlsx", include_directory=False):
     fixture_path = path_to_text_fixture(f"{fixture_name}.{filetype}")
     _, section_dict = file_utils.load_file_to_dict(fixture_path)
     pkg = {"main_section": section_dict}

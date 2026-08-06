@@ -18,12 +18,10 @@ class TestXFormConversion(XFormTestCase):
             ("flat_xlsform_test.xlsx", True),
             ("or_other.xlsx", True),
             ("pull_data.xlsx", True),
-            ("repeat_date_test.xls", True),
+            ("repeat_date_test.xlsx", True),
             ("survey_no_name.xlsx", False),
-            ("widgets.xls", True),
+            ("widgets.xlsx", True),
             ("xlsform_spec_test.xlsx", True),
-            ("xml_escaping.xls", True),
-            ("default_time_demo.xls", True),
         )
         for i, (case, set_name) in enumerate(cases):
             with self.subTest(msg=f"{i}: {case}"):

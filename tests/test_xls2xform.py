@@ -21,7 +21,7 @@ from pyxform.xls2xform import (
     xls2xform_convert,
 )
 
-from tests import example_xls
+from tests.fixtures import example_forms
 from tests.utils import get_temp_dir, get_temp_file, path_to_text_fixture
 
 
@@ -241,11 +241,9 @@ class TestXLS2XFormConvert(TestCase):
     def test_xls2xform_convert__ok(self):
         """Should find the expected output files for the conversion."""
         xlsforms = (
-            Path(example_xls.PATH) / "group.xlsx",
-            Path(example_xls.PATH) / "group.xls",
-            Path(example_xls.PATH) / "group.csv",
-            Path(example_xls.PATH) / "group.md",
-            Path(example_xls.PATH) / "choice_name_as_type.xls",  # has external choices
+            Path(example_forms.PATH) / "group.xlsx",
+            Path(example_forms.PATH) / "group.csv",
+            Path(example_forms.PATH) / "group.md",
         )
         kwargs = (
             ("validate", (True, False)),
@@ -263,10 +261,6 @@ class TestXLS2XFormConvert(TestCase):
                         self.assertIsInstance(observed, list)
                         self.assertEqual(len(observed), 0)
                         self.assertGreater(len(Path(xform).read_text()), 0)
-                        if x.name == "choice_name_as_type.xls":
-                            self.assertTrue(
-                                (Path(xform).parent / "itemsets.csv").is_file()
-                            )
 
 
 class TestXLS2XFormConvertAPI(TestCase):
@@ -309,14 +303,9 @@ class TestXLS2XFormConvertAPI(TestCase):
             ("str (data)", self.with_xlsform_data_str),  # Only for .csv, .md.
         ]
         xlsforms = (
-            (Path(example_xls.PATH) / "group.xlsx", funcs[:4]),
-            (Path(example_xls.PATH) / "group.xls", funcs[:4]),
-            (Path(example_xls.PATH) / "group.csv", funcs),
-            (Path(example_xls.PATH) / "group.md", funcs),
-            (
-                Path(example_xls.PATH) / "choice_name_as_type.xls",
-                funcs[:4],
-            ),  # has external choices
+            (Path(example_forms.PATH) / "group.xlsx", funcs[:4]),
+            (Path(example_forms.PATH) / "group.csv", funcs),
+            (Path(example_forms.PATH) / "group.md", funcs),
         )
         # Not including validate here because it's slow, the test is more about input,
         # and these same forms are checked with validate=True above via xls2xform_convert.
@@ -341,8 +330,6 @@ class TestXLS2XFormConvertAPI(TestCase):
         msg = "Argument 'definition' was not recognized as a supported type"
 
         with get_temp_file() as empty, get_temp_dir() as td:
-            bad_xls = Path(td) / "bad.xls"
-            bad_xls.write_text("bad")
             bad_xlsx = Path(td) / "bad.xlsx"
             bad_xlsx.write_text("bad")
             bad_type = Path(td) / "bad.txt"
@@ -354,7 +341,6 @@ class TestXLS2XFormConvertAPI(TestCase):
                 "ok",
                 b"ok",
                 empty,
-                bad_xls,
                 bad_xlsx,
                 bad_type,
             )

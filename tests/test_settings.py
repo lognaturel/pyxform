@@ -356,6 +356,50 @@ class TestSettings(PyxformTestCase):
             ],
         )
 
+    def test_style__no_default_output(self):
+        """Should find that no default style is set."""
+        md = """
+        | survey |
+        | | type  | name | label |
+        | | text  | q1   | Q1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=["""/h:html/h:body[not(@class)]"""],
+        )
+
+    def test_style__output_body_class_attribute(self):
+        """Should find that the 'style' setting is output as a body 'class' attribute."""
+        md = """
+        | settings |
+        | | style      |
+        | | theme-grid |
+
+        | survey |
+        | | type  | name | label |
+        | | text  | q1   | Q1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=["""/h:html/h:body[@class='theme-grid']"""],
+        )
+
+    def test_style__output_body_class_attribute_verbatim(self):
+        """Should find that the 'style' setting has no processing or validation."""
+        md = r"""
+        | settings |
+        | | style      |
+        | | theme-grids\n\n |
+
+        | survey |
+        | | type  | name | label |
+        | | text  | q1   | Q1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[r"""/h:html/h:body[@class='theme-grids\n\n']"""],
+        )
+
 
 class TestNamespaces(PyxformTestCase):
     """Test namespaces, for the XForm and in relation to settings that can be namespaced."""

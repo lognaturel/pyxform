@@ -1,20 +1,29 @@
 from tests.pyxform_test_case import PyxformTestCase
+from tests.xpath_helpers.questions import xpq
 
 
 class StaticDefaultTests(PyxformTestCase):
     def test_static_defaults(self):
+        """Should find that static defaults are placed in the model with no setvalue nodes."""
+        md = """
+        | survey |
+        | | type         | name   | label | default |
+        | | integer      | numba  | Foo   | foo     |
+        | | begin repeat | repeat |       |         |
+        | | integer      | bar    | Bar   | 12      |
+        | | end repeat   | repeat |       |         |
+        """
         self.assertPyxformXform(
-            name="static",
-            md="""
-            | survey |              |          |       |                   |
-            |        | type         | name     | label | default           |
-            |        | integer      | numba    | Foo   | foo               |
-            |        | begin repeat | repeat   |       |                   |
-            |        | integer      | bar      | Bar   | 12                |
-            |        | end repeat   | repeat   |       |                   |
-            """,
-            model__contains=["<numba>foo</numba>", "<bar>12</bar>"],
-            model__excludes=["setvalue", "<numba />"],
+            md=md,
+            xml__xpath_match=[
+                xpq.model_instance_item("numba", "foo"),
+                xpq.model_instance_item("repeat[@jr:template='']/x:bar", "12"),
+                xpq.model_instance_item("repeat[not(@jr:template)]/x:bar", "12"),
+            ],
+            xml__xpath_count=[
+                ("""/h:html/h:head/x:model/x:setvalue""", 0),
+                ("""/h:html/h:body//x:setvalue""", 0),
+            ],
         )
 
     def test_static_image_defaults(self):

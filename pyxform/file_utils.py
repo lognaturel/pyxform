@@ -1,9 +1,10 @@
 """The pyxform file utility functions."""
 
-import glob
 import os
+from pathlib import Path
 
 from pyxform import utils
+from pyxform.constants import SUPPORTED_FILE_EXTENSIONS
 from pyxform.xls2json import SurveyReader
 
 
@@ -31,8 +32,7 @@ def load_file_to_dict(path):
 
 def collect_compatible_files_in_directory(directory):
     """Create a giant dict out of all the spreadsheets and json forms in the given directory."""
-    available_files = glob.glob(os.path.join(directory, "*.xls")) + glob.glob(
-        os.path.join(directory, "*.json")
-    )
-
+    types = SUPPORTED_FILE_EXTENSIONS | {".json", ".md", ".csv"}
+    path = Path(directory)
+    available_files = [str(p) for t in types for p in path.glob(f"*{t}")]
     return dict([load_file_to_dict(f) for f in available_files])

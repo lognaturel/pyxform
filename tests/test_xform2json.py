@@ -20,22 +20,13 @@ class DumpAndLoadXForm2JsonTests(XFormTestCase):
 
     def setUp(self):
         self.excel_files = [
-            "gps.xls",
-            # "include.xls",
             "choice_filter_test.xlsx",
-            "specify_other.xls",
-            "loop.xls",
-            "text_and_integer.xls",
-            # todo: this is looking for json that is created (and
-            # deleted) by another test, is should just add that json
-            # to the directory.
-            # "include_json.xls",
-            "simple_loop.xls",
-            "yes_or_no_question.xls",
+            "loop.xlsx",
+            "text_and_integer.xlsx",
+            "yes_or_no_question.xlsx",
             "xlsform_spec_test.xlsx",
             "field-list.xlsx",
-            "table-list.xls",
-            "group.xls",
+            "group.xlsx",
         ]
         self.surveys = {}
         self.this_directory = os.path.dirname(__file__)

@@ -24,23 +24,25 @@ select_from_file = {
     "select one from file": constants.SELECT_ONE,
     "select multiple from file": constants.SELECT_ALL_THAT_APPLY,
 }
-select = {
+select_one = {
     "add select one prompt using": constants.SELECT_ONE,
-    "add select multiple prompt using": constants.SELECT_ALL_THAT_APPLY,
-    "select all that apply from": constants.SELECT_ALL_THAT_APPLY,
     "select one from": constants.SELECT_ONE,
     "select1": constants.SELECT_ONE,
     "select_one": constants.SELECT_ONE,
     "select one": constants.SELECT_ONE,
+}
+select_multiple = {
+    "add select multiple prompt using": constants.SELECT_ALL_THAT_APPLY,
+    "select all that apply from": constants.SELECT_ALL_THAT_APPLY,
     "select_multiple": constants.SELECT_ALL_THAT_APPLY,
     "select all that apply": constants.SELECT_ALL_THAT_APPLY,
-    "select_one_external": constants.SELECT_ONE_EXTERNAL,
-    **select_from_file,
-    "rank": constants.RANK,
 }
-cascading = {
-    "cascading select": constants.CASCADING_SELECT,
-    "cascading_select": constants.CASCADING_SELECT,
+select = {
+    **select_one,
+    **select_multiple,
+    **select_from_file,
+    "select_one_external": constants.SELECT_ONE_EXTERNAL,
+    "rank": constants.RANK,
 }
 settings_header = {
     "form_title": constants.TITLE,

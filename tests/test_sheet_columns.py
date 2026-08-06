@@ -194,6 +194,52 @@ class TestSurveyColumns(PyxformTestCase):
             ],
         )
 
+    def test_empty_bind_attribute__via_md__ignored(self):
+        """Should find that if provided as md data, a LF ignored entirely."""
+        md = """
+        | survey |
+        | | type | name | label | relevant |
+        | | text | q1   | Q1    | \n       |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[
+                """/h:html/h:head/x:model/x:bind[@nodeset='/test_name/q1' and not(@relevant)]"""
+            ],
+        )
+
+    def test_empty_bind_attribute__via_dict__empty_string(self):
+        """Should find that if provided as dict data, a LF is stripped back to an empty string."""
+        self.assertPyxformXform(
+            ss_structure={
+                "survey": [
+                    {"type": "text", "name": "q1", "label": "Q1", "relevant": "\n"}
+                ]
+            },
+            xml__xpath_match=[
+                """/h:html/h:head/x:model/x:bind[@nodeset='/test_name/q1' and @relevant='']"""
+            ],
+            odk_validate_error__contains=(
+                "Encountered a problem with display condition for node [${q1}] at line: , "
+                "Bad node: org.javarosa.xpath.parser.ast.ASTNodeAbstractExpr"
+            ),
+        )
+
+    def test_ignore_additional_columns_or_rows(self):
+        """Should find that additional columns or rows (such as for comments) are ignored."""
+        md = """
+        | survey |
+        | | _comment   | type | name | label |
+        | | looks good |      |      |       |
+        | |            | text | q1   | Q1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[
+                """/h:html/h:head/x:model/x:bind[@nodeset='/test_name/q1' and not(@_comment)]"""
+            ],
+        )
+
 
 class TestChoicesColumns(PyxformTestCase):
     """Invalid choice sheet column tests."""

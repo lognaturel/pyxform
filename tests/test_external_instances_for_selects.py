@@ -508,3 +508,26 @@ class TestSelectOneExternal(PyxformTestCase):
                 self.assertContains(
                     str(e), "should be an external_choices sheet in this xlsform"
                 )
+
+    def test_choice_name_is_type__ok(self):
+        """Should find that a choice name can be 'type' without error."""
+        md = """
+        | survey |
+        | | type                   | name | label | choice_filter |
+        | | select_one_external c1 | q1   | Q1    | true()        |
+
+        | external_choices |
+        | | list_name | name | label |
+        | | c1        | type | N1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[
+                """
+                /h:html/h:body/x:input[
+                  @ref='/test_name/q1'
+                  and @query="instance('c1')/root/item[true()]"
+                ]
+                """
+            ],
+        )

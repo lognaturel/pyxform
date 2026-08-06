@@ -4,7 +4,8 @@ import psutil
 from pyxform.xls2json_backends import get_xlsform, md_table_to_workbook
 from pyxform.xls2xform import get_xml_path, xls2xform_convert
 
-from tests import example_xls, test_output
+from tests import test_output
+from tests.fixtures import example_forms
 from tests.pyxform_test_case import PyxformTestCase
 from tests.utils import get_temp_dir
 
@@ -587,7 +588,7 @@ class TestXLS2JSONSheetNameHeuristics(PyxformTestCase):
         """Should warn about settings misspelling when running full pipeline."""
         file_name = "extra_sheet_names"
         warnings = xls2xform_convert(
-            xlsform_path=os.path.join(example_xls.PATH, file_name + ".xlsx"),
+            xlsform_path=os.path.join(example_forms.PATH, file_name + ".xlsx"),
             xform_path=os.path.join(test_output.PATH, file_name + ".xml"),
             validate=False,
             pretty_print=False,
@@ -606,7 +607,7 @@ class TestXLS2JSONSheetNameHeuristics(PyxformTestCase):
         process = psutil.Process(os.getpid())
         pre_mem = process.memory_info().rss
         xls2xform_convert(
-            xlsform_path=os.path.join(example_xls.PATH, "extra_columns.xlsx"),
+            xlsform_path=os.path.join(example_forms.PATH, "extra_columns.xlsx"),
             xform_path=os.path.join(test_output.PATH, "extra_columns.xml"),
         )
         post_mem = process.memory_info().rss
@@ -615,7 +616,7 @@ class TestXLS2JSONSheetNameHeuristics(PyxformTestCase):
 
     def test_xlsx_to_dict__extra_sheet_names_are_returned_by_parser(self):
         """Should return all sheet names so that later steps can do spellcheck."""
-        d = get_xlsform(os.path.join(example_xls.PATH, "extra_sheet_names.xlsx"))
+        d = get_xlsform(os.path.join(example_forms.PATH, "extra_sheet_names.xlsx"))
         self.assertIn("survey", d.sheet_names)
         self.assertIn("my_sheet", d.sheet_names)
         self.assertIn("stettings", d.sheet_names)

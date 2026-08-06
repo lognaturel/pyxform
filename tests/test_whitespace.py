@@ -30,6 +30,7 @@ class WhitespaceTest(PyxformTestCase):
         |        | text         | G1   | Wrap {0} in text     |
         |        | text         | H1   | Wrap {0} in {0} text |
         |        | text         | I1   | Wrap {0} in {0}      |
+        |        | text         | J1   | Encode {0} < {0}     |
         """
         xp = "/h:html/h:body/x:input[@ref='/test_name/{}']/x:label"
         test_cases = ("A", "B1")
@@ -85,6 +86,12 @@ class WhitespaceTest(PyxformTestCase):
                             xp.format("I1"),
                             {
                                 f"""<label> Wrap <output value=" /test_name/{case} "/> in <output value=" /test_name/{case} "/> </label>"""
+                            },
+                        ),
+                        (
+                            xp.format("J1"),
+                            {
+                                f"""<label> Encode <output value=" /test_name/{case} "/> &lt; <output value=" /test_name/{case} "/> </label>"""
                             },
                         ),
                     ],

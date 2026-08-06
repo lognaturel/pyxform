@@ -605,3 +605,40 @@ class TestChoicesSheet(PyxformTestCase):
             md=md,
             xml__xpath_match=[xpc.model_instance_choices_label("c1", ((".n", "N1"),))],
         )
+
+    def test_choice_name_is_type__ok(self):
+        """Should find that a choice name can be 'type' without error."""
+        md = """
+        | survey |
+        | | type          | name | label |
+        | | select_one c1 | q1   | Q1    |
+
+        | choices |
+        | | list_name | name | label |
+        | | c1        | type | N1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[xpc.model_instance_choices_label("c1", (("type", "N1"),))],
+        )
+
+    def test_choice_name_same_as_select_name__ok(self):
+        """Should find that the select and choice list/name can be the same without error."""
+        md = """
+        | survey |
+        | | type          | name | label |
+        | | select_one q1 | q1   | Q1    |
+
+        | choices |
+        | | list_name | name | label |
+        | | q1        | q1   | Q1    |
+        """
+        self.assertPyxformXform(
+            md=md,
+            xml__xpath_match=[
+                xpq.model_instance_item("q1"),
+                xpc.model_instance_choices_label("q1", (("q1", "Q1"),)),
+                xpq.model_instance_bind("q1", "string"),
+                xpq.body_control("q1", "select1"),
+            ],
+        )

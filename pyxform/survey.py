@@ -157,7 +157,7 @@ SURVEY_EXTRA_FIELDS = (
     "sms_keyword",
     "sms_response",
     "sms_separator",
-    "style",
+    constants.STYLE,
     "submission_url",
     "title",
     "version",

@@ -8,15 +8,16 @@ from pyxform.xls2json import SurveyReader
 from pyxform.xls2json_backends import csv_to_dict, xlsx_to_dict
 from pyxform.xls2xform import convert
 
-from tests import example_xls, test_expected_output, utils
+from tests import test_expected_output, utils
+from tests.fixtures import example_forms
 
 
 class BasicXls2JsonApiTests(TestCase):
     maxDiff = None
 
     def test_simple_yes_or_no_question(self):
-        filename = "yes_or_no_question.xls"
-        path_to_excel_file = Path(example_xls.PATH) / filename
+        filename = "yes_or_no_question.xlsx"
+        path_to_excel_file = Path(example_forms.PATH) / filename
         expected_output_path = Path(test_expected_output.PATH) / (
             path_to_excel_file.stem + ".json"
         )
@@ -26,51 +27,9 @@ class BasicXls2JsonApiTests(TestCase):
         with open(expected_output_path, encoding="utf-8") as expected:
             self.assertEqual(json.load(expected), result._pyxform)
 
-    def test_hidden(self):
-        x = SurveyReader(utils.path_to_text_fixture("hidden.xls"), default_name="hidden")
-        x_results = x.to_json_dict()
-
-        expected_dict = [
-            {"type": "hidden", "name": "hidden_test"},
-            {
-                "children": [
-                    {
-                        "bind": {"jr:preload": "uid", "readonly": "true()"},
-                        "name": "instanceID",
-                        "type": "calculate",
-                    }
-                ],
-                "control": {"bodyless": True},
-                "name": "meta",
-                "type": "group",
-            },
-        ]
-        self.assertEqual(x_results["children"], expected_dict)
-
-    def test_gps(self):
-        x = SurveyReader(utils.path_to_text_fixture("gps.xls"), default_name="gps")
-
-        expected_dict = [
-            {"type": "gps", "name": "location", "label": "GPS"},
-            {
-                "children": [
-                    {
-                        "bind": {"jr:preload": "uid", "readonly": "true()"},
-                        "name": "instanceID",
-                        "type": "calculate",
-                    }
-                ],
-                "control": {"bodyless": True},
-                "name": "meta",
-                "type": "group",
-            },
-        ]
-
-        self.assertEqual(x.to_json_dict()["children"], expected_dict)
-
     def test_text_and_integer(self):
         x = SurveyReader(
-            utils.path_to_text_fixture("text_and_integer.xls"),
+            utils.path_to_text_fixture("text_and_integer.xlsx"),
             default_name="text_and_integer",
         )
 
