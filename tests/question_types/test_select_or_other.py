@@ -2,6 +2,7 @@ from collections.abc import Iterable
 from unittest import expectedFailure
 
 from pyxform.aliases import select, select_multiple, select_one
+from pyxform.errors import ErrorCode
 
 from tests.pyxform_test_case import PyxformTestCase
 from tests.xpath_helpers.choices import xpc
@@ -91,9 +92,7 @@ class TestSelectOrOtherOutput(PyxformTestCase):
                 self.assertPyxformXform(
                     md=md.format(case[0]),
                     errored=True,
-                    error__contains=[
-                        "[row : 2] Please specify choices for this 'or other' question."
-                    ],
+                    error__contains=[ErrorCode.NAMES_016.value.format(row=2)],
                 )
 
     # Does not raise an error, just outputs a form with `q1` but no `q1_other`.
