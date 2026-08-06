@@ -592,7 +592,6 @@ class TestXLS2JSONSheetNameHeuristics(PyxformTestCase):
             xform_path=os.path.join(test_output.PATH, file_name + ".xml"),
             validate=False,
             pretty_print=False,
-            enketo=False,
         )
         expected = (
             "When looking for a sheet named 'settings', the following sheets "

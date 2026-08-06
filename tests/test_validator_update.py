@@ -9,7 +9,6 @@ from zipfile import ZipFile
 
 from pyxform.errors import PyXFormError
 from pyxform.validators.updater import (
-    EnketoValidateUpdater,
     _UpdateHandler,
     _UpdateInfo,
     capture_handler,
@@ -91,8 +90,10 @@ class TestUpdateHandler(TestCase):
         self.update_info = get_update_info(check_ok=True)
         self.updater = _UpdateHandler()
         data_dir = os.path.join(TEST_PATH, "data")
-        self.latest_enketo = os.path.join(data_dir, "latest_enketo.json")
         self.latest_odk = os.path.join(data_dir, "latest_odk.json")
+        self.latest_odk_old = os.path.join(data_dir, "latest_odk_old.json")
+        self.latest_odk_no_files = os.path.join(data_dir, "latest_odk_no_files.json")
+        self.latest_odk_file_name = "ODK-Validate-v1.20.0.jar"
         self.last_check = os.path.join(TEST_PATH, ".last_check")
         self.last_check_none = os.path.join(TEST_PATH, ".last_check_none")
         self.phantom_file = os.path.join(TEST_PATH, ".not_there")
@@ -106,7 +107,7 @@ class TestUpdateHandler(TestCase):
 
     def test_request_latest_json(self):
         """Should return version info dict containing asset list."""
-        self.update_info.api_url = "http://localhost:8000/latest_enketo.json"
+        self.update_info.api_url = "http://localhost:8000/latest_odk.json"
         observed = self.updater._request_latest_json(url=self.update_info.api_url)
         self.assertIn("assets", observed)
 
@@ -126,7 +127,7 @@ class TestUpdateHandler(TestCase):
 
     def test_read_json(self):
         """Should return version info dict containing asset list."""
-        file_path = self.latest_enketo
+        file_path = self.latest_odk
         observed = self.updater._read_json(file_path=file_path)
         self.assertIn("assets", observed)
 
@@ -172,7 +173,7 @@ class TestUpdateHandler(TestCase):
     def test_check_necessary__true_if_last_check_empty(self):
         """Should return true if the last check file was empty."""
         self.update_info.last_check_path = os.path.join(TEST_PATH, ".last_check_none")
-        self.update_info.latest_path = self.latest_enketo
+        self.update_info.latest_path = self.latest_odk
         self.assertTrue(
             self.updater._check_necessary(
                 update_info=self.update_info, utc_now=self.utc_now
@@ -182,7 +183,7 @@ class TestUpdateHandler(TestCase):
     def test_check_necessary__true_if_last_check_too_old(self):
         """Should return true if the last check was too long ago."""
         self.update_info.last_check_path = self.last_check
-        self.update_info.latest_path = self.latest_enketo
+        self.update_info.latest_path = self.latest_odk
         old = self.utc_now - timedelta(minutes=45.0)
         self.assertTrue(
             self.updater._check_necessary(update_info=self.update_info, utc_now=old)
@@ -195,7 +196,7 @@ class TestUpdateHandler(TestCase):
         with get_temp_file() as temp_file:
             self.updater._write_last_check(file_path=temp_file, content=new)
             self.update_info.last_check_path = temp_file
-            self.update_info.latest_path = self.latest_enketo
+            self.update_info.latest_path = self.latest_odk
             self.assertFalse(
                 self.updater._check_necessary(
                     update_info=self.update_info, utc_now=self.utc_now
@@ -204,7 +205,7 @@ class TestUpdateHandler(TestCase):
 
     def test_get_latest__if_check_necessary_true(self):
         """Should get latest from remote, rather than file."""
-        self.update_info.api_url = "http://localhost:8000/latest_enketo.json"
+        self.update_info.api_url = "http://localhost:8000/latest_odk.json"
         old = self.utc_now - timedelta(minutes=45.0)
 
         with get_temp_file() as temp_check, get_temp_file() as temp_json:
@@ -212,7 +213,7 @@ class TestUpdateHandler(TestCase):
             self.update_info.last_check_path = temp_check
             self.update_info.latest_path = temp_json
             latest = self.updater._get_latest(update_info=self.update_info)
-        self.assertEqual("1.0.3", latest["name"])
+        self.assertEqual("v1.20.0", latest["name"])
 
     def test_get_latest__if_check_necessary_false(self):
         """Should get latest from file, rather than remote."""
@@ -223,12 +224,12 @@ class TestUpdateHandler(TestCase):
             self.updater._write_last_check(file_path=temp_check, content=new)
             self.update_info.last_check_path = temp_check
             latest = self.updater._get_latest(update_info=self.update_info)
-        self.assertEqual("ODK Validate v1.8.0", latest["name"])
+        self.assertEqual("v1.20.0", latest["name"])
 
     def test_list__not_installed_no_files(self):
         """Should log an info message - no installed version, no files."""
         self.update_info.installed_path = self.phantom_file
-        self.update_info.latest_path = self.latest_odk
+        self.update_info.latest_path = self.latest_odk_no_files
 
         with get_temp_file() as temp_check:
             self.updater._write_last_check(file_path=temp_check, content=self.utc_now)
@@ -241,19 +242,6 @@ class TestUpdateHandler(TestCase):
     def test_list__not_installed_with_files(self):
         """Should log an info message - no installed version, with files."""
         self.update_info.installed_path = self.phantom_file
-        self.update_info.latest_path = self.latest_enketo
-
-        with get_temp_file() as temp_check:
-            self.updater._write_last_check(file_path=temp_check, content=self.utc_now)
-            self.update_info.last_check_path = temp_check
-            self.updater.list(update_info=self.update_info)
-        info = capture_handler.watcher.output["INFO"][0]
-        self.assertIn("Installed release:\n\n- None!", info)
-        self.assertIn("- windows.zip", info)
-
-    def test_list__installed_no_files(self):
-        """Should log an info message - installed version, no files."""
-        self.update_info.installed_path = self.latest_enketo
         self.update_info.latest_path = self.latest_odk
 
         with get_temp_file() as temp_check:
@@ -261,26 +249,39 @@ class TestUpdateHandler(TestCase):
             self.update_info.last_check_path = temp_check
             self.updater.list(update_info=self.update_info)
         info = capture_handler.watcher.output["INFO"][0]
-        self.assertIn("Installed release:\n\n- Tag name = 1.0.3", info)
-        self.assertIn("Files available:\n\n- None!", info)
+        self.assertIn("Installed release:\n\n- None!", info)
+        self.assertIn(f"- {self.latest_odk_file_name}", info)
 
-    def test_list__installed_with_files(self):
-        """Should log an info message - installed version, with files."""
-        self.update_info.installed_path = self.latest_enketo
-        self.update_info.latest_path = self.latest_enketo
+    def test_list__installed_no_files(self):
+        """Should log an info message - installed version, no files."""
+        self.update_info.installed_path = self.latest_odk_old
+        self.update_info.latest_path = self.latest_odk
 
         with get_temp_file() as temp_check:
             self.updater._write_last_check(file_path=temp_check, content=self.utc_now)
             self.update_info.last_check_path = temp_check
             self.updater.list(update_info=self.update_info)
         info = capture_handler.watcher.output["INFO"][0]
-        self.assertIn("Installed release:\n\n- Tag name = 1.0.3", info)
-        self.assertIn("- windows.zip", info)
+        self.assertIn("Installed release:\n\n- Tag name = v1.8.0", info)
+        self.assertIn(f"Files available:\n\n- {self.latest_odk_file_name}", info)
+
+    def test_list__installed_with_files(self):
+        """Should log an info message - installed version, with files."""
+        self.update_info.installed_path = self.latest_odk
+        self.update_info.latest_path = self.latest_odk
+
+        with get_temp_file() as temp_check:
+            self.updater._write_last_check(file_path=temp_check, content=self.utc_now)
+            self.update_info.last_check_path = temp_check
+            self.updater.list(update_info=self.update_info)
+        info = capture_handler.watcher.output["INFO"][0]
+        self.assertIn("Installed release:\n\n- Tag name = v1.20.0", info)
+        self.assertIn(self.latest_odk_file_name, info)
 
     def test_find_download_url__no_files(self):
         """Should raise an error if no files attached to release."""
-        file_name = "windows.zip"
-        json_data = self.updater._read_json(file_path=self.latest_odk)
+        file_name = self.latest_odk_file_name
+        json_data = self.updater._read_json(file_path=self.latest_odk_no_files)
 
         with self.assertRaises(PyXFormError) as ctx:
             self.updater._find_download_url(
@@ -291,7 +292,7 @@ class TestUpdateHandler(TestCase):
     def test_find_download_url__not_found(self):
         """Should raise an error if the file was not found."""
         file_name = "windows.zip"
-        json_data = self.updater._read_json(file_path=self.latest_enketo)
+        json_data = self.updater._read_json(file_path=self.latest_odk)
         json_data["assets"] = [x for x in json_data["assets"] if x["name"] != file_name]
 
         with self.assertRaises(PyXFormError) as ctx:
@@ -302,8 +303,8 @@ class TestUpdateHandler(TestCase):
 
     def test_find_download_url__duplicates(self):
         """Should raise an error if the file was found more than once."""
-        file_name = "windows.zip"
-        json_data = self.updater._read_json(file_path=self.latest_enketo)
+        file_name = self.latest_odk_file_name
+        json_data = self.updater._read_json(file_path=self.latest_odk)
         file_dicts = [x for x in json_data["assets"] if x["name"] == file_name]
         json_data["assets"].append(file_dicts[0])
 
@@ -315,11 +316,10 @@ class TestUpdateHandler(TestCase):
 
     def test_find_download_url__ok(self):
         """Should return the url for the matching file name."""
-        file_name = "windows.zip"
-        json_data = self.updater._read_json(file_path=self.latest_enketo)
+        file_name = self.latest_odk_file_name
+        json_data = self.updater._read_json(file_path=self.latest_odk)
         expected = (
-            "https://github.com/enketo/enketo-validate/releases/"
-            "download/1.0.3/windows.zip"
+            f"https://github.com/getodk/validate/releases/download/v1.20.0/{file_name}"
         )
 
         observed = self.updater._find_download_url(
@@ -634,18 +634,3 @@ class TestUpdateHandler(TestCase):
         error = str(ctx.exception)
         self.assertIn("Check failed!", error)
         self.assertIn("installed release does not appear to work", error)
-
-    def test_enketo_validate_updater__install_check_routing_ok(self):
-        """Should call the install check on the UpdateInfo instance."""
-        ev = EnketoValidateUpdater()
-        ev.update_info.install_check = install_check_ok
-        ev.update_info.installed_path = self.install_fake
-        self.assertTrue(ev.check())
-
-    def test_enketo_validate_updater__install_check_routing_fail(self):
-        """Should raise if the install check function is bogus."""
-        ev = EnketoValidateUpdater()
-        ev.update_info.install_check = None
-        ev.update_info.installed_path = self.install_fake
-        with self.assertRaises(TypeError):
-            ev.check()
