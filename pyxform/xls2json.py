@@ -39,6 +39,7 @@ from pyxform.validators.pyxform import select_from_file, unique_names
 from pyxform.validators.pyxform import settings as validate_settings
 from pyxform.validators.pyxform.android_package_name import validate_android_package_name
 from pyxform.validators.pyxform.choices import validate_and_clean_choices
+from pyxform.validators.pyxform.expression import validate_dangling_operators
 from pyxform.validators.pyxform.pyxform_reference import (
     has_pyxform_reference,
     is_pyxform_reference,
@@ -274,6 +275,13 @@ def workbook_to_json(
             header_aliases=aliases.settings_header,
             header_columns=set(Survey.get_slot_names()),
         )
+        validate_dangling_operators(
+            sheet_name=constants.SETTINGS,
+            source_sheet_data=workbook_dict.settings,
+            source_sheet_header=settings_sheet_headers,
+            normalized_sheet_data=settings_sheet.data,
+            normalized_headers=settings_sheet.headers,
+        )
         settings = settings_sheet.data[0]
         validate_settings.validate_name(name=settings.get(constants.NAME, None))
     else:
@@ -379,6 +387,13 @@ def workbook_to_json(
             header_aliases=aliases.entities_header,
             header_columns={i.value for i in constants.EntityColumns.value_list()},
         )
+        validate_dangling_operators(
+            sheet_name=constants.ENTITIES,
+            source_sheet_data=workbook_dict.entities,
+            source_sheet_header=workbook_dict.entities_header,
+            normalized_sheet_data=entities_sheet.data,
+            normalized_headers=entities_sheet.headers,
+        )
         entity_declarations = get_entity_declarations(entities_sheet=entities_sheet.data)
         entity_variable_references = get_entity_variable_references(
             entity_declarations=entity_declarations
@@ -403,6 +418,13 @@ def workbook_to_json(
         strip_whitespace=clean_text_values_enabled,
     )
     survey_sheet.data = dealias_types(dict_array=survey_sheet.data)
+    validate_dangling_operators(
+        sheet_name=constants.SURVEY,
+        source_sheet_data=workbook_dict.survey,
+        source_sheet_header=workbook_dict.survey_header,
+        normalized_sheet_data=survey_sheet.data,
+        normalized_headers=survey_sheet.headers,
+    )
 
     # Check for missing translations. The choices sheet is checked here so that the
     # warning can be combined into one message.

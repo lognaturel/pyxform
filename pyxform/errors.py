@@ -187,6 +187,13 @@ class ErrorCode(Enum):
             "questions using these types and the entity list name."
         ),
     )
+    EXPRESSION_001 = Detail(
+        name="Expression - dangling operator",
+        msg=(
+            "[row : {row}] On the '{sheet}' sheet, the '{column}' value is invalid. "
+            "An operator must be followed by a value or expression."
+        ),
+    )
     HEADER_001: Detail = Detail(
         name="Headers - invalid missing header row",
         msg=(

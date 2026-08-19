@@ -117,6 +117,51 @@ def parse_expression(text: str) -> tuple[Token, ...]:
     return tuple(_EXPRESSION_LEXER.lex(text))
 
 
+_OPERAND_END_TOKEN_TYPES = {
+    "CLOSE_PAREN",
+    "DATE",
+    "DATETIME",
+    "NAME",
+    "NUMBER",
+    "PARENT_REF",
+    "PYXFORM_REF",
+    "PYXFORM_REF_END",
+    "SELF_REF",
+    "SYSTEM_LITERAL",
+    "TIME",
+    "XPATH_PRED_END",
+}
+_WORD_OPERATORS = {"and", "div", "mod", "or"}
+
+
+def _can_end_operand(token: Token) -> bool:
+    """Return whether a token can end the left operand of a word operator."""
+    return token.type in _OPERAND_END_TOKEN_TYPES or (
+        token.type == "OPS_MATH" and token.value == "*"
+    )
+
+
+def ends_with_dangling_operator(text: str) -> bool:
+    """Return whether an expression ends with an operator requiring an operand."""
+    tokens = tuple(
+        token for token in parse_expression(text) if token.type != "WHITESPACE"
+    )
+    if not tokens:
+        return False
+
+    last_token = tokens[-1]
+    token_value = str(last_token)
+    operator = token_value.strip()
+    if operator in _WORD_OPERATORS:
+        # Operator words can also be XPath node names. They are operators only when
+        # preceded by something that can end a left operand. A path separator, for
+        # example, means the word is a node name such as the `and` in `/data/and`.
+        return len(tokens) > 1 and _can_end_operand(token=tokens[-2])
+    if last_token.type in {"OPS_COMP", "OPS_UNION"}:
+        return True
+    return last_token.type == "OPS_MATH" and operator != "*"
+
+
 def is_xml_tag(value: str) -> bool:
     """Check if the input string contains only a valid XML tag / element name."""
     return value and bool(RE_NCNAME_NAMESPACED.fullmatch(value))

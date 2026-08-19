@@ -1,6 +1,10 @@
 from enum import Enum
 
-from pyxform.parsing.expression import is_xml_tag, parse_expression
+from pyxform.parsing.expression import (
+    ends_with_dangling_operator,
+    is_xml_tag,
+    parse_expression,
+)
 
 from tests.fixtures.lexer_cases import LexerCases
 from tests.pyxform_test_case import PyxformTestCase
@@ -410,3 +414,74 @@ class TestExpression(PyxformTestCase):
                 self.assertEqual(
                     token_types, tuple(t.type for t in parse_expression(text=case))
                 )
+
+    def test_ends_with_dangling_operator(self):
+        """Should identify supported operators with varied trailing whitespace."""
+        operators = (
+            "=",
+            "!=",
+            "<",
+            ">",
+            "<=",
+            ">=",
+            "+",
+            "-",
+            "div",
+            "mod",
+            "and",
+            "or",
+            "|",
+        )
+        for operator in operators:
+            for whitespace in ("", "   ", "\t \n"):
+                expression = f"${{q1}} {operator}{whitespace}"
+                with self.subTest(expression=expression):
+                    self.assertTrue(ends_with_dangling_operator(expression))
+
+        for expression in ("${q1}and", "true()and", "/data/* and"):
+            with self.subTest(expression=expression):
+                self.assertTrue(ends_with_dangling_operator(expression))
+
+    def test_does_not_end_with_dangling_operator(self):
+        """Should accept complete expressions and quoted operator characters."""
+        for expression in (
+            "${q1} = 1",
+            "${q1} != ''",
+            "${q1} < ${q2}",
+            "${q1} > 0",
+            "${q1} <= 5",
+            "${q1} >= 5",
+            "${q1} + 1",
+            "${q1} - 1",
+            "${q1} div 2",
+            "${q1} mod 2",
+            "${q1} and ${q2}",
+            "${q1} or ${q2}",
+            "${q1} | ${q2}",
+            "/data/*",
+            "/data/and",
+            "/data/or",
+            "/data/div",
+            "/data/mod",
+        ):
+            with self.subTest(expression=expression):
+                self.assertFalse(ends_with_dangling_operator(expression))
+
+        for operator in (
+            "=",
+            "!=",
+            "<",
+            ">",
+            "<=",
+            ">=",
+            "+",
+            "-",
+            "div",
+            "mod",
+            "and",
+            "or",
+            "|",
+        ):
+            expression = f"'{operator}'"
+            with self.subTest(expression=expression):
+                self.assertFalse(ends_with_dangling_operator(expression))
